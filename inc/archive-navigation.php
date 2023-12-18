@@ -2,7 +2,7 @@
 /**
  * Navigation
  *
- * @package      BEStarter
+ * @package      CoPiStarter
  * @author       Bill Erickson
  * @since        1.0.0
  * @license      GPL-2.0+
@@ -46,13 +46,13 @@ function be_archive_paginated_navigation() {
 
 	echo '<nav class="archive-pagination pagination">';
 
-	$before_number = '<span class="screen-reader-text">' . __( 'Go to page', 'bestarter_textdomain' ) . '</span>';
+	$before_number = '<span class="screen-reader-text">' . __( 'Go to page', 'copistarter' ) . '</span>';
 
-	printf( '<ul role="navigation" aria-label="%s">', esc_attr__( 'Pagination', 'bestarter_textdomain' ) );
+	printf( '<ul role="navigation" aria-label="%s">', esc_attr__( 'Pagination', 'copistarter' ) );
 
 	// Previous Post Link.
 	if ( get_previous_posts_link() ) {
-		$label = __( '<span class="screen-reader-text">Go to Previous Page</span>', 'bestarter_textdomain' );
+		$label = __( '<span class="screen-reader-text">Go to Previous Page</span>', 'copistarter' );
 		$label .= be_icon( [ 'icon' => 'chevron-large-left' ] );
 		$link  = get_previous_posts_link( $label );
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is hardcoded and safe, not set via input.
@@ -67,7 +67,7 @@ function be_archive_paginated_navigation() {
 		printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, get_pagenum_link( 1 ), trim( $before_number . ' 1' ) );
 
 		if ( ! in_array( 2, $links, true ) ) {
-			$label = sprintf( '<span class="screen-reader-text">%s</span> &#x02026;', __( 'Interim pages omitted', 'bestarter_textdomain' ) );
+			$label = sprintf( '<span class="screen-reader-text">%s</span> &#x02026;', __( 'Interim pages omitted', 'copistarter' ) );
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is known to be safe, not set via input.
 			printf( '<li class="pagination-omission">%s</li> ' . "\n", $label );
 		}
@@ -80,7 +80,7 @@ function be_archive_paginated_navigation() {
 		$aria  = '';
 		if ( $paged === $link ) {
 			$class = ' class="active" ';
-			$aria  = ' aria-label="' . esc_attr__( 'Current page', 'bestarter_textdomain' ) . '" aria-current="page"';
+			$aria  = ' aria-label="' . esc_attr__( 'Current page', 'copistarter' ) . '" aria-current="page"';
 		}
 
 		printf(
@@ -99,7 +99,7 @@ function be_archive_paginated_navigation() {
 	if ( ! in_array( $max, $links, true ) ) {
 
 		if ( ! in_array( $max - 1, $links, true ) ) {
-			$label = sprintf( '<span class="screen-reader-text">%s</span> &#x02026;', __( 'Interim pages omitted', 'bestarter_textdomain' ) );
+			$label = sprintf( '<span class="screen-reader-text">%s</span> &#x02026;', __( 'Interim pages omitted', 'copistarter' ) );
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is known to be safe, not set via input.
 			printf( '<li class="pagination-omission">%s</li> ' . "\n", $label );
 		}
@@ -112,7 +112,7 @@ function be_archive_paginated_navigation() {
 
 	// Next Post Link.
 	if ( get_next_posts_link() ) {
-		$label = __( '<span class="screen-reader-text">Go to Next Page</span>', 'bestarter_textdomain' );
+		$label = __( '<span class="screen-reader-text">Go to Next Page</span>', 'copistarter' );
 		$label .= be_icon( [ 'icon' => 'chevron-large-right' ] );
 		$link  = get_next_posts_link( $label );
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is hardcoded and safe, not set via input.

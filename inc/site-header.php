@@ -2,7 +2,7 @@
 /**
  * Site Header
  *
- * @package      BEStarter
+ * @package      CoPiStarter
  * @subpackage   site-header/01
  * @author       Bill Erickson
  * @since        1.0.0
@@ -15,7 +15,7 @@
 function be_register_menus() {
 	register_nav_menus(
 		[
-			'primary' => esc_html__( 'Primary Navigation Menu', 'bestarter_textdomain' ),
+			'primary' => esc_html__( 'Primary Navigation Menu', 'copistarter' ),
 		]
 	);
 

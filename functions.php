@@ -2,7 +2,7 @@
 /**
  * Functions
  *
- * @package      BEStarter
+ * @package      CoPiStarter
  * @author       Bill Erickson
  * @since        1.0.0
  * @license      GPL-2.0+
@@ -67,7 +67,7 @@ if ( ! function_exists( 'be_setup' ) ) :
 		/*
 		 * Make theme available for translation.
 		 */
-		load_theme_textdomain( 'bestarter_textdomain', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'copistarter', get_template_directory() . '/languages' );
 
 		// Editor Styles.
 		add_theme_support( 'editor-styles' );

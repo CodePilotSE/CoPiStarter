@@ -2,13 +2,13 @@
 /**
  * Block Areas
  *
- * @package      BEStarter
+ * @package      CoPiStarter
  * @author       Bill Erickson
  * @since        1.0.0
  * @license      GPL-2.0+
  **/
 
-namespace BEStarter\Block_Areas;
+namespace CoPiStarter\Block_Areas;
 
 /**
  * Block Areas
@@ -30,18 +30,18 @@ function block_area_name( $block_area ) {
  */
 function register_cpt() {
 	$labels = [
-		'name'               => __( 'Block Areas', 'bestarter_textdomain' ),
-		'singular_name'      => __( 'Block Area', 'bestarter_textdomain' ),
-		'add_new'            => __( 'Add New', 'bestarter_textdomain' ),
-		'add_new_item'       => __( 'Add New Block Area', 'bestarter_textdomain' ),
-		'edit_item'          => __( 'Edit Block Area', 'bestarter_textdomain' ),
-		'new_item'           => __( 'New Block Area', 'bestarter_textdomain' ),
-		'view_item'          => __( 'View Block Area', 'bestarter_textdomain' ),
-		'search_items'       => __( 'Search Block Areas', 'bestarter_textdomain' ),
-		'not_found'          => __( 'No Block Areas found', 'bestarter_textdomain' ),
-		'not_found_in_trash' => __( 'No Block Areas found in Trash', 'bestarter_textdomain' ),
-		'parent_item_colon'  => __( 'Parent Block Area:', 'bestarter_textdomain' ),
-		'menu_name'          => __( 'Block Areas', 'bestarter_textdomain' ),
+		'name'               => __( 'Block Areas', 'copistarter' ),
+		'singular_name'      => __( 'Block Area', 'copistarter' ),
+		'add_new'            => __( 'Add New', 'copistarter' ),
+		'add_new_item'       => __( 'Add New Block Area', 'copistarter' ),
+		'edit_item'          => __( 'Edit Block Area', 'copistarter' ),
+		'new_item'           => __( 'New Block Area', 'copistarter' ),
+		'view_item'          => __( 'View Block Area', 'copistarter' ),
+		'search_items'       => __( 'Search Block Areas', 'copistarter' ),
+		'not_found'          => __( 'No Block Areas found', 'copistarter' ),
+		'not_found_in_trash' => __( 'No Block Areas found in Trash', 'copistarter' ),
+		'parent_item_colon'  => __( 'Parent Block Area:', 'copistarter' ),
+		'menu_name'          => __( 'Block Areas', 'copistarter' ),
 	];
 
 	$args = [

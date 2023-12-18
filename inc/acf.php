@@ -2,13 +2,13 @@
 /**
  * ACF Customizations
  *
- * @package      BEStarter
+ * @package      CoPiStarter
  * @author       Bill Erickson
  * @since        1.0.0
  * @license      GPL-2.0+
  **/
 
-namespace BEStarter\ACF;
+namespace CoPiStarter\ACF;
 
 // Disable CPT and taxonomy functionality
 add_filter( 'acf/settings/enable_post_types', '__return_false' );
@@ -37,7 +37,7 @@ function register_options_page() {
 	if ( function_exists( 'acf_add_options_page' ) ) {
 		acf_add_options_page(
 			[
-				'title'      => __( 'Site Options', 'bestarter_textdomain' ),
+				'title'      => __( 'Site Options', 'copistarter' ),
 				'capability' => 'manage_options',
 			]
 		);

@@ -2,14 +2,14 @@
 /**
  * Site Footer
  *
- * @package      BEStarter
+ * @package      CoPiStarter
  * @subpackage   site-header/01
  * @author       Bill Erickson
  * @since        1.0.0
  * @license      GPL-2.0+
  **/
 
-use BEStarter\Blocks\Social_Links;
+use CoPiStarter\Blocks\Social_Links;
 
 /**
  * Site Footer

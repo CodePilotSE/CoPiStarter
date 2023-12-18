@@ -2,7 +2,7 @@
 /**
  * WPForms
  *
- * @package      BEStarter
+ * @package      CoPiStarter
  * @author       Bill Erickson
  * @since        1.0.0
  * @license      GPL-2.0+
@@ -133,7 +133,7 @@ function be_wpforms_theme_locations_column( $columns ) {
 	foreach ( $columns as $key => $value ) {
 		$new_columns[ $key ] = $value;
 		if ( 'name' === $key ) {
-			$new_columns['be_theme_location'] = __( 'Theme Location', 'bestarter_textdomain' );
+			$new_columns['be_theme_location'] = __( 'Theme Location', 'copistarter' );
 		}
 	}
 	return $new_columns;
