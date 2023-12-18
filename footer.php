@@ -2,13 +2,13 @@
 /**
  * Site Footer
  *
- * @package      BEStarter
+ * @package      CoPiStarter
  * @author       Bill Erickson
  * @since        1.0.0
  * @license      GPL-2.0+
  **/
 
-use BEStarter\Block_Areas;
+use CoPiStarter\Block_Areas;
 
 echo '</div>'; // .site-inner
 

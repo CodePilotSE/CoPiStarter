@@ -2,7 +2,7 @@
 /**
  * Singular partial
  *
- * @package      BEStarter
+ * @package      CoPiStarter
  * @author       Bill Erickson
  * @since        1.0.0
  * @license      GPL-2.0+
@@ -22,7 +22,7 @@ the_content();
 
 wp_link_pages(
 	[
-		'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'bestarter_textdomain' ),
+		'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'copistarter' ),
 		'after'  => '</div>',
 	]
 );

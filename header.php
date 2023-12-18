@@ -2,7 +2,7 @@
 /**
  * Site Header
  *
- * @package      BEStarter
+ * @package      CoPiStarter
  * @author       Bill Erickson
  * @since        1.0.0
  * @license      GPL-2.0+
@@ -22,7 +22,7 @@ echo '<body class="' . esc_attr( join( ' ', get_body_class() ) ) . '" id="top">'
 wp_body_open();
 tha_body_top();
 echo '<div class="site-container">';
-	echo '<a class="skip-link screen-reader-text" href="#main-content">' . esc_html__( 'Skip to content', 'bestarter_textdomain' ) . '</a>';
+	echo '<a class="skip-link screen-reader-text" href="#main-content">' . esc_html__( 'Skip to content', 'copistarter' ) . '</a>';
 
 	tha_header_before();
 	echo '<header class="site-header" role="banner"><div class="wrap">';

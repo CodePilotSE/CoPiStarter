@@ -2,7 +2,7 @@
 /**
  * Archive Header
  *
- * @package      BEStarter
+ * @package      CoPiStarter
  * @subpackage   archive-header/1
  * @author       Bill Erickson
  * @since        1.0.0
