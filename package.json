@@ -4,12 +4,15 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"sass-dev": "sass --watch --update --style=expanded assets/scss:assets/css",
-		"sass-prod": "sass --no-source-map --style=compressed assets/scss:assets/css"
+		"sass-dev": "npm run watch-scss & sass --watch --update --style=expanded assets/scss:assets/css",
+		"watch-scss": "chokidar 'blocks/**/*.scss' 'assets/scss/*.scss' -c 'node compile-scss.js {path}'",
+		"sass-prod": "npm run watch-scss-prod & sass --no-source-map --style=compressed assets/scss:assets/css",
+		"watch-scss-prod": "chokidar 'blocks/**/*.scss' 'assets/scss/*.scss' -c 'node compile-scss.js {path} --prod'"
 	},
 	"author": "",
 	"license": "GPL-2.0-or-later",
 	"devDependencies": {
+		"chokidar-cli": "^3.0.0",
 		"sass": "^1.54.0"
 	}
 }
