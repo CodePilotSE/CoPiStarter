@@ -202,3 +202,12 @@ function be_default_image_sizes( $sizes, $size, $image_src, $image_meta, $attach
 	return $sizes;
 }
 add_filter( 'wp_calculate_image_sizes', 'be_default_image_sizes', 10, 5 );
+
+/**
+ * Remove all default block patterns
+ */
+
+ function be_remove_default_block_patterns() {
+	remove_theme_support( 'core-block-patterns' );
+}
+add_action( 'after_setup_theme', 'be_remove_default_block_patterns' );
