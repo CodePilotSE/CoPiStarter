@@ -32,3 +32,12 @@
 body.full-width-content .editor-styles-wrapper {
 	--wp--custom--layout--page: var(--wp--custom--layout--wide);
 }
+
+.editor-styles-wrapper .edit-post-visual-editor__post-title-wrapper{
+  background-color: var(--wp--preset--color--black);
+  color: var(--wp--preset--color--white);
+  margin-top: 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 4rem;
+}
