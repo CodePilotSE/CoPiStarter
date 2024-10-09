@@ -3,4 +3,6 @@
 .sass-cache/
 node_modules
 /blocks/**/style.css
-/assets/css
+*.css
+*.css.map
+
