@@ -26,8 +26,18 @@ add_action( 'after_setup_theme', 'be_register_menus' );
  * Site Header
  */
 function be_site_header() {
-	echo '<a href="' . esc_url( home_url() ) . '" rel="home" class="site-header__logo" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . ' Home">' . get_bloginfo( 'name' ) . '</a>';
+  $custom_logo_id = get_theme_mod( 'custom_logo' );
+  $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+  $logo_class = "";
+  if ( has_custom_logo() ) {
+    $logo_class = "image-logo";
+    $home_link_content = '<img src="' . esc_url( $logo[0] ) . '" alt="' . get_bloginfo( 'name' ) . '">';
+    } else {
+    $logo_class = "text-logo";
+    $home_link_content = get_bloginfo('name');
+  }
 
+	echo '<a href="' . esc_url( home_url() ) . '" rel="home" class="site-header__logo '. $logo_class .'" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . ' Home">' . $home_link_content . '</a>';
 	echo '<div class="site-header__toggles">';
 	echo be_mobile_menu_toggle();
 	echo '</div>';
