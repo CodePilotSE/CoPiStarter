@@ -1,0 +1,32 @@
+@function fluid-pow($pow, $operator: '*') {
+	$min-size: #{calc(#{var(--fs-base-min)} #{$operator} pow(var(--scale-ratio), #{$pow}))};
+	$max-size: #{calc(#{var(--fs-base-max)} #{$operator} pow(var(--scale-ratio), #{$pow}))};
+	$scale-size: #{calc(1.5vw #{$operator} pow(var(--scale-ratio), #{$pow}))};
+
+	@return clamp(#{$min-size}, #{$scale-size}, #{$max-size});
+}
+
+:root {
+
+	// Base sizes (in pixels)
+	--fs-base-min: 16px;
+	--fs-base-max: 18px;
+
+	// Font size scale ratios
+	--scale-ratio: 1.15;
+
+	@media screen and (min-width: 768px) {
+		--scale-ratio: 1.2;
+	}
+
+	// Font sizes
+	--copistarter--font-size--min: #{fluid-pow(2, '/')};
+	--copistarter--font-size--small: #{fluid-pow(1, '/')};
+	--copistarter--font-size--medium: #{fluid-pow(0, '*')};
+	--copistarter--font-size--large: #{fluid-pow(1, '*')};
+	--copistarter--font-size--x-large: #{fluid-pow(1.8, '*')};
+	--copistarter--font-size--big: #{fluid-pow(2.7, '*')};
+	--copistarter--font-size--huge: #{fluid-pow(3.7, '*')};
+	--copistarter--font-size--colossal: #{fluid-pow(5.5, '*')};
+	--copistarter--font-size--gargantuan: #{fluid-pow(7, '*')};
+}
