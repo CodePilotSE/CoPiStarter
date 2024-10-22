@@ -20,17 +20,11 @@ A theme created by CodePilot AB for its customers.
 - Custom block patterns
 - Sidebar and full-width layout options
 
-## Getting Started
-
-1. Upload the theme folder to your `/wp-content/themes/` directory
-2. Activate the theme through the 'Themes' menu in WordPress
-3. Customize your site using the WordPress Customizer or Site Editor
-
 ## Customization
 
 ### Colors and Typography
 
-You can easily change colors and typography settings in the `theme.json` file or through the Site Editor.
+You can easily change colors and typography settings in the `theme.json` file.
 
 ### Styles
 
@@ -40,7 +34,8 @@ To compile Sass files:
 
 1. Make sure you have Node.js installed
 2. Run `npm install` to install dependencies
-3. Use `npm run sass-dev` to compile styles
+3a. Run `npm run sass-dev` to continuously compile files when they are saved
+3b. Run `npm run sass-compile` to compile all files once
 
 
 ### Block Patterns
