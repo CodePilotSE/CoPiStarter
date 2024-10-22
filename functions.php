@@ -160,9 +160,10 @@ function print_site_logo($class = ""){
     $logo_class = "text-logo";
     $home_link_content = get_bloginfo('name');
   }
-  if(is_array($class)){
-    $class = implode(" ", $class);
+  if(!is_array($class)){
+    $class = array($class);
   }
+  $class[] = $logo_class;
 
-	echo '<a href="' . esc_url( home_url() ) . '" rel="home" class="'. $class .' '. $logo_class .'" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . ' Home">' . $home_link_content . '</a>';
+	echo '<a href="' . esc_url( home_url() ) . '" rel="home" class="'. implode(" ", $class) .'" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . ' Home">' . $home_link_content . '</a>';
 }
