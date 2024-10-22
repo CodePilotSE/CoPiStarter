@@ -148,3 +148,21 @@ function be_template_hierarchy( $template ) {
 	return $template;
 }
 add_filter( 'template_include', 'be_template_hierarchy' );
+
+function print_site_logo($class = ""){
+  $custom_logo_id = get_theme_mod( 'custom_logo' );
+  $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+  $logo_class = "";
+  if ( has_custom_logo() ) {
+    $logo_class = "image-logo";
+    $home_link_content = '<img src="' . esc_url( $logo[0] ) . '" alt="' . get_bloginfo( 'name' ) . '">';
+    } else {
+    $logo_class = "text-logo";
+    $home_link_content = get_bloginfo('name');
+  }
+  if(is_array($class)){
+    $class = implode(" ", $class);
+  }
+
+	echo '<a href="' . esc_url( home_url() ) . '" rel="home" class="'. $class .' '. $logo_class .'" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . ' Home">' . $home_link_content . '</a>';
+}
