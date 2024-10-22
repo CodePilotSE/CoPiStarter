@@ -20,8 +20,6 @@ A theme created by CodePilot AB for its customers.
 - Custom block patterns
 - Sidebar and full-width layout options
 
-## Customization
-
 ### Colors and Typography
 
 You can easily change colors and typography settings in the `theme.json` file.
