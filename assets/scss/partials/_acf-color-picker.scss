@@ -1,0 +1,71 @@
+.wp-admin .acf-fields .color-picker {
+	ul.acf-radio-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+		margin-left: 0;
+		padding-left: 0;
+
+		&::after,
+		&::before {
+			display: none;
+		}
+
+		li {
+			display: flex;
+			margin-right: 0;
+
+			label {
+				color: var(--color-white);
+				height: 38px;
+				overflow: hidden;
+				position: relative;
+				width: 38px;
+				padding: 4px;
+
+				input[type=radio]:focus {
+					border: none;
+					box-shadow: none;
+				}
+
+				input[type="radio"] {
+					height: 28px;
+					margin-left: 1px;
+					margin-top: 1px;
+					width: 28px;
+
+					&:checked {
+						position: relative;
+
+						&::before {
+							position: absolute;
+							background-color: transparent;
+							border: 2px solid #0075ff;
+							width: calc(100% + 10px);
+							height: calc(100% + 10px);
+							left: -8px;
+							top: -8px;
+						}
+					}
+
+					@each $val in $theme_colors {
+						&[value="#{$val}"] {
+							background-color: var(--wp--preset--color--#{$val});
+						}
+					}
+
+					&[value="none"]::after {
+						content: "";
+						background: linear-gradient(to bottom right, transparent, transparent 46%, gray 46%, gray 54%, transparent 54%, transparent);
+						width: 1rem;
+						height: 1rem;
+						position: absolute;
+						transform: translate(-50%, -50%);
+						top: 50%;
+						left: 50%;
+					}
+				}
+			}
+		}
+	}
+}
