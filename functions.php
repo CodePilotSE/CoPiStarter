@@ -145,3 +145,6 @@ function be_template_hierarchy( $template ) {
 	return $template;
 }
 add_filter( 'template_include', 'be_template_hierarchy' );
+
+// Disable Gravity Forms default notification
+add_filter( 'gform_default_notification', '__return_false' );
