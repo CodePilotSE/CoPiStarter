@@ -53,3 +53,26 @@ function be_entry_author() {
 	$id = (int) get_the_author_meta( 'ID' );
 	echo '<p class="entry-author"><a href="' . get_author_posts_url( $id ) . '" aria-hidden="true" tabindex="-1">' . get_avatar( $id, 40 ) . '</a><em>by</em> <a href="' . get_author_posts_url( $id ) . '">' . get_the_author() . '</a></p>';
 }
+
+
+/**
+ * Print Site Logo
+ *
+ */
+function print_site_logo($class = array()){
+  if(!is_array($class)){
+    $class = array($class);
+  }
+  if ( has_custom_logo() ) {
+    $custom_logo_id = get_theme_mod( 'custom_logo' );
+    $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+    $class[] = "image-logo";
+    $home_link_content = '<img src="' . esc_url( $logo[0] ) . '" alt="' . get_bloginfo( 'name' ) . '">';
+  } else {
+    $class[] = "text-logo";
+    $home_link_content = get_bloginfo('name');
+  }
+
+
+	echo '<a href="' . esc_url( home_url() ) . '" rel="home" class="'. implode(" ", $class) .'" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . ' Home">' . $home_link_content . '</a>';
+}
