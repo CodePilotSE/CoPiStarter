@@ -29,8 +29,7 @@ include_once get_template_directory() . '/inc/login-logo.php';
 // Plugin Support.
 require_once get_template_directory() . '/inc/acf.php';
 require_once get_template_directory() . '/inc/wordpress-seo.php';
-include_once get_template_directory() . '/inc/wpforms.php';
-
+include_once get_template_directory() . '/inc/gravity-forms.php';
 /**
  * Enqueue scripts and styles.
  */
@@ -145,6 +144,3 @@ function be_template_hierarchy( $template ) {
 	return $template;
 }
 add_filter( 'template_include', 'be_template_hierarchy' );
-
-// Disable Gravity Forms default notification
-add_filter( 'gform_default_notification', '__return_false' );
