@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Check if this is a branch checkout (not a file checkout)
+if [ $3 -eq 1 ]; then
+    echo "Switched branches. Running sass-compile..."
+    npm run sass-compile
+fi
+

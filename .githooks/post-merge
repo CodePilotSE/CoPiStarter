@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Run sass-compile after merge (pull)
+echo "Merged changes. Running sass-compile..."
+npm run sass-compile
+
