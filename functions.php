@@ -29,8 +29,7 @@ include_once get_template_directory() . '/inc/login-logo.php';
 // Plugin Support.
 require_once get_template_directory() . '/inc/acf.php';
 require_once get_template_directory() . '/inc/wordpress-seo.php';
-include_once get_template_directory() . '/inc/wpforms.php';
-
+include_once get_template_directory() . '/inc/gravity-forms.php';
 /**
  * Enqueue scripts and styles.
  */
@@ -127,10 +126,13 @@ if ( ! function_exists( 'be_setup' ) ) :
 		// -- Responsive embeds
 		add_theme_support( 'responsive-embeds' );
 
+		// add custom logo
+		add_theme_support( 'custom-logo' );
 	}
 
 endif;
 add_action( 'after_setup_theme', 'be_setup' );
+
 
 /**
  * Template Hierarchy
