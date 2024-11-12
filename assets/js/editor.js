@@ -42,9 +42,9 @@ wp.domReady(() => {
 
 
   const blockStylesToUnregister = {
-    'core/button': ['squared', 'fill'],
-    'core/separator': ['default', 'wide', 'dots'],
-    'core/quote': ['default', 'large', 'plain']
+    // 'core/button': ['squared', 'fill'],
+    // 'core/separator': ['wide', 'dots'],
+    // 'core/quote': ['large', 'plain']
   };
 
   Object.keys(blockStylesToUnregister).forEach((block) => {
