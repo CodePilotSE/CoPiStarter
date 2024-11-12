@@ -126,10 +126,13 @@ if ( ! function_exists( 'be_setup' ) ) :
 		// -- Responsive embeds
 		add_theme_support( 'responsive-embeds' );
 
+		// add custom logo
+		add_theme_support( 'custom-logo' );
 	}
 
 endif;
 add_action( 'after_setup_theme', 'be_setup' );
+
 
 /**
  * Template Hierarchy
