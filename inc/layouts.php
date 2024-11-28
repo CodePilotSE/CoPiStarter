@@ -13,9 +13,9 @@
  **/
 function be_page_layout_options() {
 	return [
-		'content-sidebar',
+		// 'content-sidebar',
 		'content',
-		'full-width-content',
+		// 'full-width-content',
 	];
 }
 
@@ -114,7 +114,7 @@ function be_page_layout_metabox() {
 		]
 	);
 }
-add_action( 'acf/init', 'be_page_layout_metabox' );
+// add_action( 'acf/init', 'be_page_layout_metabox' );
 
 /**
  * Layout Body Class
