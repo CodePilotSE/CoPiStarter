@@ -148,3 +148,51 @@ function be_template_hierarchy( $template ) {
 	return $template;
 }
 add_filter( 'template_include', 'be_template_hierarchy' );
+
+/**
+ * Add gutenberg classes to blocks depending on the block supports settings
+ */
+function cs_block_class( $block , $classes = [] ) {
+  
+  // Alignment
+  if($block['supports']['align'] && !empty($block['align'])) {
+    $classes[] = 'align' . $block['align'];
+  }
+  if ($block['supports']['alignContent'] && !empty($block['align_content'])) {
+    $classes[] = 'has-align-content';
+    $classes[] = 'has-align-content-' . $block['align_content'];
+  }
+  if ($block['supports']['alignText'] && !empty($block['align_text'])) {
+    $classes[] = 'has-text-align';
+    $classes[] = 'has-text-align-' . $block['align_text'];
+  }
+
+  // Colors
+  if($block['supports']['color']):
+    $color_support = $block['supports']['color'];
+    if($color_support['background'] && !empty($block['backgroundColor'])) {
+      $classes[] = 'has-background';
+      $classes[] = 'has-' . $block['backgroundColor'] . '-background-color';
+    }
+    if($color_support['text'] && !empty($block['textColor'])) {
+      $classes[] = 'has-text-color';
+      $classes[] = 'has-' . $block['textColor'] . '-color';
+    }
+    if($color_support['gradients'] && !empty($block['gradient'])) {
+      $classes[] = 'has-background';
+      // Add the specific gradient to the block with a style attribute
+    }
+    if($color_support['link'] && !empty($block['linkColor'])) {
+      $classes[] = 'has-link-color';
+      $classes[] = 'has-' . $block['linkColor'] . '-link-color';
+    }
+  endif;
+
+  // Class Name
+  if(!empty($block['className'])) {
+    $classes[] = $block['className'];
+  } 
+
+  
+	return $classes;
+}

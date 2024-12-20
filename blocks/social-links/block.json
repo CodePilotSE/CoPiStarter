@@ -13,14 +13,16 @@
 	},
 	"styles": [
 	],
+	"parent": [],
 	"supports": {
-		"align": false,
-		"anchor": false,
-		"alignContent": false,
+		"align": true,
+		"anchor": true,
+		"alignContent": true,
 		"color": {
-			"text": false,
-			"background": false,
-			"link": false
+			"text": true,
+			"background": true,
+			"link": false,
+			"gradients": true
 		},
 		"alignText": true,
 		"fullHeight": false
