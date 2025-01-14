@@ -8,12 +8,17 @@
 		"watch-scss": "chokidar 'blocks/**/*.scss' 'assets/scss/*.scss' -c 'node compile-scss.js {path}'",
 		"sass-prod": "npm run watch-scss-prod & sass --no-source-map --style=compressed assets/scss:assets/css",
 		"watch-scss-prod": "chokidar 'blocks/**/*.scss' 'assets/scss/*.scss' -c 'node compile-scss.js {path} --prod'",
-		"postinstall": "./setup-hooks.sh"
+		"postinstall": "./setup-hooks.sh",
+		"sass-compile": "node compile-all-scss.js"
 	},
 	"author": "",
 	"license": "GPL-2.0-or-later",
 	"devDependencies": {
 		"chokidar-cli": "^3.0.0",
+    "glob": "^10.3.10",
 		"sass": "^1.54.0"
+	},
+	"dependencies": {
+		"glob": "^11.0.1"
 	}
 }
