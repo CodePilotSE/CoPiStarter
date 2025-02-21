@@ -148,3 +148,85 @@ function be_template_hierarchy( $template ) {
 	return $template;
 }
 add_filter( 'template_include', 'be_template_hierarchy' );
+
+/**
+ * Add gutenberg classes to blocks depending on the block supports settings
+ */
+function cs_block_class( $block , $classes = [] ) {
+  
+  // Alignment
+  if($block['supports']['align'] && !empty($block['align'])) {
+    $classes[] = 'align' . $block['align'];
+  }
+  if ($block['supports']['alignContent'] && !empty($block['align_content'])) {
+    $classes[] = 'has-align-content';
+    $classes[] = 'has-align-content-' . $block['align_content'];
+  }
+  if ($block['supports']['alignText'] && !empty($block['align_text'])) {
+    $classes[] = 'has-text-align';
+    $classes[] = 'has-text-align-' . $block['align_text'];
+  }
+
+  // Colors
+  if($block['supports']['color']):
+    $color_support = $block['supports']['color'];
+    if($color_support['background'] && !empty($block['backgroundColor'])) {
+      $classes[] = 'has-background';
+      $classes[] = 'has-' . $block['backgroundColor'] . '-background-color';
+    }
+    if($color_support['text'] && !empty($block['textColor'])) {
+      $classes[] = 'has-text-color';
+      $classes[] = 'has-' . $block['textColor'] . '-color';
+    }
+    if($color_support['gradients'] && !empty($block['gradient'])) {
+      $classes[] = 'has-background';
+      // Add the specific gradient to the block with a style attribute
+    }
+    if($color_support['link'] && !empty($block['linkColor'])) {
+      $classes[] = 'has-link-color';
+      $classes[] = 'has-' . $block['linkColor'] . '-link-color';
+    }
+
+    // Button
+    if(!empty($block['style']['elements']['button']['color'])):
+      $button_color = $block['style']['elements']['button']['color'];
+      if(!empty($button_color['text'])):
+        $classes[] = block_element_color($color_support['button'], $button_color['text'], 'button-color');
+      endif;
+      if(!empty($button_color['background'])):
+        $classes[] = block_element_color($color_support['button'], $button_color['background'], 'button-background-color');
+      endif;
+    endif;
+
+    // Heading
+    if(!empty($block['style']['elements']['heading']['color'])):
+      $heading_color = $block['style']['elements']['heading']['color'];
+      if(!empty($heading_color['text'])):
+        $classes[] = block_element_color($color_support['heading'], $heading_color['text'], 'heading-color');
+      endif;
+      if(!empty($heading_color['background'])):
+        $classes[] = block_element_color($color_support['heading'], $heading_color['background'], 'heading-background-color', true);
+      endif;
+    endif;
+
+    for($x = 1; $x <= 6; $x++) {
+      if(!empty($block['style']['elements']['h' . $x]['color'])):
+        $heading_color = $block['style']['elements']['h' . $x]['color'];
+        if(!empty($heading_color['text'])):
+          $classes[] = block_element_color($color_support['heading'], $heading_color['text'], 'h' . $x . '-color');
+        endif;
+        if(!empty($heading_color['background'])):
+          $classes[] = block_element_color($color_support['heading'], $heading_color['background'], 'h' . $x . '-background-color', true);
+        endif;
+      endif;
+    }
+  endif;
+
+  // Class Name
+  if(!empty($block['className'])) {
+    $classes[] = $block['className'];
+  } 
+
+  
+	return $classes;
+}
