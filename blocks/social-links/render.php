@@ -1,6 +1,6 @@
 <?php
 /**
- * Social Links block
+ * Block Demo block
  *
  * @package      CoPiStarter
  * @author       CodePilot
@@ -8,14 +8,14 @@
  * @license      GPL-2.0+
  **/
 
-use CoPiStarter\Blocks\Social_Links;
+use CoPiStarter\Blocks\Block_Demo;
 
-$classes = Social_Links\classes( $block );
-$styles = Social_Links\styles( $block );
+$classes = Block_Demo\classes( $block );
+$styles = Block_Demo\styles( $block );
 ?>
 <section class="<?= $classes; ?>" <?= !empty( $styles ) ? 'style="' . $styles . '"' : ''; ?>>
   <?php 
   echo 'this is just a placeholder block'; 
-  echo 'remember to add replace the "social links" block name with the actual block name'; 
+  echo 'remember to add replace the "block demo" block name with the actual block name'; 
   ?>
 </section>

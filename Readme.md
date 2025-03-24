@@ -4,7 +4,7 @@
 - Run `npm run build`
 - Search and replace "copistarter" with the new theme name
 - Check the allowed blocks list in `assets/js/editor.js` so that it only includes the blocks that should be allowed in the theme
-- Delete or rebuild the social links block
+- Delete or rebuild the "block demo" block
 
 # Copistarter Theme
 

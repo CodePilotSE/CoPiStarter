@@ -1,6 +1,6 @@
 <?php
 /**
- * Social Links block
+ * Block Demo block
  *
  * @package      CoPiStarter
  * @author       Bill Erickson
@@ -8,14 +8,14 @@
  * @license      GPL-2.0+
  **/
 
-namespace CoPiStarter\Blocks\Social_Links;
+namespace CoPiStarter\Blocks\Block_Demo;
 
 /**
- * Site social links
+ * Block Demo
  */
 function classes( $block ){
   $classes = [];
-  $classes[] = 'wp-block-cwp-social-links';
+  $classes[] = 'wp-block-cwp-block-demo';
   $classes = cs_block_class( $block , $classes );
   return implode( ' ', $classes );
 }

@@ -1,8 +1,8 @@
 {
-	"name": "cwp/social-links",
-	"title": "Social Links",
+	"name": "cwp/block-demo",
+	"title": "Block Demo",
 	"description": "",
-	"style": "block-social-links",
+	"style": "block-block-demo",
 	"category": "theme",
 	"icon": "",
 	"apiVersion": 2,
