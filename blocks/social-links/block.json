@@ -1,8 +1,8 @@
 {
-	"name": "cwp/social-links",
-	"title": "Social Links",
+	"name": "cwp/block-demo",
+	"title": "Block Demo",
 	"description": "",
-	"style": "block-social-links",
+	"style": "block-block-demo",
 	"category": "theme",
 	"icon": "",
 	"apiVersion": 2,
@@ -14,13 +14,14 @@
 	"styles": [
 	],
 	"supports": {
-		"align": false,
-		"anchor": false,
-		"alignContent": false,
+		"align": true,
+		"anchor": true,
+		"alignContent": true,
 		"color": {
-			"text": false,
-			"background": false,
-			"link": false
+			"text": true,
+			"background": true,
+			"link": false,
+			"gradients": true
 		},
 		"alignText": true,
 		"fullHeight": false
