@@ -182,9 +182,15 @@ function cs_block_class( $block , $classes = [] ) {
       $classes[] = 'has-background';
       // Add the specific gradient to the block with a style attribute
     }
-    if($color_support['link'] && !empty($block['linkColor'])) {
+    if($color_support['link'] && !empty($block['style']['elements']['link']['color']['text'])) {
+      $link_color = str_replace('var:preset|color|', '', $block['style']['elements']['link']['color']['text']);
       $classes[] = 'has-link-color';
-      $classes[] = 'has-' . $block['linkColor'] . '-link-color';
+      $classes[] = 'has-' . $link_color . '-link-color';
+    }
+    if($color_support['link'] && !empty($block['style']['elements']['link'][':hover']['color']['text'])) {
+      $link_hover_color = str_replace('var:preset|color|', '', $block['style']['elements']['link'][':hover']['color']['text']);
+      $classes[] = 'has-link-hover-color';
+      $classes[] = 'has-' . $link_hover_color . '-link-hover-color';
     }
 
     // Button
