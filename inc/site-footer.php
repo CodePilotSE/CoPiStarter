@@ -9,7 +9,6 @@
  * @license      GPL-2.0+
  **/
 
-use CoPiStarter\Blocks\Social_Links;
 
 /**
  * Site Footer
