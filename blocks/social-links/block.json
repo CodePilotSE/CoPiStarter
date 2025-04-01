@@ -21,7 +21,9 @@
 			"text": true,
 			"background": true,
 			"link": false,
-			"gradients": true
+			"gradients": false,
+			"button": false,
+			"heading": false
 		},
 		"alignText": true,
 		"fullHeight": false
