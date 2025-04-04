@@ -2,14 +2,13 @@
 ---------------------------------------------------------------------------------------------------- */
 
 .site-header {
-	background: var(--wp--preset--color--background);
+	background: var(--wp--preset--color--white);
 	position: relative;
 
 	.wrap {
 		display: grid;
 		grid-template-columns: 200px 1fr;
 	}
-
 
 	&__toggles {
 		display: flex;
@@ -39,13 +38,13 @@
 	padding: 0;
 	text-align: center;
 
-	@include size( 44px );
+	@include size(44px);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
 	svg {
-		@include size( 24px );
+		@include size(24px);
 	}
 
 	.close {
@@ -53,7 +52,6 @@
 	}
 
 	&.active {
-
 		.close {
 			display: inline;
 		}
@@ -67,7 +65,7 @@
 /* Admin Bar
 --------------------------------------------- */
 
-@include media(">782px" ) {
+@include media(">782px") {
 	.admin-bar .site-container {
 		padding-top: 32px;
 	}
@@ -83,7 +81,6 @@
 ---------------------------------------------------------------------------------------------------- */
 
 .nav-menu {
-
 	& > * {
 		line-height: 0;
 	}
@@ -102,7 +99,7 @@
 
 		a {
 			border: none;
-			color: var(--wp--preset--color--foreground);
+			color: var(--wp--preset--color--black);
 			display: block;
 			font-size: var(--wp--preset--font-size--small);
 			position: relative;
@@ -111,7 +108,7 @@
 		}
 
 		&.menu-item-has-children > a {
-			padding-right: calc( var(--wp--custom--layout--padding) + 6px );
+			padding-right: calc(var(--wp--custom--layout--padding) + 6px);
 		}
 
 		&:hover > a {
@@ -137,17 +134,14 @@
 	}
 
 	@include media(">mobile_menu") {
-
 		.menu {
 			display: flex;
 			justify-content: flex-end;
 		}
 
 		.menu-item {
-
 			&:hover,
 			&:focus-within {
-
 				& > .sub-menu {
 					left: auto;
 					opacity: 1;
@@ -156,11 +150,11 @@
 		}
 
 		.menu > .menu-item-has-children:hover > a {
-			color: var(--wp--preset--color--foreground);
+			color: var(--wp--preset--color--black);
 		}
 
 		.sub-menu {
-			background: var(--wp--preset--color--background);
+			background: var(--wp--preset--color--white);
 			left: -9999px;
 			opacity: 0;
 			position: absolute;
@@ -192,10 +186,10 @@
 			top: 0;
 			right: 0;
 			transform: none;
-			@include size( 44px );
+			@include size(44px);
 
 			svg {
-				@include size( 18px );
+				@include size(18px);
 			}
 
 			&:not(.expanded) {

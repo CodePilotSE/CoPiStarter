@@ -36,7 +36,7 @@
 		font-size: var(--wp--preset--font-size--large);
 
 		a {
-			color: var(--wp--preset--color--foreground);
+			color: var(--wp--preset--color--black);
 			text-decoration: none;
 
 			&:hover {
@@ -66,7 +66,7 @@
 			display: inline-block;
 
 			a {
-				background: var(--wp--preset--color--background);
+				background: var(--wp--preset--color--white);
 				border: var(--wp--custom--border-width--tiny) solid var(--wp--preset--color--primary);
 				border-radius: var(--wp--custom--border-radius--tiny);
 				color: var(--wp--preset--color--primary);
@@ -89,8 +89,8 @@
 			&:hover > a,
 			&.active > a {
 				background: var(--wp--preset--color--primary);
-				color: var(--wp--preset--color--background);
-				fill: var(--wp--preset--color--background);
+				color: var(--wp--preset--color--white);
+				fill: var(--wp--preset--color--white);
 			}
 		}
 	}
