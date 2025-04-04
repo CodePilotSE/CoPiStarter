@@ -4,7 +4,7 @@
 .breadcrumb {
 	margin: 0 auto 16px;
 	line-height: var(--wp--custom--line-height--small);
-	font-size: var(--wp--preset--font-size--tiny);
+	font-size: var(--wp--preset--font-size--small);
 	max-width: var(--wp--custom--layout--page);
 	white-space: nowrap;
 	overflow: hidden;
@@ -27,7 +27,6 @@
 --------------------------------------------- */
 
 div.wpforms-container {
-
 	.wpforms-title {
 		font-size: var(--wp--preset--font-size--x-large);
 		line-height: var(--wp--custom--line-height--small);
@@ -59,6 +58,5 @@ div.wpforms-container {
 		margin-top: 16px;
 		text-align: left;
 	}
-
 }
 
