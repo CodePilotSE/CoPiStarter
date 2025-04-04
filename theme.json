@@ -11,12 +11,12 @@
 			"palette": [
 				{
 					"slug": "black",
-					"color": "#000000",
+					"color": "#282828",
 					"name": "Black"
 				},
 				{
 					"slug": "white",
-					"color": "#ffffff",
+					"color": "#fbfbfb",
 					"name": "White"
 				},
 				{
