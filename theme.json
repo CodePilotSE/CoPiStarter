@@ -158,62 +158,47 @@
 			"fontSizes": [
 				{
 					"name": "Gargantuan",
-					"size": "clamp(2.75rem, 5.2vw, 3.25rem)",
+					"size": "var(--copistarter--font-size--gargantuan)",
 					"slug": "gargantuan"
 				},
 				{
 					"name": "Colossal",
-					"size": "clamp(2.5rem, 4.8vw, 3rem)",
+					"size": "var(--copistarter--font-size--colossal)",
 					"slug": "colossal"
 				},
 				{
-					"name": "Gigantic",
-					"size": "clamp(2.125rem, 4.4vw, 2.75rem)",
-					"slug": "gigantic"
-				},
-				{
-					"name": "Jumbo",
-					"size": "clamp(2rem, 4vw, 2.5rem)",
-					"slug": "jumbo"
-				},
-				{
 					"name": "Huge",
-					"size": "clamp(1.875rem, 3.6vw, 2.25rem)",
+					"size": "var(--copistarter--font-size--huge)",
 					"slug": "huge"
 				},
 				{
 					"name": "Big",
-					"size": "clamp(1.75rem, 3.2vw, 2rem)",
+					"size": "var(--copistarter--font-size--big)",
 					"slug": "big"
 				},
 				{
 					"name": "Extra Large",
-					"size": "clamp(1.5rem, 2.8vw, 1.75rem)",
+					"size": "var(--copistarter--font-size--x-large)",
 					"slug": "x-large"
 				},
 				{
 					"name": "Large",
-					"size": "1.25rem",
+					"size": "var(--copistarter--font-size--large)",
 					"slug": "large"
 				},
 				{
 					"name": "Medium",
-					"size": "1.125rem",
+					"size": "var(--copistarter--font-size--medium)",
 					"slug": "medium"
 				},
 				{
 					"name": "Small",
-					"size": "1rem",
+					"size": "var(--copistarter--font-size--small)",
 					"slug": "small"
 				},
 				{
-					"name": "Tiny",
-					"size": "0.875rem",
-					"slug": "tiny"
-				},
-				{
 					"name": "Min",
-					"size": "0.75rem",
+					"size": "var(--copistarter--font-size--tiny)",
 					"slug": "min"
 				}
 			]
@@ -279,33 +264,33 @@
 			},
 			"h1": {
 				"typography": {
-					"fontSize": "var(--copistarter--font-size--colossal)",
+					"fontSize": "var(--wp--preset--font-size--colossal)",
 					"lineHeight": "var(--wp--custom--line-height--tiny)"
 				}
 			},
 			"h2": {
 				"typography": {
-					"fontSize": "var(--copistarter--font-size--huge)"
+					"fontSize": "var(--wp--preset--font-size--huge)"
 				}
 			},
 			"h3": {
 				"typography": {
-					"fontSize": "var(--copistarter--font-size--big)"
+					"fontSize": "var(--wp--preset--font-size--big)"
 				}
 			},
 			"h4": {
 				"typography": {
-					"fontSize": "var(--copistarter--font-size--x-large)"
+					"fontSize": "var(--wp--preset--font-size--x-large)"
 				}
 			},
 			"h5": {
 				"typography": {
-					"fontSize": "var(--copistarter--font-size--large)"
+					"fontSize": "var(--wp--preset--font-size--large)"
 				}
 			},
 			"h6": {
 				"typography": {
-					"fontSize": "var(--copistarter--font-size--medium)"
+					"fontSize": "var(--wp--preset--font-size--medium)"
 				}
 			}
 		},
