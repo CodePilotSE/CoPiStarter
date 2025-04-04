@@ -268,9 +268,8 @@ label,
 	color: var(--wp--preset--color--black);
 }
 
+// list of background colors that should have white text
 .has-primary-background-color,
-.has-secondary-background-color,
-.has-tertiary-background-color,
-.has-black-background-color {
+.has-secondary-background-color {
 	color: var(--wp--preset--color--white);
 }
