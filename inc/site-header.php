@@ -51,6 +51,14 @@ function be_mobile_menu_toggle() {
 	return $output;
 }
 
+function trv_header_search() {
+  echo '<div class="header-search-wrapper">';
+  get_search_form();
+  echo' </div>';
+}
+add_action('tha_header_bottom', 'trv_header_search', 12);
+
+
 /**
  * Add a dropdown icon to top-level menu items.
  *
