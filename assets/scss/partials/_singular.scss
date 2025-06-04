@@ -30,7 +30,7 @@ h1.front {
 		}
 
 		@include media("<tablet") {
-			&.alignwide {
+			&.alignwide.has-background {
 				margin-left: calc(-1 * var(--wp--custom--layout--padding));
 				margin-right: calc(-1 * var(--wp--custom--layout--padding));
 				max-width: 100vw;
