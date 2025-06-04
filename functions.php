@@ -36,7 +36,24 @@ include_once get_template_directory() . '/inc/gravity-forms.php';
  */
 function be_scripts() {
 
-	wp_enqueue_script( 'theme-global', get_theme_file_uri( '/assets/js/global.js' ), [], filemtime( get_theme_file_path( '/assets/js/global.js' ) ), true );
+	// Register and enqueue global.js as a module
+	wp_register_script( 
+		'theme-global', 
+		get_theme_file_uri( '/assets/js/global.js' ), 
+		[], 
+		filemtime( get_theme_file_path( '/assets/js/global.js' ) ), 
+		true 
+	);
+	
+	// Add type="module" to the script tag
+	add_filter('script_loader_tag', function($tag, $handle) {
+		if ($handle === 'theme-global') {
+			return str_replace(' src', ' type="module" src', $tag);
+		}
+		return $tag;
+	}, 10, 2);
+
+	wp_enqueue_script( 'theme-global' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

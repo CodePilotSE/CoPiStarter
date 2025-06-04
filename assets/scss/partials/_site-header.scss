@@ -161,6 +161,10 @@
 			width: 215px;
 			z-index: 99;
 
+			&.left {
+				right: 100%;
+			}
+
 			.menu-item {
 				float: none;
 
