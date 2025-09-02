@@ -2,6 +2,8 @@
  * Immediately Invoked Function Expression Boilerplate
  * (c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
  */
+import { MenuPositioning } from './nav-position.js';
+
 ;(function () {
 
 	'use strict';
@@ -83,4 +85,8 @@
         isMouseDownInside = false;
     });
   });
+	// Initialize menu positioning when DOM is ready
+	document.addEventListener('DOMContentLoaded', () => MenuPositioning.init());
+  
 })();
+
