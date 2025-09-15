@@ -40,3 +40,7 @@ body.full-width-content .editor-styles-wrapper {
 	padding-bottom: 2rem;
 	margin-bottom: 4rem;
 }
+
+.wp-admin .editor-visual-editor a {
+	pointer-events: none;
+}
