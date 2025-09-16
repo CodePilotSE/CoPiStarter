@@ -10,19 +10,6 @@
  **/
 
 /**
- * Register nav menus
- */
-function be_register_menus() {
-	register_nav_menus(
-		[
-			'primary' => esc_html__( 'Primary Navigation Menu', 'copistarter' ),
-		]
-	);
-
-}
-add_action( 'after_setup_theme', 'be_register_menus' );
-
-/**
  * Site Header
  */
 function be_site_header() {
