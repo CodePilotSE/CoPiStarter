@@ -40,6 +40,51 @@ import { MenuPositioning } from './nav-position.js';
 		toggleSubMenu(event);
 	});
 
+  document.addEventListener('DOMContentLoaded', function() {
+    var wrapper = document.querySelector('.header-search-wrapper');
+    var searchBlock = document.querySelector('.header-search-wrapper > .wp-block-search');
+    var searchBlockInput = searchBlock.querySelector('.wp-block-search__input');
+    var searchButton = searchBlock.querySelector('.wp-block-search__button');
+    var isMouseDownInside = false;
+    var isSearchVisible = false;
+    searchButton.removeAttribute('type');
+  
+    function showSearchBlock() {
+        searchBlockInput.style.display = 'block';
+        searchBlock.classList.add('active');
+        isSearchVisible = true;
+        searchBlockInput.focus();
+    }
+  
+    function hideSearchBlock() {
+        searchBlockInput.style.display = 'none';
+        searchBlock.classList.remove('active');
+        isSearchVisible = false;
+    }
+  
+    // Handle search button click
+    searchButton.addEventListener('click', function(event) {
+        if (!isSearchVisible) {
+            event.preventDefault();
+            showSearchBlock();
+        }
+        // If search is visible, let the default form submission happen
+    });
+  
+    // Add mousedown event listener to the wrapper to check if the mousedown started inside the wrapper
+    wrapper.addEventListener('mousedown', function(event) {
+        isMouseDownInside = true;
+    });
+  
+    // Add mouseup event listener to the document to hide the search block when clicking outside the wrapper
+    document.addEventListener('mouseup', function(event) {
+        if (!wrapper.contains(event.target) && !isMouseDownInside) {
+            hideSearchBlock();
+        }
+        // Reset the flag after processing the click
+        isMouseDownInside = false;
+    });
+  });
 	// Initialize menu positioning when DOM is ready
 	document.addEventListener('DOMContentLoaded', () => MenuPositioning.init());
   
