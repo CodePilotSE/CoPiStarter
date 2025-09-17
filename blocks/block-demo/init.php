@@ -14,15 +14,22 @@ namespace CoPiStarter\Blocks\Block_Demo;
  * Block Demo
  */
 function classes( $block ){
-  $classes = [];
-  $classes[] = 'wp-block-cwp-block-demo';
+  // add classes
+  $classes = ['wp-block-cwp-block-demo'];
   $classes = cs_block_class( $block , $classes );
-  return implode( ' ', $classes );
+
+  // return classes
+  if( !empty( $classes ) ){return 'class="'.implode( ' ', $classes ).'"';}
+  return '';
 }
 function styles( $block ){
+  // add styles
   $styles = [];
   if( !empty( $block['style']['color']['gradient'] ) ){
     $styles[] = 'background: ' . $block['style']['color']['gradient'] . ';';
   }
-  return implode( ' ', $styles );
+
+  // return styles
+  if( !empty( $styles ) ){return 'style="'.implode( ' ', $styles ).'"';}
+  return '';
 }
