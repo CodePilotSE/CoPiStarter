@@ -22,14 +22,3 @@ function classes( $block ){
   if( !empty( $classes ) ){return 'class="'.implode( ' ', $classes ).'"';}
   return '';
 }
-function styles( $block ){
-  // add styles
-  $styles = [];
-  if( !empty( $block['style']['color']['gradient'] ) ){
-    $styles[] = 'background: ' . $block['style']['color']['gradient'] . ';';
-  }
-
-  // return styles
-  if( !empty( $styles ) ){return 'style="'.implode( ' ', $styles ).'"';}
-  return '';
-}

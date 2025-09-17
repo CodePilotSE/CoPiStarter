@@ -84,3 +84,13 @@ function cs_block_class( $block , $classes = [] ) {
   
 	return $classes;
 }
+
+/**
+ * block gradient style-tag
+ */
+function block_gradient_style_tag( $block ) {
+	if( !empty( $block['style']['color']['gradient'] ) ){
+		return 'style="background: ' . $block['style']['color']['gradient'] . ';"';
+	}
+	return '';
+}
