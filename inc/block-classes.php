@@ -88,9 +88,14 @@ function cs_block_class( $block , $classes = [] ) {
 /**
  * block gradient style-tag
  */
-function block_gradient_style_tag( $block ) {
-	if( !empty( $block['style']['color']['gradient'] ) ){
-		return 'style="background: ' . $block['style']['color']['gradient'] . ';"';
+function block_gradient_style_tag( $block, $additional_styles = '' ) {
+  $styles = '';
+  if(!empty($block['supports']['color']['gradients']) && !empty( $block['style']['color']['gradient'] ) ){
+    $styles = 'background: ' . $block['style']['color']['gradient'] . ';';
 	}
+  $styles .= $additional_styles;
+  if(!empty($styles)) {
+    return 'style="'. $styles .'"';
+  }
 	return '';
 }
