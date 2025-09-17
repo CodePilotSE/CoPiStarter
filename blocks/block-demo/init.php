@@ -15,8 +15,7 @@ namespace CoPiStarter\Blocks\Block_Demo;
  */
 function classes( $block ){
   // add classes
-  $classes = ['wp-block-cwp-block-demo'];
-  $classes = cs_block_class( $block , $classes );
+  $classes = cs_block_class( $block , ['wp-block-cwp-block-demo'] );
 
   // return classes
   if( !empty( $classes ) ){return 'class="'.implode( ' ', $classes ).'"';}

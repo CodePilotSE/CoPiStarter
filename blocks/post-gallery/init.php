@@ -13,8 +13,7 @@ namespace CoPiStarter\Blocks\Post_Gallery;
  */
 
  function classes( $block ){
-  $classes = ['wp-block-cwp-post-gallery'];
-  $classes = cs_block_class( $block , $classes );
+  $classes = cs_block_class( $block , ['wp-block-cwp-post-gallery'] );
   if( !empty( $classes ) ){return 'class="'.implode( ' ', $classes ).'"';}
   return '';
 }
@@ -26,7 +25,7 @@ function query($block) {
     'order' => 'DESC',
     'post_status' => 'publish',
   ];
-  
+
   if (function_exists('get_field')):
     switch(get_field('post_gallery_mode')):
       case 'latest-posts':
