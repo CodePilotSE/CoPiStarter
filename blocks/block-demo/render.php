@@ -9,12 +9,8 @@
  **/
 
 use CoPiStarter\Blocks\Block_Demo;
-
-$classes = Block_Demo\classes( $block );
-?>
-<section <?= $classes; ?> <?= block_gradient_style_tag( $block ) ?>>
-  <?php 
-  echo 'this is just a placeholder block'; 
-  echo 'remember to add replace the "block demo" block name with the actual block name'; 
-  ?>
-</section>
+$styles = block_gradient_style_tag( $block );
+$classes = cs_block_classes( $block );
+echo '<section '. $classes . ' '. $styles . '>';
+  echo Block_Demo\block_content($block);  
+echo '</section>';

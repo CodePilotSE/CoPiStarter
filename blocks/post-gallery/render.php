@@ -7,11 +7,11 @@
  **/
 
 use CoPiStarter\Blocks\Post_Gallery;
-$classes = Post_Gallery\classes( $block );
-
+$classes = cs_block_classes( $block );
+$styles = block_gradient_style_tag( $block );
 $query_data = Post_Gallery\query( $block );
 
-echo '<section '. $classes . ' '. block_gradient_style_tag( $block ) . '>';
+echo '<section '. $classes . ' '. $styles . '>';
   $query = new WP_Query($query_data);
   if($query->have_posts()) {
     while($query->have_posts()) {

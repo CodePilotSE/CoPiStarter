@@ -56,22 +56,22 @@ function cs_block_class( $block , $classes = [] ) {
     // Button
     if(!empty($block['style']['elements']['button']['color'])):
       $button_color = $block['style']['elements']['button']['color'];
-      $classes = block_element_color($color_support['button'] ?? false, $button_color['text'], 'button', $classes);
-      $classes = block_element_color($color_support['button'] ?? false, $button_color['background'], 'button-background', $classes);
+      $classes = block_element_color(($color_support['button'] ?? false) && isset($button_color['text']) ?? false, $button_color['text'] ?? '', 'button', $classes);
+      $classes = block_element_color(($color_support['button'] ?? false) && isset($button_color['background']) ?? false, $button_color['background'] ?? '', 'button-background', $classes);
     endif;
 
     // Heading
     if(!empty($block['style']['elements']['heading']['color'])):
       $heading_color = $block['style']['elements']['heading']['color'];
-      $classes = block_element_color($color_support['heading'] ?? false, $heading_color['text'], 'heading', $classes);
-      $classes = block_element_color($color_support['heading'] ?? false, $heading_color['background'], 'heading-background', $classes);
+      $classes = block_element_color(($color_support['heading'] ?? false) && !empty($heading_color['text']) ?? false, $heading_color['text'] ?? '', 'heading', $classes);
+      $classes = block_element_color(($color_support['heading'] ?? false) && !empty($heading_color['background']) ?? false, $heading_color['background'] ?? '', 'heading-background', $classes);
     endif;
 
     for($x = 1; $x <= 6; $x++) {
       if(!empty($block['style']['elements']['h' . $x]['color'])):
         $heading_color = $block['style']['elements']['h' . $x]['color'];
-        $classes = block_element_color($color_support['heading'] ?? false, $heading_color['text'], 'h' . $x, $classes);
-        $classes = block_element_color($color_support['heading'] ?? false, $heading_color['background'], 'h' . $x . '-background', $classes);
+        $classes = block_element_color(($color_support['heading'] ?? false) && !empty($heading_color['text']) ?? false, $heading_color['text'] ?? '', 'h' . $x, $classes);
+        $classes = block_element_color(($color_support['heading'] ?? false) && !empty($heading_color['background']) ?? false, $heading_color['background'] ?? '', 'h' . $x . '-background', $classes);
       endif;
     }
   endif;
@@ -83,6 +83,17 @@ function cs_block_class( $block , $classes = [] ) {
 
   
 	return $classes;
+}
+
+/**
+ * Block Classes
+ */
+
+function cs_block_classes( $block, $classes = [] ){
+  $classes[] = 'wp-block-cwp-' . $block['name'];
+  $classes = cs_block_class( $block , $classes );
+  if( !empty( $classes ) ){return 'class="'.implode( ' ', $classes ).'"';}
+  return '';
 }
 
 /**

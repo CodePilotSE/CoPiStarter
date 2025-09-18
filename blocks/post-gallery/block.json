@@ -18,9 +18,12 @@
 		"anchor": true,
 		"alignContent": false,
 		"color": {
-			"text": false,
-			"background": false,
-			"link": false
+			"text": true,
+			"background": true,
+			"link": true,
+			"gradients": true,
+			"button": true,
+			"heading": true
 		},
 		"alignText": false,
 		"fullHeight": false
