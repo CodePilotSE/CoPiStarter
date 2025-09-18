@@ -7,7 +7,7 @@
  **/
 
 use CoPiStarter\Blocks\Post_Gallery;
-$classes = cs_block_classes( $block );
+$classes = cs_block_classes( $block , ['wp-block-cwp-post-gallery']);
 $styles = block_gradient_style_tag( $block );
 $query_data = Post_Gallery\query( $block );
 

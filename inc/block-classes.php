@@ -90,7 +90,6 @@ function cs_block_class( $block , $classes = [] ) {
  */
 
 function cs_block_classes( $block, $classes = [] ){
-  $classes[] = 'wp-block-cwp-' . $block['name'];
   $classes = cs_block_class( $block , $classes );
   if( !empty( $classes ) ){return 'class="'.implode( ' ', $classes ).'"';}
   return '';
