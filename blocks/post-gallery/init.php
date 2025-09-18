@@ -11,13 +11,6 @@ namespace CoPiStarter\Blocks\Post_Gallery;
 /**
  * Site post gallery
  */
-
- function classes( $block ){
-  $classes = cs_block_class( $block , ['wp-block-cwp-post-gallery'] );
-  if( !empty( $classes ) ){return 'class="'.implode( ' ', $classes ).'"';}
-  return '';
-}
-
 function query($block) {
   $args = [
     'post_type' => 'post',

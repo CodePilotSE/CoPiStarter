@@ -13,11 +13,3 @@ namespace CoPiStarter\Blocks\Block_Demo;
 /**
  * Block Demo
  */
-function classes( $block ){
-  // add classes
-  $classes = cs_block_class( $block , ['wp-block-cwp-block-demo'] );
-
-  // return classes
-  if( !empty( $classes ) ){return 'class="'.implode( ' ', $classes ).'"';}
-  return '';
-}
