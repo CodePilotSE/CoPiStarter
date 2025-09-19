@@ -13,16 +13,6 @@ namespace CoPiStarter\Blocks\Block_Demo;
 /**
  * Block Demo
  */
-function classes( $block ){
-  $classes = [];
-  $classes[] = 'wp-block-cwp-block-demo';
-  $classes = cs_block_class( $block , $classes );
-  return implode( ' ', $classes );
-}
-function styles( $block ){
-  $styles = [];
-  if( !empty( $block['style']['color']['gradient'] ) ){
-    $styles[] = 'background: ' . $block['style']['color']['gradient'] . ';';
-  }
-  return implode( ' ', $styles );
+function block_content($block) {
+  return 'This is just a placeholder block <br> Remember to replace the "block demo" block name with the actual block name';
 }
