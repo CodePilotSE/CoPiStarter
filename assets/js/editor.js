@@ -58,5 +58,23 @@ wp.domReady(() => {
       field.dispatchEvent(new Event('change'));
     });
   }, 1000); // Adjust timeout as needed to ensure fields are loaded
+  
+  
+  // ------------------------------------------------------------
+  // Set align to none if it is empty to fix issue with align setting reverting to default
+  // ------------------------------------------------------------
 
-} );
+  const { select, subscribe, dispatch } = wp.data;
+  const store = 'core/block-editor';
+
+  subscribe(() => {
+    const blocks = select(store).getBlocks();
+    blocks.forEach(block => {
+      if (block.attributes && block.attributes.align === '') {
+        dispatch(store).updateBlockAttributes(block.clientId, {
+          align: 'none'
+        });
+      }
+    });
+  });
+});
