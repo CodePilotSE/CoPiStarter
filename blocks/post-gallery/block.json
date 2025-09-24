@@ -1,0 +1,37 @@
+{
+	"name": "cwp/post-gallery",
+	"title": "Post Gallery",
+	"description": "",
+	"style": "block-post-gallery",
+	"category": "theme",
+	"icon": "grid-view",
+	"apiVersion": 2,
+	"keywords": [],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"styles": [
+	],
+	"supports": {
+		"align": [ "wide", "full" ],
+		"anchor": true,
+		"alignContent": false,
+		"color": {
+			"text": true,
+			"background": true,
+			"link": true,
+			"gradients": true,
+			"button": true,
+			"heading": true
+		},
+		"alignText": false,
+		"fullHeight": false
+	},
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "wide"
+		}
+	}
+}
