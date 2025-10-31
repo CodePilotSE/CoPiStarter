@@ -23,20 +23,20 @@ add_filter( 'login_headertext', '__return_empty_string' );
  * Login Logo
  */
 function be_login_logo() {
-
-	$logo_path   = '/assets/icons/logo/logo.svg';
-	$logo_width  = 212;
-	$logo_height = 40;
-
-	if ( ! file_exists( get_theme_file_path( $logo_path ) ) ) {
-		return;
-	}
-
-	$logo   = get_theme_file_uri( $logo_path );
-	$height = floor( $logo_height / $logo_width * 312 );
-	$styles = sprintf(
-		'.login h1 a {
-			background-image: url(%s);
+  $custom_logo_id = get_theme_mod( 'custom_logo' );
+  $logo_url = '';
+  if (file_exists( get_theme_file_path( '/assets/icons/logo/logo.svg' ) ) ) {
+    $logo_url = get_template_directory_uri() . '/assets/icons/logo/logo.svg';
+  }
+  elseif ( !empty( $custom_logo_id ) ) {
+    $logo_url = wp_get_attachment_image_url( $custom_logo_id , 'full' );
+  } else {
+    return;
+  }
+	?>
+	<style>
+		.login h1 a {
+			background-image: url(<?php echo esc_url( $logo_url ); ?>);
 			background-size: contain;
 			background-repeat: no-repeat;
 			background-position: center center;
@@ -44,11 +44,9 @@ function be_login_logo() {
 			overflow: hidden;
 			text-indent: -9999em;
 			width: 312px;
-			height: %dpx;
-		}',
-		esc_url( $logo ),
-		$height
-	);
-	wp_add_inline_style( 'theme-style', $styles );
+			height: 100px;
+		}
+	</style>
+	<?php
 }
-//add_action( 'login_head', 'be_login_logo' );
+add_action( 'login_head', 'be_login_logo' );
