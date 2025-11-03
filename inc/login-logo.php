@@ -38,11 +38,6 @@ function be_login_logo() {
 		.login h1 a {
 			background-image: url(<?php echo esc_url( $logo_url ); ?>);
 			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center center;
-			display: block;
-			overflow: hidden;
-			text-indent: -9999em;
 			width: 312px;
 			height: 100px;
 		}
