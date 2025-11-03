@@ -25,8 +25,8 @@ add_filter( 'login_headertext', '__return_empty_string' );
 function be_login_logo() {
   $custom_logo_id = get_theme_mod( 'custom_logo' );
   $logo_url = '';
-  if (file_exists( get_theme_file_path( '/assets/icons/logo/logo.svg' ) ) ) {
-    $logo_url = get_template_directory_uri() . '/assets/icons/logo/logo.svg';
+  if (file_exists( get_theme_file_path( '/assets/img/login-logo.svg' ) ) ) {
+    $logo_url = get_template_directory_uri() . '/assets/img/login-logo.svg';
   }
   elseif ( !empty( $custom_logo_id ) ) {
     $logo_url = wp_get_attachment_image_url( $custom_logo_id , 'full' );
