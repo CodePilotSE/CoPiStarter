@@ -16,7 +16,7 @@ wp.domReady(() => {
     'widgets',
   ];
 
-  // blocks in disallowed block categories that should still be allowed
+  // Blocks in disallowed block categories that should still be allowed
   const allowedBlocks = [
     'core/separator',
     'core/featured-image',
