@@ -23,10 +23,10 @@
 	--copistarter--font-size--min: #{fluid-pow(2, '/')};
 	--copistarter--font-size--small: #{fluid-pow(1, '/')};
 	--copistarter--font-size--medium: #{fluid-pow(0, '*')};
-	--copistarter--font-size--large: #{fluid-pow(1, '*')};
-	--copistarter--font-size--x-large: #{fluid-pow(1.8, '*')};
-	--copistarter--font-size--big: #{fluid-pow(2.7, '*')};
-	--copistarter--font-size--huge: #{fluid-pow(3.7, '*')};
-	--copistarter--font-size--colossal: #{fluid-pow(5.5, '*')};
-	--copistarter--font-size--gargantuan: #{fluid-pow(7, '*')};
+	--copistarter--font-size--medium-large: #{fluid-pow(1, '*')};
+	--copistarter--font-size--large: #{fluid-pow(1.8, '*')};
+	--copistarter--font-size--x-large: #{fluid-pow(2.7, '*')};
+	--copistarter--font-size--2x-large: #{fluid-pow(3.7, '*')};
+	--copistarter--font-size--3x-large: #{fluid-pow(5.5, '*')};
+	--copistarter--font-size--colossal: #{fluid-pow(7, '*')};
 }
