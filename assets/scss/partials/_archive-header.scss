@@ -11,7 +11,7 @@
 }
 
 .archive-header h1 {
-	margin-top: var(--wp--custom--layout--block-gap-large);
+	margin-top: var(--wp--custom--layout--spacing);
 }
 
 .archive-description > *:first-child {
@@ -23,5 +23,5 @@
 }
 
 .archive-header .breadcrumb {
-	margin-bottom: var(--wp--custom--layout--block-gap-large);
+	margin-bottom: var(--wp--custom--layout--spacing);
 }

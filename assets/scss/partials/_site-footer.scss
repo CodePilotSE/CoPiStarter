@@ -2,7 +2,7 @@
 ---------------------------------------------------------------------------------------------------- */
 
 .block-area-before-footer {
-	padding: var(--wp--custom--layout--block-gap-large) var(--wp--custom--layout--padding);
+	padding: var(--wp--custom--layout--spacing) var(--wp--custom--layout--spacing-s);
 
 	& > * {
 		max-width: var(--wp--custom--layout--wide);
