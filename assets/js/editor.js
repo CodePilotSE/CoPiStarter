@@ -28,7 +28,7 @@ wp.domReady(() => {
   
 
   allBlocks.forEach((block) => {
-    if(((!allowedBlocks.includes(block.name) && disallowedBlockCategories.includes(block.category)) || disallowedBlocks.includes(block.name)) && block.name.substring(0, 5) === 'core/') {
+    if (((!allowedBlocks.includes(block.name) && disallowedBlockCategories.includes(block.category)) || disallowedBlocks.includes(block.name)) && block.name.substring(0, 5) === 'core/') {
       wp.blocks.unregisterBlockType(block.name);
     }
   });
