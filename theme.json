@@ -68,7 +68,7 @@
 				"wide": "1200px",
 				"sidebar": "336px",
 				"page": "var(--wp--custom--layout--content)",
-        "spacing-xs": "8px",
+				"spacing-xs": "8px",
 				"spacing-s": "16px",
 				"spacing": "32px",
 				"spacing-l": "64px",
