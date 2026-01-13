@@ -1,45 +1,56 @@
 wp.domReady(() => {
   // Get all registered block types
   const allBlocks = wp.blocks.getBlockTypes();
-
-  // Define the allowed blocks
-  const allowedBlocks = [
-      'core/paragraph',
-      'core/image',
-      'core/heading',
-      'core/list',
-      'core/list-item',
-      'core/button',
-      'core/buttons',
-      'core/separator',
-      'core/quote',
-      'core/image',
-      'core/gallery',
-      'core/spacer',
-      'core/featured-image',
-      'core/post-featured-image',
-      'core/post-terms',
-      'core/post-date',
-      'core/post-title'
-
-  ];
-
-  // Define the blocks that you manually want to disallow
-  const disallowedBlocks = [
-    
-  ];
-
+  
+  // ------------------------------------------------------------
   // Unregister blocks
+  // ------------------------------------------------------------
+
+  const disallowedBlocks = [
+    'core/code',
+    'core/html',
+  ];
+  
+  const disallowedBlockCategories = [
+    'theme',
+    'widgets',
+  ];
+
+  // Blocks in disallowed block categories that should still be allowed
+  const allowedBlocks = [
+    'core/separator',
+    'core/featured-image',
+    'core/post-featured-image',
+    'core/post-terms',
+    'core/post-date',
+    'core/post-title'
+  ];
+  
+
   allBlocks.forEach((block) => {
-    var blockName = block.name;
-    if(!allowedBlocks.includes(blockName) && blockName.substring(0, 5) === 'core/'){
-      wp.blocks.unregisterBlockType(blockName);
-    }
-    if(disallowedBlocks.includes(blockName)){
-      wp.blocks.unregisterBlockType(blockName);
+    if (((!allowedBlocks.includes(block.name) && disallowedBlockCategories.includes(block.category)) || disallowedBlocks.includes(block.name)) && block.name.substring(0, 5) === 'core/') {
+      wp.blocks.unregisterBlockType(block.name);
     }
   });
 
+
+  // ------------------------------------------------------------
+  // Limit embed block variations
+  // ------------------------------------------------------------
+
+  const allowedEmbedBlocks = [
+    'vimeo',
+    'youtube',
+  ];
+  wp.blocks.getBlockVariations('core/embed').forEach((blockVariation) => {
+    if (-1 === allowedEmbedBlocks.indexOf(blockVariation.name)) {
+      wp.blocks.unregisterBlockVariation('core/embed', blockVariation.name);
+    }
+  });
+
+  // ------------------------------------------------------------
+  // Unregister block styles
+  // ------------------------------------------------------------
 
   const blockStylesToUnregister = {
     // 'core/button': ['squared', 'fill'],
