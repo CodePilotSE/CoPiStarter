@@ -11,6 +11,22 @@ function cs_custom_excerpt_length() {
 }
 add_filter( 'excerpt_length', 'cs_custom_excerpt_length', 12 );
 
+/**
+ * Outputs or returns a shortened post excerpt with optional HTML wrappers.
+ *
+ * If a manual excerpt is set for the post, that excerpt is used as-is. Otherwise,
+ * the excerpt length is temporarily adjusted on the frontend using the
+ * `excerpt_length` filter, while in the admin area the excerpt is trimmed
+ * manually with `wp_trim_words()`.
+ *
+ * @param int         $length        Number of words to include in the excerpt.
+ * @param string      $wrapper_start HTML to prepend to the excerpt.
+ * @param string      $wrapper_end   HTML to append to the excerpt.
+ * @param bool        $echo          Whether to echo the excerpt. If false, the
+ *                                   excerpt string is returned instead.
+ *
+ * @return string|void The excerpt string when `$echo` is false, otherwise void.
+ */
 // In admin, manually trim words because excerpt_length filter doesn't work
 function cs_custom_excerpt_in_editor( $excerpt, $post = null ) {
     // Only apply in admin/editor context
