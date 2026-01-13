@@ -43,7 +43,7 @@ function short_excerpt($length = 15, $wrapper_start = '', $wrapper_end = '', $ec
     }
 
     if ($echo) {
-        echo $output;
+        echo esc_html($output);
         return;
     }
     return $output;
