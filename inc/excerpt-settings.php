@@ -6,10 +6,24 @@
  * @author       CodePilot
 
  **/
-function cs_custom_excerpt_length( $length ) {
-    return 2;
+function cs_custom_excerpt_length() {
+    return 30;
 }
 add_filter( 'excerpt_length', 'cs_custom_excerpt_length', 12 );
+
+// In admin, manually trim words because excerpt_length filter doesn't work
+function cs_custom_excerpt_in_editor( $excerpt, $post = null ) {
+    // Only apply in admin/editor context
+    if ( ! is_admin() || has_excerpt( $post ) ) {
+        return $excerpt;
+    }
+    
+    $length = cs_custom_excerpt_length(); 
+    
+    // Apply the custom length using wp_trim_words
+    return wp_trim_words( $excerpt, $length, '...' );
+}
+add_filter( 'get_the_excerpt', 'cs_custom_excerpt_in_editor', 15, 2 );
 
 function short_excerpt($length = 15, $wrapper_start = '', $wrapper_end = '', $echo = true) {
     $output = '';
