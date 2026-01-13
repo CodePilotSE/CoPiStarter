@@ -23,7 +23,7 @@ function cs_custom_excerpt_in_editor( $excerpt, $post = null ) {
 }
 add_filter( 'get_the_excerpt', 'cs_custom_excerpt_in_editor', 15, 2 );
 
-function short_excerpt($length = 15, $wrapper_start = '', $wrapper_end = '', $echo = true) {
+function cs_short_excerpt($length = 15, $wrapper_start = '', $wrapper_end = '', $echo = true) {
     $output = '';
 
     // don't shorten the excerpt if it's manually set
