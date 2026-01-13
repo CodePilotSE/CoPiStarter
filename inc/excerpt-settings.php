@@ -18,10 +18,8 @@ function cs_custom_excerpt_in_editor( $excerpt, $post = null ) {
         return $excerpt;
     }
     
-    $length = cs_custom_excerpt_length(); 
-    
     // Apply the custom length using wp_trim_words
-    return wp_trim_words( $excerpt, $length, '...' );
+    return wp_trim_words( $excerpt, cs_custom_excerpt_length(), '...' );
 }
 add_filter( 'get_the_excerpt', 'cs_custom_excerpt_in_editor', 15, 2 );
 
