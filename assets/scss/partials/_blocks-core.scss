@@ -47,7 +47,7 @@ figure.wp-caption {
 
 .wp-block-image {
 	figcaption {
-		font-size: var(--wp--preset--font-size--small);
+		font-size: var(--wp--preset--font-size--s);
 		text-align: center;
 	}
 
@@ -158,7 +158,7 @@ textarea {
 	border: var(--wp--custom--border-width--tiny) solid var(--wp--preset--color--black);
 	border-radius: none;
 	color: var(--wp--preset--color--black);
-	font-size: var(--wp--preset--font-size--small);
+	font-size: var(--wp--preset--font-size--s);
 	line-height: var(--wp--custom--line-height--medium);
 	padding: 9px 12px;
 	width: 100%;
@@ -187,7 +187,7 @@ label,
 	font-family: var(--wp--custom--typography--interface--font-family);
 	letter-spacing: var(--wp--custom--typography--interface--letter-spacing);
 	text-transform: var(--wp--custom--typography--interface--text-transform);
-	font-size: var(--wp--preset--font-size--small);
+	font-size: var(--wp--preset--font-size--s);
 	font-weight: 600;
 
 	.wpforms-required-label {
