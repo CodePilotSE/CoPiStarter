@@ -6,7 +6,7 @@
 	margin-inline: auto;
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: var(--wp--custom--layout--block-gap);
+	gap: var(--wp--custom--layout--spacing-s);
 
 	@include media(">=tablet") {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -25,7 +25,7 @@
 	}
 
 	.entry-category {
-		font-size: var(--wp--preset--font-size--small);
+		font-size: var(--wp--preset--font-size--s);
 
 		a {
 			text-decoration: none;
@@ -33,7 +33,7 @@
 	}
 
 	&__title {
-		font-size: var(--wp--preset--font-size--large);
+		font-size: var(--wp--preset--font-size--l);
 
 		a {
 			color: var(--wp--preset--color--black);
@@ -76,7 +76,7 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				font-size: var(--wp--preset--font-size--small);
+				font-size: var(--wp--preset--font-size--s);
 				font-weight: 700;
 				text-align: center;
 				text-decoration: none;

@@ -20,13 +20,13 @@
 	}
 
 	// Font sizes
-	--copistarter--font-size--min: #{fluid-pow(2, '/')};
-	--copistarter--font-size--small: #{fluid-pow(1, '/')};
-	--copistarter--font-size--medium: #{fluid-pow(0, '*')};
-	--copistarter--font-size--large: #{fluid-pow(1, '*')};
-	--copistarter--font-size--x-large: #{fluid-pow(1.8, '*')};
-	--copistarter--font-size--big: #{fluid-pow(2.7, '*')};
-	--copistarter--font-size--huge: #{fluid-pow(3.7, '*')};
-	--copistarter--font-size--colossal: #{fluid-pow(5.5, '*')};
-	--copistarter--font-size--gargantuan: #{fluid-pow(7, '*')};
+	--copistarter--font-size--xs: #{fluid-pow(2, '/')};
+	--copistarter--font-size--s: #{fluid-pow(1, '/')};
+	--copistarter--font-size--m: #{fluid-pow(0, '*')};
+	--copistarter--font-size--l: #{fluid-pow(1, '*')};
+	--copistarter--font-size--xl: #{fluid-pow(1.8, '*')};
+	--copistarter--font-size--2xl: #{fluid-pow(2.7, '*')};
+	--copistarter--font-size--3xl: #{fluid-pow(3.7, '*')};
+	--copistarter--font-size--4xl: #{fluid-pow(5.5, '*')};
+	--copistarter--font-size--enormous: #{fluid-pow(7, '*')};
 }

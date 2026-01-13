@@ -9,8 +9,8 @@ h1.front {
 }
 
 .site-inner {
-	padding-left: var(--wp--custom--layout--padding);
-	padding-right: var(--wp--custom--layout--padding);
+	padding-left: var(--wp--custom--layout--spacing-s);
+	padding-right: var(--wp--custom--layout--spacing-s);
 }
 
 .entry-content,
@@ -24,15 +24,15 @@ h1.front {
 		}
 
 		&.alignfull {
-			margin-left: calc(-1 * var(--wp--custom--layout--padding));
-			margin-right: calc(-1 * var(--wp--custom--layout--padding));
+			margin-left: calc(-1 * var(--wp--custom--layout--spacing-s));
+			margin-right: calc(-1 * var(--wp--custom--layout--spacing-s));
 			max-width: 100vw;
 		}
 
 		@include media("<tablet") {
 			&.alignwide.has-background {
-				margin-left: calc(-1 * var(--wp--custom--layout--padding));
-				margin-right: calc(-1 * var(--wp--custom--layout--padding));
+				margin-left: calc(-1 * var(--wp--custom--layout--spacing-s));
+				margin-right: calc(-1 * var(--wp--custom--layout--spacing-s));
 				max-width: 100vw;
 			}
 		}
@@ -45,26 +45,26 @@ h1.front {
 	& > .alignfull,
 	& > .wp-block-separator {
 		&:not(:first-child) {
-			margin-top: var(--wp--custom--layout--block-gap-large);
+			margin-top: var(--wp--custom--layout--spacing);
 		}
 
 		&:not(:last-child) {
-			margin-bottom: var(--wp--custom--layout--block-gap-large);
+			margin-bottom: var(--wp--custom--layout--spacing);
 		}
 	}
 
 	& > .alignfull.has-background + .alignfull.has-background {
-		margin-top: calc(-1 * var(--wp--custom--layout--block-gap-large));
+		margin-top: calc(-1 * var(--wp--custom--layout--spacing));
 	}
 }
 
 .full-width-content .entry-content {
 	&:first-child > .alignfull.has-background:first-child {
-		margin-top: calc(-1 * var(--wp--custom--layout--block-gap-large));
+		margin-top: calc(-1 * var(--wp--custom--layout--spacing));
 	}
 
 	&:last-child > .alignfull.has-background:last-child {
-		margin-bottom: calc(-1 * var(--wp--custom--layout--block-gap-large));
+		margin-bottom: calc(-1 * var(--wp--custom--layout--spacing));
 	}
 }
 
@@ -137,7 +137,7 @@ h1.front {
 
 		.comment-author {
 			color: var(--wp--preset--color--black);
-			font-size: var(--wp--preset--font-size--large);
+			font-size: var(--wp--preset--font-size--l);
 			display: inline-block;
 			vertical-align: middle;
 			margin: 0;
@@ -163,7 +163,7 @@ h1.front {
 		}
 
 		.comment-metadata {
-			font-size: var(--wp--preset--font-size--small);
+			font-size: var(--wp--preset--font-size--s);
 			margin-bottom: 16px;
 
 			a {
@@ -189,7 +189,7 @@ h1.front {
 			font-family: var(--wp--custom--typography--interface--font-family);
 			letter-spacing: var(--wp--custom--typography--interface--letter-spacing);
 			text-transform: var(--wp--custom--typography--interface--text-transform);
-			font-size: var(--wp--preset--font-size--small);
+			font-size: var(--wp--preset--font-size--s);
 		}
 
 		ol.children {

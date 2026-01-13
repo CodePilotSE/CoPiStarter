@@ -8,11 +8,13 @@ input[type="search"] {
 
 body {
 	@include media("<360px") {
-		--wp--custom--layout--padding: 10px;
+		--wp--custom--layout--spacing-s: 10px;
 	}
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
 	box-sizing: inherit;
 }
 
@@ -20,15 +22,14 @@ body {
 --------------------------------------------- */
 
 .wrap {
-	max-width: calc( var(--wp--custom--layout--wide) + calc( 2 * var(--wp--custom--layout--padding ) ) );
+	max-width: calc(var(--wp--custom--layout--wide) + calc(2 * var(--wp--custom--layout--spacing-s)));
 	margin: 0 auto;
-	padding-left: var(--wp--custom--layout--padding);
-	padding-right: var(--wp--custom--layout--padding);
-
+	padding-left: var(--wp--custom--layout--spacing-s);
+	padding-right: var(--wp--custom--layout--spacing-s);
 }
 
 .site-inner {
-	padding: var(--wp--custom--layout--block-gap-large) 0;
+	padding: var(--wp--custom--layout--spacing) 0;
 }
 
 body.full-width-content {
@@ -51,7 +52,7 @@ body.full-width-content {
 }
 
 .screen-reader-text:focus,
-.screen-reader-shortcut:focus  {
+.screen-reader-shortcut:focus {
 	clip: auto !important;
 	height: auto;
 	width: auto;
@@ -63,24 +64,20 @@ body.full-width-content {
 	background: #fff;
 	z-index: 100000; /* Above WP toolbar. */
 	text-decoration: none;
-	box-shadow: 0 0 2px 2px rgba(0,0,0,.6);
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, .6);
 }
 
 /* Sidebar Layouts
 --------------------------------------------- */
 
-
 @include media("<medium") {
-
 	.sidebar-primary {
 		display: none;
 	}
 }
 
 @include media(">=medium") {
-
 	.content-sidebar {
-
 		.content-area {
 			display: grid;
 			grid-template-columns: minmax(0, 1fr) var(--wp--custom--layout--sidebar);
@@ -100,5 +97,5 @@ body.full-width-content {
 			float: none;
 			width: 100%;
 		}
-}
+	}
 }
