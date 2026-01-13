@@ -214,7 +214,7 @@
 					"padding": "11px 16px"
 				},
 				"typography": {
-					"fontSize": "var(--wp--preset--font-size--small)",
+					"fontSize": "var(--copistarter--font-size--s)",
 					"fontWeight": "700",
 					"lineHeight": "var(--wp--custom--line-height--medium)"
 				}
@@ -259,7 +259,7 @@
 			}
 		},
 		"spacing": {
-			"blockGap": "var(--wp--custom--layout--block-gap)"
+			"blockGap": "var(--wp--custom--layout--spacing-s)"
 		},
 		"typography": {
 			"fontFamily": "var(--wp--preset--font-family--system-sans-serif)",
