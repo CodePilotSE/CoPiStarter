@@ -2,7 +2,7 @@
 /**
  * Excerpt Settings
  *
- * @package      Raketsajt
+ * @package      CoPiStarter
  * @author       CodePilot
 
  **/
