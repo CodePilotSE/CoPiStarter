@@ -54,7 +54,7 @@ function cs_short_excerpt($length = 15, $wrapper_start = '', $wrapper_end = '', 
       remove_filter('excerpt_length', $filter, 20);
     } else {
       // In admin, manually trim words because excerpt_length filter doesn't work
-      $output = $wrapper_start . wp_trim_words(get_the_excerpt(), $length, '...') . $wrapper_end;
+      $output = $wrapper_start . wp_trim_words(get_the_excerpt(), $length, '…') . $wrapper_end;
     }
   }
 
