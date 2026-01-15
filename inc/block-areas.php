@@ -295,16 +295,11 @@ function cs_get_block_area_id($slug) {
  */
 function cs_add_block_area_links_to_admin_menu() {
 	$block_areas_to_link = [ 
-    [
-      'name' => 'Sidfot',
-      'slug' => 'footer-content',
-      'icon' => 'dashicons-editor-kitchensink'
-    ],
-    [
-      'name' => 'Sidofält',
-      'slug' => 'sidebar',
-      'icon' => 'dashicons-align-pull-right'
-    ],
+    // [
+    //   'name' => 'Sidfot',
+    //   'slug' => 'footer-content',
+    //   'icon' => 'dashicons-editor-kitchensink'
+    // ]
   ];
 	foreach( $block_areas_to_link as $block_area ) {
     $url = '';
