@@ -256,7 +256,7 @@ function cs_get_block_area_id($slug) {
 
 	$args = [
 		'post_type'      => 'block_area',
-		'post_meta_key'  => 'be_block_area',
+		'meta_key'       => 'be_block_area',
 		'meta_value'     => $slug,
 		'posts_per_page' => 1,
 		'post_status'    => 'any',
