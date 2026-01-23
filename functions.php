@@ -28,6 +28,7 @@ require_once get_template_directory() . '/inc/loop.php';
 include_once get_template_directory() . '/inc/login-logo.php';
 include_once get_template_directory() . '/inc/acf-theme-colors.php';
 include_once get_template_directory() . '/inc/block-classes.php';
+include_once get_template_directory() . '/inc/excerpt-settings.php';
 // Plugin Support.
 require_once get_template_directory() . '/inc/acf.php';
 require_once get_template_directory() . '/inc/wordpress-seo.php';
