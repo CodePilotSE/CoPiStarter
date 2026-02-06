@@ -17,7 +17,8 @@ function slash_edit_check() {
 }
 function slash_edit_check_login() {
   if ( !is_user_logged_in() || !current_user_can( 'edit_posts' ) ) {
-    wp_redirect( wp_login_url( $_SERVER['REQUEST_URI'] ) );
+    $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( $_SERVER['REQUEST_URI'] ) : '';
+    wp_redirect( wp_login_url( $request_uri ) );
     exit;
   }
   return true;
@@ -36,9 +37,9 @@ function slash_edit_get_url() {
 
 function slash_edit_post($post_type) {
   slash_edit_check_login();
-  $clean_url = slash_edit_get_url();
+  $clean_path = slash_edit_get_url();
   // Get the post slug from the url
-  $post_slug = trim($clean_url, '/');
+  $post_slug = trim($clean_path, '/');
 
   // Get the post by slug
   if ( $post = get_page_by_path( $post_slug, OBJECT, $post_type ) ) {
@@ -57,11 +58,11 @@ function slash_edit_post($post_type) {
 
 function slash_edit_term($taxonomy) {
   slash_edit_check_login();
-  $clean_url = slash_edit_get_url();
-  $term_slug = trim($clean_url, '/'.$taxonomy.'/');
+  $clean_path = slash_edit_get_url();
+  $term_slug = trim($clean_path, '/'.$taxonomy.'/');
   if ( $term = get_term_by( 'slug', $term_slug, $taxonomy )) {
     // Check if user can edit this specific term
-    if ( !current_user_can( 'edit_term', $term->term_id, $taxonomy ) ) {
+    if ( !current_user_can( 'manage_categories', $term->term_id, $taxonomy ) ) {
       wp_die( 'You do not have permission to edit this term.' );
     }
     
@@ -73,6 +74,22 @@ function slash_edit_term($taxonomy) {
   }
 }
 
+<<<<<<< Updated upstream
+=======
+function slash_edit_archive($taxonomy) {
+  slash_edit_check_login();
+  $clean_path = slash_edit_get_url();
+  $term_slug = trim($clean_path, '/'.$taxonomy.'/');
+  if ( $term = get_term_by( 'slug', $term_slug, $taxonomy )) {
+    $edit_link = get_edit_term_link( $term->term_id, $taxonomy, 'raw' );
+    if ( !empty( $edit_link ) ) {
+      wp_redirect( $edit_link );
+      exit;
+    }  
+  }
+}
+
+>>>>>>> Stashed changes
 function run_slash_edits() {
   if ( !slash_edit_check() ) {
     return;
