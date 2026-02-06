@@ -74,22 +74,6 @@ function slash_edit_term($taxonomy) {
   }
 }
 
-<<<<<<< Updated upstream
-=======
-function slash_edit_archive($taxonomy) {
-  slash_edit_check_login();
-  $clean_path = slash_edit_get_url();
-  $term_slug = trim($clean_path, '/'.$taxonomy.'/');
-  if ( $term = get_term_by( 'slug', $term_slug, $taxonomy )) {
-    $edit_link = get_edit_term_link( $term->term_id, $taxonomy, 'raw' );
-    if ( !empty( $edit_link ) ) {
-      wp_redirect( $edit_link );
-      exit;
-    }  
-  }
-}
-
->>>>>>> Stashed changes
 function run_slash_edits() {
   if ( !slash_edit_check() ) {
     return;
