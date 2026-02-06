@@ -73,19 +73,6 @@ function slash_edit_term($taxonomy) {
   }
 }
 
-function slash_edit_archive($taxonomy) {
-  slash_edit_check_login();
-  $clean_url = slash_edit_get_url();
-  $term_slug = trim($clean_url, '/'.$taxonomy.'/');
-  if ( $term = get_term_by( 'slug', $term_slug, $taxonomy )) {
-    $edit_link = get_edit_term_link( $term->term_id, $taxonomy, 'raw' );
-    if ( !empty( $edit_link ) ) {
-      wp_redirect( $edit_link );
-      exit;
-    }  
-  }
-}
-
 function run_slash_edits() {
   if ( !slash_edit_check() ) {
     return;
