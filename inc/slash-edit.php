@@ -98,11 +98,9 @@ function run_slash_edits() {
     }
   }
   $taxonomies = get_taxonomies();
-  if (count($taxonomies) > 0) {
-    foreach ($taxonomies as $taxonomy) {
+  foreach ($taxonomies as $taxonomy) {
       // Check if the current URL matches a taxonomy term
       slash_edit_term($taxonomy);
-    }
   }
 
 }
