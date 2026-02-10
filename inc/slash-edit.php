@@ -9,9 +9,11 @@
  **/
 
 function slash_edit_check() {
-  if ( !is_admin() && ( substr($_SERVER['REQUEST_URI'], -5) === '/edit' || substr($_SERVER['REQUEST_URI'], -6) === '/edit/' ) ) {
-
-    return true;
+  if ( !is_admin() && isset($_SERVER['REQUEST_URI']) ) {
+    $uri = wp_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
+    if ( substr($uri, -5) === '/edit' || substr($uri, -6) === '/edit/' ) {
+      return true;
+    }
   }
   return false;
 }
@@ -24,15 +26,17 @@ function slash_edit_check_login() {
   return true;
 }
 function slash_edit_get_url() {
-  if ( !slash_edit_check() ) {
+  if ( !slash_edit_check()  && !isset($_SERVER['REQUEST_URI']) ) {
     return null;
   }
-  if ( substr($_SERVER['REQUEST_URI'], -6) === '/edit/' ) {
-    return substr($_SERVER['REQUEST_URI'], 0, -6);
+  $uri = wp_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ); 
+  if ( substr($uri, -6) === '/edit/' ) {
+    return substr($uri, 0, -6);
   }
-  elseif ( substr($_SERVER['REQUEST_URI'], -5) === '/edit' ) {
-    return substr($_SERVER['REQUEST_URI'], 0, -5);
+  elseif ( substr($uri, -5) === '/edit' ) {
+    return substr($uri, 0, -5);
   }
+  return null;
 }
 
 function slash_edit_post($post_type) {
@@ -45,12 +49,12 @@ function slash_edit_post($post_type) {
   if ( $post = get_page_by_path( $post_slug, OBJECT, $post_type ) ) {
     // Check if user can edit this specific post
     if ( !current_user_can( 'edit_post', $post->ID ) ) {
-      wp_die( 'You do not have permission to edit this post.' );
+      wp_die( __( 'Du har inte behörighet att redigera detta inlägg.', 'copistarter' ) );
     }
     
     $edit_link = get_edit_post_link( $post->ID, 'raw' );
     if ( !empty( $edit_link ) ) {
-      wp_redirect( $edit_link );
+      wp_safe_redirect( $edit_link );
       exit;
     }
   }    
@@ -63,12 +67,12 @@ function slash_edit_term($taxonomy) {
   if ( $term = get_term_by( 'slug', $term_slug, $taxonomy )) {
     // Check if user can edit this specific term
     if ( !current_user_can( 'manage_categories', $term->term_id, $taxonomy ) ) {
-      wp_die( 'You do not have permission to edit this term.' );
+      wp_die( __( 'Du har inte behörighet att redigera denna kategori.', 'copistarter' ) );
     }
     
     $edit_link = get_edit_term_link( $term->term_id, $taxonomy, 'raw' );
     if ( !empty( $edit_link ) ) {
-      wp_redirect( $edit_link );
+      wp_safe_redirect( $edit_link );
       exit;
     }
   }
