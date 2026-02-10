@@ -20,7 +20,7 @@ function slash_edit_check() {
 function slash_edit_check_login() {
   if ( !is_user_logged_in() || !current_user_can( 'edit_posts' ) ) {
     $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( $_SERVER['REQUEST_URI'] ) : '';
-    wp_redirect( wp_login_url( $request_uri ) );
+    wp_safe_redirect( wp_login_url( $request_uri ) );
     exit;
   }
   return true;
