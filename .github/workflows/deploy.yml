@@ -1,0 +1,131 @@
+name: Deploy WordPress theme on release
+
+on:
+  release:
+    types: [published]
+
+concurrency:
+  group: deploy-theme
+  cancel-in-progress: false
+
+env:
+  # Anpassa per kund / repo:
+  # Rekommenderat: sätt som Actions-variabel (Settings → Variables → Actions → THEME_PATH)
+  THEME_PATH: ${{ vars.THEME_PATH }}
+  # Om du inte vill använda en Actions-variabel kan du hårdkoda sökvägen här, t.ex.:
+  # THEME_PATH: /var/www/html/wp-content/themes/copistarter
+
+  # Valfri port, default 22 om inte satt i repo-variabler/secrets.
+  SSH_PORT: ${{ secrets.SSH_PORT }}
+  # SSH-host och användare hämtas från secrets och exponeras som env-variabler.
+  SSH_HOST: ${{ secrets.SSH_HOST }}
+  SSH_USER: ${{ secrets.SSH_USER }}
+  # Valfri: om satt till "true" körs rsync med --dry-run (ingen ändring på servern),
+  # bra vid första körning på en ny kund.
+  RSYNC_DRY_RUN: ${{ vars.RSYNC_DRY_RUN }}
+
+jobs:
+  deploy:
+    name: Build and deploy theme
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Använd shallow clone men hämta även tags (räcker normalt även för composer)
+          fetch-depth: 1
+          fetch-tags: true
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build assets (SCSS → CSS)
+        run: npm run sass-compile
+
+      - name: Install Composer dependencies (if composer.json exists)
+        if: hashFiles('composer.json') != ''
+        run: |
+          composer install --no-dev --optimize-autoloader
+
+      - name: Prepare SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          # Sätt standardport om SSH_PORT inte är satt
+          PORT="${SSH_PORT:-22}"
+
+          # Lägg till hosten i known_hosts för att undvika interaktiv prompt
+          ssh-keyscan -p "$PORT" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+        shell: bash
+
+      - name: Deploy theme via rsync (only for non-prerelease)
+        if: github.event.release.prerelease == false
+        run: |
+          set -e
+
+          # Fallback till 22 om SSH_PORT inte är satt
+          PORT="${SSH_PORT:-22}"
+
+          # Säkerställ att THEME_PATH är satt
+          if [ -z "${THEME_PATH}" ]; then
+            echo "ERROR: THEME_PATH is not set. Configure it as an Actions variable or hardcode it in the workflow."
+            exit 1
+          fi
+
+          # Säkerställ att SSH_HOST och SSH_USER är satta (kommer från secrets via env)
+          if [ -z "${SSH_HOST}" ]; then
+            echo "ERROR: SSH_HOST is not set. Configure it as a repository secret."
+            exit 1
+          fi
+
+          if [ -z "${SSH_USER}" ]; then
+            echo "ERROR: SSH_USER is not set. Configure it as a repository secret."
+            exit 1
+          fi
+
+          RSYNC_SSH="ssh -i ~/.ssh/id_rsa -p ${PORT}"
+
+          # Extra säkerhet: kontrollera att målkatalogen ser ut som ett WP-tema (style.css måste finnas)
+          if ! ${RSYNC_SSH} "${SSH_USER}@${SSH_HOST}" "[ -f '${THEME_PATH}/style.css' ]"; then
+            echo "ERROR: ${THEME_PATH}/style.css saknas på servern. THEME_PATH verkar inte peka på en giltig temakatalog."
+            exit 1
+          fi
+
+          # Valfritt dry-run-läge styrt av RSYNC_DRY_RUN (Actions-variabel)
+          EXTRA_FLAGS=()
+          if [ "${RSYNC_DRY_RUN}" = "true" ]; then
+            echo "RSYNC_DRY_RUN=true → kör rsync i dry-run-läge (ingen fil tas bort/skrivs på servern)."
+            EXTRA_FLAGS=("--dry-run")
+          fi
+
+          rsync -az --delete "${EXTRA_FLAGS[@]}" \
+            -e "${RSYNC_SSH}" \
+            --exclude=".git" \
+            --exclude=".github" \
+            --exclude=".gitignore" \
+            --exclude=".gitattributes" \
+            --exclude="node_modules" \
+            --exclude="package.json" \
+            --exclude="package-lock.json" \
+            --exclude="pnpm-lock.yaml" \
+            --exclude="yarn.lock" \
+            --exclude="compile-all-scss.js" \
+            --exclude="compile-scss.js" \
+            --exclude="setup-hooks.sh" \
+            --exclude="assets/scss" \
+            --exclude="blocks/**/*.scss" \
+            --exclude="src" \
+            --exclude="README*" \
+            ./ \
+            "${SSH_USER}@${SSH_HOST}:${THEME_PATH}"
+
+        shell: bash
+
