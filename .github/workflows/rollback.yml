@@ -55,12 +55,10 @@ jobs:
       - name: Deploy selected ref via rsync
         env:
           PORT: ${{ env.SSH_PORT }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           set -e
 
-          PORT="${PORT:-22}"
+          PORT="${SSH_PORT:-22}"
 
           if [ -z "${THEME_PATH}" ]; then
             echo "ERROR: THEME_PATH is not set. Configure it as an Actions variable or hardcode it in the workflow."
