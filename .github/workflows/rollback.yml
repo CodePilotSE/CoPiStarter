@@ -89,13 +89,13 @@ jobs:
           fi
 
           # Valfritt dry-run-läge styrt av RSYNC_DRY_RUN (Actions-variabel)
-          EXTRA_FLAGS=""
+          EXTRA_FLAGS=()
           if [ "${RSYNC_DRY_RUN}" = "true" ]; then
             echo "RSYNC_DRY_RUN=true → kör rsync i dry-run-läge (ingen fil tas bort/skrivs på servern)."
-            EXTRA_FLAGS="--dry-run"
+            EXTRA_FLAGS=("--dry-run")
           fi
 
-          rsync -az --delete ${EXTRA_FLAGS} \
+          rsync -az --delete "${EXTRA_FLAGS[@]}" \
             -e "${RSYNC_SSH}" \
             --exclude=".git" \
             --exclude=".github" \
