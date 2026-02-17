@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           # Här används automatiskt den ref (tag/branch) du valt i UI:t
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Use Node.js
         uses: actions/setup-node@v4
