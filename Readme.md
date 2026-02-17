@@ -75,7 +75,7 @@ Görs en gång per kundprojekt:
      (eller tryck Enter för defaultvägen, men ett separat filnamn är oftast tydligare).
    - Du kan välja att sätta en passphrase eller lämna den tom (tom är enklast för CI, men kräver att du litar på att nyckeln bara ligger som GitHub-secret).
 
-3. Lägg till **publika nyckeln** på servern:
+3. Lägg till **den publika nyckeln** på servern:
 
    - Visa den publika nyckeln:
 
