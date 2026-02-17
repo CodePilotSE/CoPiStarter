@@ -70,8 +70,8 @@ Görs en gång per kundprojekt:
    ssh-keygen -t ed25519 -C "copistarter-deploy-kund-X"
    ```
 
-   - När du får frågan “Enter file in which to save the key”: ange t.ex.  
-     `~/.ssh/copistarter-deploy-kund-x`  
+   - När du får frågan “Enter file in which to save the key”: ange t.ex.
+     `~/.ssh/copistarter-deploy-kund-x`
      (eller tryck Enter för defaultvägen, men ett separat filnamn är oftast tydligare).
    - Du kan välja att sätta en passphrase eller lämna den tom (tom är enklast för CI, men kräver att du litar på att nyckeln bara ligger som GitHub-secret).
 
@@ -134,7 +134,7 @@ Läggs i GitHub under `Settings → Secrets and variables → Actions → Variab
    - Eventuella pre-releases kan märkas med suffix, t.ex. `2026.02.17-alpha.1` och markeras som *pre-release* i GitHub. **Pre-releases kör hela buildflödet men hoppar över själva deploy-steget**, så de kan användas för att testa att kompilering fungerar utan att påverka produktion.
 5. Skapa en GitHub Release för den taggen (pre-release om du bara vill testa build, vanlig release om du också vill deploya).
 6. Verifiera att `deploy.yml` körs klart utan fel och – för vanliga releaser – att temat uppdateras på servern.
-7. För rollback: kör `rollback.yml` från Actions-fliken och välj vilken tagg som ska rullas tillbaka till.
+7. För rollback: kör `rollback.yml` från Actions-fliken och välj vilken tagg som ska rullas tillbaka till. Rollback-workflowet bryr sig inte om pre-release-flaggan – om du väljer en pre-release-tagg (t.ex. `2026.02.17-alpha.1`) i “Run workflow” kommer just den koden att deployas.
 
 ### Uppdatera äldre kundprojekt till nytt deploy-flöde
 
