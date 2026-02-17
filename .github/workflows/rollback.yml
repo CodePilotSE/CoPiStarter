@@ -10,6 +10,9 @@ env:
   # THEME_PATH: /var/www/html/wp-content/themes/copistarter
 
   SSH_PORT: ${{ secrets.SSH_PORT }}
+  # Valfri: om satt till "true" körs rsync med --dry-run (ingen ändring på servern),
+  # bra vid första körning på en ny kund eller vid test av rollback-flödet.
+  RSYNC_DRY_RUN: ${{ vars.RSYNC_DRY_RUN }}
 
 jobs:
   rollback-deploy:
@@ -62,9 +65,22 @@ jobs:
             exit 1
           fi
 
-          RSYNC_SSH="ssh -i ~/.ssh/id_rsa -p ${PORT} -o StrictHostKeyChecking=no"
+          RSYNC_SSH="ssh -i ~/.ssh/id_rsa -p ${PORT}"
 
-          rsync -az --delete \
+          # Extra säkerhet: kontrollera att målkatalogen ser ut som ett WP-tema (style.css måste finnas)
+          if ! ${RSYNC_SSH} "[ -f '${THEME_PATH}/style.css' ]"; then
+            echo "ERROR: ${THEME_PATH}/style.css saknas på servern. THEME_PATH verkar inte peka på en giltig temakatalog."
+            exit 1
+          fi
+
+          # Valfritt dry-run-läge styrt av RSYNC_DRY_RUN (Actions-variabel)
+          EXTRA_FLAGS=""
+          if [ "${RSYNC_DRY_RUN}" = "true" ]; then
+            echo "RSYNC_DRY_RUN=true → kör rsync i dry-run-läge (ingen fil tas bort/skrivs på servern)."
+            EXTRA_FLAGS="--dry-run"
+          fi
+
+          rsync -az --delete ${EXTRA_FLAGS} \
             -e "${RSYNC_SSH}" \
             --exclude=".git" \
             --exclude=".github" \

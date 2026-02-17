@@ -116,6 +116,7 @@ GitHub Actions-workflowet kommer sedan, vid varje körning, att skriva `SSH_KEY`
 Läggs i GitHub under `Settings → Secrets and variables → Actions → Variables`:
 
 - `THEME_PATH` – absolut sökväg till temats katalog på servern, t.ex. `/var/www/html/wp-content/themes/copistarter`
+- `RSYNC_DRY_RUN` – (valfri) sätt till `true` för att köra rsync i *dry-run*-läge (ingen ändring på servern, bara logg över vad som skulle ändrats). Bra vid första körning på ett nytt kundprojekt eller när du vill verifiera att `THEME_PATH` pekar rätt innan skarp deploy.
 
 ### Checklista för nytt kundprojekt
 
