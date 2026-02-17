@@ -1,0 +1,98 @@
+name: Deploy WordPress theme on release
+
+on:
+  release:
+    types: [published]
+
+env:
+  # Anpassa per kund / repo:
+  # Rekommenderat: sätt som Actions-variabel (Settings → Variables → Actions → THEME_PATH)
+  THEME_PATH: ${{ vars.THEME_PATH }}
+  # Om du inte vill använda en Actions-variabel kan du hårdkoda sökvägen här, t.ex.:
+  # THEME_PATH: /var/www/html/wp-content/themes/copistarter
+
+  # Valfri port, default 22 om inte satt i repo-variabler/secrets.
+  SSH_PORT: ${{ secrets.SSH_PORT }}
+
+jobs:
+  deploy:
+    name: Build and deploy theme
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Säkerställ att vi checkar ut hela historiken om det behövs (t.ex. för composer)
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build assets (SCSS → CSS)
+        run: npm run sass-compile
+
+      - name: Install Composer dependencies (if composer.json exists)
+        if: hashFiles('composer.json') != ''
+        run: |
+          composer install --no-dev --optimize-autoloader
+
+      - name: Prepare SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          # Sätt standardport om SSH_PORT inte är satt
+          PORT="${SSH_PORT:-22}"
+
+          # Lägg till hosten i known_hosts för att undvika interaktiv prompt
+          ssh-keyscan -p "$PORT" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+        shell: bash
+
+      - name: Deploy theme via rsync (only for non-prerelease)
+        if: github.event.release.prerelease == false
+        env:
+          PORT: ${{ env.SSH_PORT }}
+        run: |
+          set -e
+
+          # Fallback till 22 om SSH_PORT inte är satt
+          PORT="${PORT:-22}"
+
+          # Säkerställ att THEME_PATH är satt
+          if [ -z "${THEME_PATH}" ]; then
+            echo "ERROR: THEME_PATH is not set. Configure it as an Actions variable or hardcode it in the workflow."
+            exit 1
+          fi
+
+          RSYNC_SSH="ssh -i ~/.ssh/id_rsa -p ${PORT} -o StrictHostKeyChecking=no"
+
+          rsync -az --delete \
+            -e "${RSYNC_SSH}" \
+            --exclude=".git" \
+            --exclude=".github" \
+            --exclude=".gitignore" \
+            --exclude=".gitattributes" \
+            --exclude="node_modules" \
+            --exclude="package.json" \
+            --exclude="package-lock.json" \
+            --exclude="pnpm-lock.yaml" \
+            --exclude="yarn.lock" \
+            --exclude="compile-all-scss.js" \
+            --exclude="compile-scss.js" \
+            --exclude="setup-hooks.sh" \
+            --exclude="assets/scss" \
+            --exclude="blocks/**/*.scss" \
+            --exclude="src" \
+            --exclude="README*" \
+            ./ \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${THEME_PATH}"
+
+        shell: bash
+
