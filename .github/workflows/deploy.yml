@@ -17,6 +17,9 @@ env:
 
   # Valfri port, default 22 om inte satt i repo-variabler/secrets.
   SSH_PORT: ${{ secrets.SSH_PORT }}
+  # SSH-host och användare hämtas från secrets och exponeras som env-variabler.
+  SSH_HOST: ${{ secrets.SSH_HOST }}
+  SSH_USER: ${{ secrets.SSH_USER }}
   # Valfri: om satt till "true" körs rsync med --dry-run (ingen ändring på servern),
   # bra vid första körning på en ny kund.
   RSYNC_DRY_RUN: ${{ vars.RSYNC_DRY_RUN }}
