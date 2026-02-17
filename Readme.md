@@ -85,7 +85,7 @@ Görs en gång per kundprojekt:
 
    - Kopiera hela raden och klistra in i `~/.ssh/authorized_keys` för användaren `SSH_USER` på servern.
 
-4. Lägg in **privata nyckeln** som `SSH_KEY` i GitHub:
+4. Lägg in **den privata nyckeln** som `SSH_KEY` i GitHub:
 
    - Visa den privata nyckeln:
 
