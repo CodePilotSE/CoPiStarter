@@ -106,7 +106,7 @@ Görs en gång per kundprojekt:
 
 6. Spara nyckelparet säkert, t.ex. i ett delat 1Password-valv:
    - Skapa en post med t.ex. namnet `copistarter-deploy-kund-X`.
-   - Lägg in både **privata** och **publika** nyckeln som fält.
+   - Lägg in både **den privata** och **publika** nyckeln som fält.
    - Efter att nyckeln finns i 1Password, på servern och i GitHub Secrets kan filerna raderas från din lokala disk om du vill.
 
 GitHub Actions-workflowet kommer sedan, vid varje körning, att skriva `SSH_KEY`-secret till `~/.ssh/id_rsa` på den tillfälliga runnern och använda den för att ansluta till servern.
