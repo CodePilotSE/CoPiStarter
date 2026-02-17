@@ -91,7 +91,7 @@ jobs:
           RSYNC_SSH="ssh -i ~/.ssh/id_rsa -p ${PORT}"
 
           # Extra säkerhet: kontrollera att målkatalogen ser ut som ett WP-tema (style.css måste finnas)
-          if ! ${RSYNC_SSH} "[ -f '${THEME_PATH}/style.css' ]"; then
+          if ! ${RSYNC_SSH} "${SSH_USER}@${SSH_HOST}" "[ -f '${THEME_PATH}/style.css' ]"; then
             echo "ERROR: ${THEME_PATH}/style.css saknas på servern. THEME_PATH verkar inte peka på en giltig temakatalog."
             exit 1
           fi
