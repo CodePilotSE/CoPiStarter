@@ -65,15 +65,11 @@ jobs:
 
       - name: Deploy theme via rsync (only for non-prerelease)
         if: github.event.release.prerelease == false
-        env:
-          PORT: ${{ env.SSH_PORT }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           set -e
 
           # Fallback till 22 om SSH_PORT inte är satt
-          PORT="${PORT:-22}"
+          PORT="${SSH_PORT:-22}"
 
           # Säkerställ att THEME_PATH är satt
           if [ -z "${THEME_PATH}" ]; then
@@ -81,7 +77,7 @@ jobs:
             exit 1
           fi
 
-          # Säkerställ att SSH_HOST och SSH_USER är satta
+          # Säkerställ att SSH_HOST och SSH_USER är satta (kommer från secrets via env)
           if [ -z "${SSH_HOST}" ]; then
             echo "ERROR: SSH_HOST is not set. Configure it as a repository secret."
             exit 1

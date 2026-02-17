@@ -57,8 +57,6 @@ jobs:
         shell: bash
 
       - name: Deploy selected ref via rsync
-        env:
-          PORT: ${{ env.SSH_PORT }}
         run: |
           set -e
 
