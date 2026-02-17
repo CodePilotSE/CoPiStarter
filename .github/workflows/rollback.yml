@@ -4,6 +4,10 @@ on:
   # Manuell trigger: välj tagg/branch i GitHub UI ("Run workflow" → "Use workflow from")
   workflow_dispatch:
 
+concurrency:
+  group: deploy-theme
+  cancel-in-progress: false
+
 env:
   # Anpassa per kund / repo:
   THEME_PATH: ${{ vars.THEME_PATH }}

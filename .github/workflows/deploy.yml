@@ -4,6 +4,10 @@ on:
   release:
     types: [published]
 
+concurrency:
+  group: deploy-theme
+  cancel-in-progress: false
+
 env:
   # Anpassa per kund / repo:
   # Rekommenderat: sätt som Actions-variabel (Settings → Variables → Actions → THEME_PATH)
