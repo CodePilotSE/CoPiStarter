@@ -71,7 +71,7 @@ jobs:
             exit 1
           fi
 
-          RSYNC_SSH="ssh -i ~/.ssh/id_rsa -p ${PORT} -o StrictHostKeyChecking=no"
+          RSYNC_SSH="ssh -i ~/.ssh/id_rsa -p ${PORT}"
 
           rsync -az --delete \
             -e "${RSYNC_SSH}" \
