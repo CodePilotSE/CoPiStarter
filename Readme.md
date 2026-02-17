@@ -59,6 +59,58 @@ Läggs i GitHub under `Settings → Secrets and variables → Actions → Secret
 - `SSH_KEY` – privat SSH-nyckel (PEM-format) med access till `SSH_USER@SSH_HOST`
 - `SSH_PORT` – (valfri) SSH-port om du inte kör på 22
 
+#### Generera deploy-nyckel (engångssetup, macOS)
+
+Görs en gång per kundprojekt:
+
+1. Öppna Terminal på din macOS-dator.
+2. Generera ett nytt nyckelpar för just detta kundprojekt, t.ex.:
+
+   ```bash
+   ssh-keygen -t ed25519 -C "copistarter-deploy-kund-X"
+   ```
+
+   - När du får frågan “Enter file in which to save the key”: ange t.ex.  
+     `~/.ssh/copistarter-deploy-kund-x`  
+     (eller tryck Enter för defaultvägen, men ett separat filnamn är oftast tydligare).
+   - Du kan välja att sätta en passphrase eller lämna den tom (tom är enklast för CI, men kräver att du litar på att nyckeln bara ligger som GitHub-secret).
+
+3. Lägg till **publika nyckeln** på servern:
+
+   - Visa den publika nyckeln:
+
+     ```bash
+     cat ~/.ssh/copistarter-deploy-kund-x.pub
+     ```
+
+   - Kopiera hela raden och klistra in i `~/.ssh/authorized_keys` för användaren `SSH_USER` på servern.
+
+4. Lägg in **privata nyckeln** som `SSH_KEY` i GitHub:
+
+   - Visa den privata nyckeln:
+
+     ```bash
+     cat ~/.ssh/copistarter-deploy-kund-x
+     ```
+
+   - Kopiera hela innehållet, inklusive `-----BEGIN` / `-----END`.
+   - Gå till `Settings → Secrets and variables → Actions` i kundens repo.
+   - Skapa ett nytt secret:
+     - Name: `SSH_KEY`
+     - Value: innehållet från den privata nyckeln.
+
+5. Sätt även:
+   - `SSH_HOST` – hostname/IP till servern.
+   - `SSH_USER` – användaren som ska användas för deploy.
+   - (ev.) `SSH_PORT` – om du inte använder port 22.
+
+6. Spara nyckelparet säkert, t.ex. i ett delat 1Password-valv:
+   - Skapa en post med t.ex. namnet `copistarter-deploy-kund-X`.
+   - Lägg in både **privata** och **publika** nyckeln som fält.
+   - Efter att nyckeln finns i 1Password, på servern och i GitHub Secrets kan filerna raderas från din lokala disk om du vill.
+
+GitHub Actions-workflowet kommer sedan, vid varje körning, att skriva `SSH_KEY`-secret till `~/.ssh/id_rsa` på den tillfälliga runnern och använda den för att ansluta till servern.
+
 ### Nödvändiga GitHub Variables (per kund/repo)
 
 Läggs i GitHub under `Settings → Secrets and variables → Actions → Variables`:
