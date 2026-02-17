@@ -55,6 +55,8 @@ jobs:
       - name: Deploy selected ref via rsync
         env:
           PORT: ${{ env.SSH_PORT }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           set -e
 
@@ -62,6 +64,17 @@ jobs:
 
           if [ -z "${THEME_PATH}" ]; then
             echo "ERROR: THEME_PATH is not set. Configure it as an Actions variable or hardcode it in the workflow."
+            exit 1
+          fi
+
+          # Säkerställ att SSH_HOST och SSH_USER är satta
+          if [ -z "${SSH_HOST}" ]; then
+            echo "ERROR: SSH_HOST is not set. Configure it as a repository secret."
+            exit 1
+          fi
+
+          if [ -z "${SSH_USER}" ]; then
+            echo "ERROR: SSH_USER is not set. Configure it as a repository secret."
             exit 1
           fi
 
@@ -99,7 +112,7 @@ jobs:
             --exclude="src" \
             --exclude="README*" \
             ./ \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${THEME_PATH}"
+            "${SSH_USER}@${SSH_HOST}:${THEME_PATH}"
 
         shell: bash
 
