@@ -241,3 +241,72 @@ function show( $block_area = '', $echo = true ) {
 		return $output;
 	}
 }
+
+//----------------------------------
+// Get Block Area ID by Slug
+//----------------------------------
+/**
+ * @param string $slug Post slug (post_name).
+ * @return int|false Post ID on success, false on failure.
+ */
+function cs_get_block_area_id($slug) {
+	if ( empty( $slug ) ) {
+		return false;
+	}
+
+	$args = [
+		'post_type'      => 'block_area',
+		'meta_key'       => 'be_block_area',
+		'meta_value'     => $slug,
+		'posts_per_page' => 1,
+		'post_status'    => 'any',
+		'fields'         => 'ids',
+	];
+
+	$query = new \WP_Query( $args );
+
+	if ( $query->have_posts() ) {
+		$post_id = $query->posts[0];
+		wp_reset_postdata();
+		return $post_id;
+	}
+
+	wp_reset_postdata();
+	return false;
+}
+
+//----------------------------------
+// Add block area links to admin menu
+//----------------------------------
+/**
+ * Adds direct menu links in the WordPress admin menu for specific block areas,
+ * allowing quick access to edit commonly used block areas like the footer and sidebar.
+ *
+ * ## Block Area Configuration
+ *
+ * Each block area in the `$block_areas_to_link` array requires:
+ * - `name`: Display name for the menu item (Swedish: "Sidfot" = Footer, "Sidofält" = Sidebar)
+ * - `slug`: Block area slug that matches the meta_value in the database (e.g., 'footer-content', 'sidebar')
+ * - `icon`: WordPress Dashicon class name for the menu icon
+ *
+
+ * @return void
+ *
+ */
+function cs_add_block_area_links_to_admin_menu() {
+	$block_areas_to_link = [ 
+    // [
+    //   'name' => 'Sidfot',
+    //   'slug' => 'footer-content',
+    //   'icon' => 'dashicons-editor-kitchensink'
+    // ]
+  ];
+	foreach( $block_areas_to_link as $block_area ) {
+    $url = '';
+    $url = get_edit_post_link( cs_get_block_area_id( $block_area['slug'] ), '&' ); // Using & to override default "&amp;" causing the function to return an empty string
+    if( $url ) {
+      add_menu_page($block_area['name'], __($block_area['name'], 'copistarter'), 'edit_others_posts', $url, '', $block_area['icon'], 999);
+    }
+	}
+}
+add_action( 'admin_menu', __NAMESPACE__ . '\\cs_add_block_area_links_to_admin_menu' );
