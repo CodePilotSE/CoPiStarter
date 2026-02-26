@@ -33,9 +33,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          # Använd shallow clone men hämta även tags (räcker normalt även för composer)
-          fetch-depth: 1
-          fetch-tags: true
+          # Vid release-event: shallow + fetch-tags ger konflikt ("Cannot fetch both SHA and refs/tags/X").
+          # Full history undviker problemet; alternativt fetch-tags: false om du bara behöver koden.
+          fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -74,11 +74,12 @@ jobs:
           # Fallback till 22 om SSH_PORT inte är satt
           PORT="${SSH_PORT:-22}"
 
-          # Säkerställ att THEME_PATH är satt
+          # Säkerställ att THEME_PATH är satt och normalisera (inga avslutande /)
           if [ -z "${THEME_PATH}" ]; then
             echo "ERROR: THEME_PATH is not set. Configure it as an Actions variable or hardcode it in the workflow."
             exit 1
           fi
+          THEME_PATH="${THEME_PATH%/}"
 
           # Säkerställ att SSH_HOST och SSH_USER är satta (kommer från secrets via env)
           if [ -z "${SSH_HOST}" ]; then
@@ -91,11 +92,17 @@ jobs:
             exit 1
           fi
 
-          RSYNC_SSH="ssh -i ~/.ssh/id_rsa -p ${PORT}"
+          RSYNC_SSH="ssh -i ~/.ssh/id_rsa -p ${PORT} -o ConnectTimeout=10 -o BatchMode=yes"
 
           # Extra säkerhet: kontrollera att målkatalogen ser ut som ett WP-tema (style.css måste finnas)
           if ! ${RSYNC_SSH} "${SSH_USER}@${SSH_HOST}" "[ -f '${THEME_PATH}/style.css' ]"; then
-            echo "ERROR: ${THEME_PATH}/style.css saknas på servern. THEME_PATH verkar inte peka på en giltig temakatalog."
+            echo "ERROR: ${THEME_PATH}/style.css saknas på servern (eller SSH-kontrollen misslyckades). THEME_PATH verkar inte peka på en giltig temakatalog."
+            echo ""
+            echo "--- Diagnostik: innehåll i THEME_PATH på servern ---"
+            ${RSYNC_SSH} "${SSH_USER}@${SSH_HOST}" "ls -la '${THEME_PATH}'" 2>&1 || true
+            echo "--- Diagnostik: innehåll i överordnad katalog ---"
+            PARENT_DIR="$(dirname "${THEME_PATH}")"
+            ${RSYNC_SSH} "${SSH_USER}@${SSH_HOST}" "ls -la '${PARENT_DIR}'" 2>&1 || true
             exit 1
           fi
 
@@ -103,7 +110,8 @@ jobs:
           EXTRA_FLAGS=()
           if [ "${RSYNC_DRY_RUN}" = "true" ]; then
             echo "RSYNC_DRY_RUN=true → kör rsync i dry-run-läge (ingen fil tas bort/skrivs på servern)."
-            EXTRA_FLAGS=("--dry-run")
+            echo "Listan nedan visar vad som hade kopierats (>) respektive tagits bort (*deleting)."
+            EXTRA_FLAGS=("--dry-run" "--itemize-changes")
           fi
 
           rsync -az --delete "${EXTRA_FLAGS[@]}" \
