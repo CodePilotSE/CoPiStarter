@@ -1,0 +1,16 @@
+# .github/workflows/clickup.yml
+name: ClickUp Integration
+
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize, review_requested]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  clickup:
+    uses: CodePilotSE/infra-scripts/.github/workflows/clickup-integration.yml@main
+    permissions:
+      contents: write
+      pull-requests: read
+    secrets: inherit
