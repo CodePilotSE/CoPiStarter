@@ -44,3 +44,51 @@ function register_options_page() {
 	}
 }
 add_action( 'init', __NAMESPACE__ . '\\register_options_page' );
+
+/**
+ * Print ACF field with optional inline text editing support.
+ *
+ * @param string $field   Field name/key.
+ * @param string $context Context (e.g. block ID) or empty for global.
+ * @param string $element HTML element to wrap value in.
+ */
+function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attributes = [] ) {
+	$allowed_elements = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div' ];
+
+	if ( ! in_array( $element, $allowed_elements, true ) ) {
+		return;
+	}
+
+	if ( empty( $context ) ) {
+		$field_value = \get_field( $field );
+	} else {
+		$field_value = \get_field( $field, $context );
+	}
+
+	$attributes_string = '';
+	foreach ( $attributes as $attribute => $value ) {
+		$attributes_string .= $attribute . '="' . $value . '" ';
+	}
+
+	if ( function_exists( 'acf_inline_text_editing_attrs' ) ) {
+		if ( empty( $context ) ) {
+			$field_editing_attrs = acf_inline_text_editing_attrs( $field );
+		} else {
+			$field_editing_attrs = acf_inline_text_editing_attrs( $field, $context );
+		}
+		printf(
+			'<%1$s %2$s %3$s>%4$s</%1$s>',
+			esc_attr( $element ),
+			$field_editing_attrs,
+			$attributes_string,
+			esc_html( $field_value )
+		);
+	} else {
+		printf(
+			'<%1$s %2$s>%3$s</%1$s>',
+			esc_attr( $element ),
+			$attributes_string,
+			esc_html( $field_value )
+		);
+	}
+}
