@@ -53,6 +53,9 @@ add_action( 'init', __NAMESPACE__ . '\\register_options_page' );
  * @param string $element    HTML element to wrap value in.
  * @param array  $attributes Optional HTML attributes as key => value pairs.
  *
+ * Usage:
+ * cs_print_acf_inline_edit( 'field name', 'current block id', 'element to wrap the field in', 'attributes as key => value pairs' ) 
+ * 
  * @return void
  */
 function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attributes = [] ) {
@@ -69,8 +72,8 @@ function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attr
 	}
 
 	$attributes_string = '';
-	foreach ( $attributes as $attribute => $value ) {
-		$attributes_string .= $attribute . '="' . $value . '" ';
+	foreach ( $attributes as $key => $value ) {
+		$attributes_string .= esc_attr( $key ) . '="' . esc_attr( $value ) . '" ';
 	}
 
 	if ( function_exists( 'acf_inline_text_editing_attrs' ) ) {
@@ -84,14 +87,14 @@ function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attr
 			esc_attr( $element ),
 			$field_editing_attrs,
 			$attributes_string,
-			esc_html( $field_value )
+			wp_kses_post( $field_value )
 		);
 	} else {
 		printf(
 			'<%1$s %2$s>%3$s</%1$s>',
 			esc_attr( $element ),
 			$attributes_string,
-			esc_html( $field_value )
+			wp_kses_post( $field_value )
 		);
 	}
 }
