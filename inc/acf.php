@@ -72,8 +72,10 @@ function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attr
 	}
 
 	$attributes_string = '';
-	foreach ( $attributes as $key => $value ) {
-		$attributes_string .= esc_attr( $key ) . '="' . esc_attr( $value ) . '" ';
+  if( !empty( $attributes ) && is_array( $attributes ) ) {
+    foreach ( $attributes as $key => $value ) {
+      $attributes_string .= esc_attr( $key ) . '="' . esc_attr( $value ) . '" ';
+    }
 	}
 
 	if ( function_exists( 'acf_inline_text_editing_attrs' ) ) {
