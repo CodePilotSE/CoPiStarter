@@ -304,7 +304,7 @@ function cs_add_block_area_links_to_admin_menu() {
 	foreach( $block_areas_to_link as $block_area ) {
     $url = '';
     $url = get_edit_post_link( cs_get_block_area_id( $block_area['slug'] ), '&' ); // Using & to override default "&amp;" causing the function to return an empty string
-    if( $url ) {
+    if( !empty( $url ) && !empty( $block_area['name'] ) && !empty( $block_area['icon'] ) ) {
       add_menu_page($block_area['name'], __($block_area['name'], 'copistarter'), 'edit_others_posts', $url, '', $block_area['icon'], 999);
     }
 	}
