@@ -60,8 +60,9 @@ add_action( 'init', __NAMESPACE__ . '\\register_options_page' );
  */
 function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attributes = [] ) {
 	$allowed_elements = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div' ];
-
-	if ( ! in_array( $element, $allowed_elements, true ) ) {
+  $allowed_field_types = [ 'text', 'textarea', 'number', 'email', 'url', 'tel' ];
+  $field_type = get_field_object( $field )['type'];
+	if ( empty( $field_type ) || $field_type && ! in_array( $field_type, $allowed_field_types, true ) || ! in_array( $element, $allowed_elements, true ) ) {
 		return;
 	}
 
