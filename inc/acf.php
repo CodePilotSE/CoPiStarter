@@ -54,8 +54,8 @@ add_action( 'init', __NAMESPACE__ . '\\register_options_page' );
  * @param array  $attributes Optional HTML attributes as key => value pairs.
  *
  * Usage:
- * cs_print_acf_inline_edit( 'field name', 'current block id', 'element to wrap the field in', 'array of attributes as "key => value" pairs' ) 
- * 
+ * cs_print_acf_inline_edit( 'field name', 'current block id', 'element to wrap the field in', 'array of attributes as "key => value" pairs' )
+ *
  * @return void
  */
 function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attributes = [] ) {
