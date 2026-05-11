@@ -21,7 +21,7 @@ if ( disable_site_comments() ) {
       global $pagenow;
       
       if ($pagenow === 'edit-comments.php') {
-          wp_redirect(admin_url());
+          wp_safe_redirect(admin_url());
           exit;
       }
 
