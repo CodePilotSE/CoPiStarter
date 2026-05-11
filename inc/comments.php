@@ -10,11 +10,9 @@
 
 namespace CoPiStarter\Comments;
 
-function disable_site_comments() {
-  return true;
-}
+$disable_site_comments = true;
 
-if ( disable_site_comments() ) {
+if ( $disable_site_comments ) {
   add_action('admin_init', function () {
     // Redirect any user trying to access comments page
     global $pagenow;
