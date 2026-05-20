@@ -24,9 +24,6 @@ if ( $disable_site_comments ) {
 				exit;
 			}
 
-			// Remove comments metabox from dashboard.
-			remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
-
 			// Disable support for comments and trackbacks in post types.
 			foreach ( get_post_types() as $post_type ) {
 				if ( post_type_supports( $post_type, 'comments' ) ) {
@@ -36,6 +33,11 @@ if ( $disable_site_comments ) {
 			}
 		}
 	);
+
+  add_action('wp_dashboard_setup', function () {
+    // Remove comments metabox from dashboard 
+    remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
+  });
 
 	// Close comments on the front-end.
 	add_filter( 'comments_open', '__return_false', 20, 2 );
