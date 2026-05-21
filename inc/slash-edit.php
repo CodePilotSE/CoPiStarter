@@ -17,14 +17,6 @@ function slash_edit_check() {
   }
   return false;
 }
-function slash_edit_check_login() {
-  if ( !is_user_logged_in() ) {
-    $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( $_SERVER['REQUEST_URI'] ) : '';
-    wp_safe_redirect( wp_login_url( $request_uri ) );
-    exit;
-  }
-  return true;
-}
 function slash_edit_get_url() {
   if ( !slash_edit_check()  && !isset($_SERVER['REQUEST_URI']) ) {
     return null;
@@ -72,10 +64,6 @@ function slash_edit_term($taxonomy, $term_slug) {
 }
 
 function run_slash_edits() {
-  if ( !slash_edit_check() ) {
-    return;
-  }
-  slash_edit_check_login();
   $clean_path = slash_edit_get_url();
   // Loop through all post types and check if the current URL matches a post type
   $post_types = get_post_types();
