@@ -19,7 +19,8 @@ function cs_print_acf_link_field( $field, $post_id = false, $link_text = '', $fa
   } else {
     $field_object = get_field_object( $field, $post_id );
   }
-  
+
+  if ( ! is_array( $field_object ) || empty( $field_object ) ) return;
   if ( empty( $field_object['type'] ) || $field_object['type'] !== 'link' ) return;
   
   $field_value = $field_object['value'];
