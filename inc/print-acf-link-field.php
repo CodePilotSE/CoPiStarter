@@ -35,6 +35,7 @@ function cs_print_acf_link_field( $field, $post_id = false, $link_text = '', $fa
       $link_text = !empty( $field_value['title'] ) ? $field_value['title'] : $fallback_text;
     endif;
   else :
+    if(empty( $field_value )) return;
     $link = $field_value;
     if ( empty( $link_text ) ) :
       $link_text = $fallback_text;
@@ -45,5 +46,5 @@ function cs_print_acf_link_field( $field, $post_id = false, $link_text = '', $fa
     $link_text = $fallback_text;
   endif;
 
-  printf( '<a href="%1$s"> %2$s</a>', esc_url( $link ), esc_html( $link_text ) );
+  printf( '<a href="%1$s">%2$s</a>', esc_url( $link ), esc_html( $link_text ) );
 }
