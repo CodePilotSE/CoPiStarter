@@ -73,7 +73,7 @@ function slash_edit_term($taxonomy, $term_slug) {
   }
   
   if ( $term = get_term_by( 'slug', $term_slug, $taxonomy )) {
-    $edit_link = get_edit_term_link( $term->term_id, $taxonomy, 'raw' );
+    $edit_link = get_edit_term_link( $term->term_id, $taxonomy );
     if ( !empty( $edit_link ) ) {
       wp_safe_redirect( $edit_link );
       exit;
