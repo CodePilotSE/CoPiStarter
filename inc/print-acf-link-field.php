@@ -9,8 +9,11 @@
  * @return void
  * @example cs_print_acf_link_field( 'field_69d5144cc6ccf', get_the_ID(), 'This is a custom title' , 'Läs mer' );
  */
-function cs_print_acf_link_field( $field, $post_id = false, $link_text = '', $fallback_text = 'Läs mer') {
+function cs_print_acf_link_field( $field, $post_id = false, $link_text = '', $fallback_text = '' ) {
   if ( empty( $field ) ) return;
+  if ( empty( $fallback_text ) ) {
+    $fallback_text = __( 'Läs mer', 'copistarter' );
+  }
   if ( empty( $post_id ) ){
     $field_object = get_field_object( $field );
   } else {
