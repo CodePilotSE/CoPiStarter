@@ -9,7 +9,7 @@
  * @return void
  * @example cs_print_acf_link_field( 'field_69d5144cc6ccf', get_the_ID(), 'This is a custom title', 'span' );
  */
-function cs_print_acf_link_field( $field, $post_id = false, $param_title_value = '', $text_wrapper_element = '' ) {
+function cs_print_acf_link_field( $field, $post_id = false, $link_text = '', $fallback_text = 'Läs mer') {
   if ( empty( $field ) ) return;
   if ( empty( $post_id ) ){
     $field_object = get_field_object( $field );
