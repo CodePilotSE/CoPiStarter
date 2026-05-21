@@ -28,7 +28,7 @@ function cs_print_acf_link_field( $field, $post_id = false, $link_text = '', $fa
   
   if ( $return_format === 'array' ) :
     // If the field is an array, check if the url is set and if not, return
-    if ( empty( $field_value['url'] ) ) return;
+    if ( !is_array( $field_value ) || empty( $field_value['url'] ) ) return;
 
     $link = $field_value['url'];
     if ( empty( $link_text ) ) :
