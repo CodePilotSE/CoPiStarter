@@ -43,9 +43,5 @@ function cs_print_acf_link_field( $field, $post_id = false, $link_text = '', $fa
     endif;
   endif;
   
-  if ( empty( $link_text ) ) :
-    $link_text = $fallback_text;
-  endif;
-
   printf( '<a href="%1$s">%2$s</a>', esc_url( $link ), esc_html( $link_text ) );
 }
