@@ -93,10 +93,14 @@ function run_slash_edits() {
     }
   }
   $taxonomies = get_taxonomies();
-  foreach ($taxonomies as $taxonomy) {
-    $term_slug = trim($clean_path, '/'.$taxonomy.'/');
-    // Check if the current URL matches a taxonomy term
-    slash_edit_term($taxonomy, $term_slug);
+  $path_segments = array_values( array_filter( explode( '/', (string) $clean_path ), 'strlen' ) );
+  foreach ( $taxonomies as $taxonomy ) {
+    if ( empty( $path_segments ) || $path_segments[0] !== $taxonomy ) {
+      continue;
+    }
+    $term_segments = array_slice( $path_segments, 1 );
+    $term_slug = implode( '/', $term_segments );
+    slash_edit_term( $taxonomy, $term_slug );
   }
 
 }
