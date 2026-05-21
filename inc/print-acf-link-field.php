@@ -36,13 +36,6 @@ function cs_print_acf_link_field( $field, $post_id = false, $link_text = '', $fa
   
   empty( $param_title_value ) ? $title_value = $acf_field_title_value : $title_value = $param_title_value;
 
-  $allowed_wrapper_elements = [ 'span', 'div', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'em', 'b', 'i' ];
-  $wrapper_open = '';
-  $wrapper_close = '';
-  if ( !empty( $text_wrapper_element ) && in_array( $text_wrapper_element, $allowed_wrapper_elements ) ) {
-    $wrapper_open = '<' . $text_wrapper_element . '>';
-    $wrapper_close = '</' . $text_wrapper_element . '>';
-  }
   
   printf( '<a href="%1$s"> %2$s%3$s%4$s</a>', $link, $wrapper_open, $title_value, $wrapper_close );
 }
