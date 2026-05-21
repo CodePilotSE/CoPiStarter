@@ -23,6 +23,24 @@ function slash_edit_get_url() {
   }
   $uri = wp_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ); 
   if (is_string($uri)) {
+    // If the URL is /edit or /edit/, redirect to the home page edit link
+    if ($uri === '/edit' || $uri === '/edit/') {
+      if ( get_option( 'show_on_front' ) === 'page' ) {
+        $home_page_id = (int) get_option( 'page_on_front' );
+        if ( $home_page_id) {
+          $home_page = get_post( $home_page_id );
+          if ( $home_page instanceof WP_Post ) {
+            $home_page_edit_link = get_edit_post_link( $home_page_id, 'raw' );
+            if ( empty( $home_page_edit_link ) ) {
+              $home_page_edit_link = admin_url( 'post.php?post=' . $home_page_id . '&action=edit' );
+            }
+            wp_safe_redirect( $home_page_edit_link );
+            exit;
+          }
+        }
+      }
+      return null;
+    }
     if ( substr($uri, -6) === '/edit/' ) {
       return substr($uri, 0, -6);
     }
