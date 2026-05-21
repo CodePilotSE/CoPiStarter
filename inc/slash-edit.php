@@ -26,7 +26,7 @@ function slash_edit_check_login() {
   return true;
 }
 function slash_edit_get_url() {
-  if ( !slash_edit_check()  && !isset($_SERVER['REQUEST_URI']) ) {
+  if ( !slash_edit_check() || !isset($_SERVER['REQUEST_URI']) ) {
     return null;
   }
   $uri = wp_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ); 
