@@ -11,7 +11,7 @@
 function slash_edit_check() {
   if ( !is_admin() && isset($_SERVER['REQUEST_URI']) ) {
     $uri = wp_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
-    if ( substr($uri, -5) === '/edit' || substr($uri, -6) === '/edit/' ) {
+    if ( is_string($uri) && ( substr($uri, -5) === '/edit' || substr($uri, -6) === '/edit/' ) ) {
       return true;
     }
   }
@@ -30,11 +30,13 @@ function slash_edit_get_url() {
     return null;
   }
   $uri = wp_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ); 
-  if ( substr($uri, -6) === '/edit/' ) {
-    return substr($uri, 0, -6);
-  }
-  elseif ( substr($uri, -5) === '/edit' ) {
-    return substr($uri, 0, -5);
+  if (is_string($uri)) {
+    if ( substr($uri, -6) === '/edit/' ) {
+      return substr($uri, 0, -6);
+    }
+    elseif ( substr($uri, -5) === '/edit' ) {
+      return substr($uri, 0, -5);
+    }
   }
   return null;
 }
@@ -85,10 +87,10 @@ function run_slash_edits() {
     }
   }
   $taxonomies = get_taxonomies();
-  $term_slug = trim($clean_path, '/'.$taxonomy.'/');
   foreach ($taxonomies as $taxonomy) {
-      // Check if the current URL matches a taxonomy term
-      slash_edit_term($taxonomy, $term_slug);
+    $term_slug = trim($clean_path, '/'.$taxonomy.'/');
+    // Check if the current URL matches a taxonomy term
+    slash_edit_term($taxonomy, $term_slug);
   }
 
 }
