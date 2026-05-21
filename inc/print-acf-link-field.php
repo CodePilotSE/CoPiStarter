@@ -3,7 +3,7 @@
  * Print ACF Link Field
  *
  * @param string $field The field name or field key.
- * @param string $post_id The ID of the post/ page where the field is located.
+ * @param int|string|false $post_id The ID of the post/ page where the field is located.
  * @param string $link_text The text to display for the link. Will override the field title if set.
  * @param string $fallback_text The text to display if the field is empty.
  * @return void
