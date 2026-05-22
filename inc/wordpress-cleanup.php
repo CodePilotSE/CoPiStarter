@@ -184,26 +184,6 @@ function be_max_srcset_width( $max_width, $size_array ) {
 add_filter( 'max_srcset_image_width', 'be_max_srcset_width', 10, 2 );
 
 /**
- * Default image sizes
- */
-function be_default_image_sizes( $sizes, $size, $image_src, $image_meta, $attachment_id ) {
-
-	$layout = be_page_layout();
-	if ( 'full-width-content' === $layout ) {
-		return $sizes;
-	}
-
-	$content_width = $GLOBALS['content_width'];
-
-	if ( $size[0] > $content_width ) {
-		$sizes = esc_attr( '(max-width: ' . $content_width . 'px) 100vw, ' . $content_width . 'px' );
-	}
-
-	return $sizes;
-}
-add_filter( 'wp_calculate_image_sizes', 'be_default_image_sizes', 10, 5 );
-
-/**
  * Remove all default block patterns
  */
 
