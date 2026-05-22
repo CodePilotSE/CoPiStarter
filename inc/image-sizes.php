@@ -2,7 +2,7 @@
 
 // Add new image sizes ---------------------------------------------------------
 // X-Large image-size
-add_image_size( 'x-large', 1600, 0, true ); 
+add_image_size( 'x-large', 1600, 0, false ); 
 
 // Update existing wp image sizes ---------------------------------------------------------
 // Thumbnail image-size
