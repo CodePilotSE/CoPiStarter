@@ -27,12 +27,12 @@ update_option( 'large_size_crop', 0 );
 // Add custom image sizes to the resolution list in the WordPress editor
 function custom_image_sizes_to_editor( ) {
  
-    $sizes['thumbnail']    = 'Liten';
-    $sizes['medium']       = 'Medium';
-    $sizes['medium_large'] = 'Mediumstor';
-    $sizes['large']        = 'Stor';
-    $sizes['x-large']      = 'Extra stor';
-    $sizes['full']         = 'Full storlek';
+    $sizes['thumbnail']    = __( 'Liten', 'copistarter' );
+    $sizes['medium']       = __( 'Medium', 'copistarter' );
+    $sizes['medium_large'] = __( 'Mediumstor', 'copistarter' );
+    $sizes['large']        = __( 'Stor', 'copistarter' );
+    $sizes['x-large']      = __( 'Extra stor', 'copistarter' );
+    $sizes['full']         = __( 'Full storlek', 'copistarter' );
   return $sizes;
 }
 add_filter( 'image_size_names_choose', 'custom_image_sizes_to_editor' );
