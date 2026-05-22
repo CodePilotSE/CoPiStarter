@@ -179,7 +179,7 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
  * }
  */
 function be_max_srcset_width( $max_width, $size_array ) {
-	return 1200;
+	return 1600;
 }
 add_filter( 'max_srcset_image_width', 'be_max_srcset_width', 10, 2 );
 
