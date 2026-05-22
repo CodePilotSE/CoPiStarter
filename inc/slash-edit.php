@@ -81,8 +81,30 @@ function slash_edit_term($taxonomy, $term_slug) {
   }
 }
 
+function slash_edit_get_taxonomy_rewrite_base( $taxonomy ) {
+  $taxonomy_obj = get_taxonomy( $taxonomy );
+  if ( ! $taxonomy_obj instanceof WP_Taxonomy || ! $taxonomy_obj->rewrite ) {
+    return null;
+  }
+  if ( ! empty( $taxonomy_obj->rewrite_slug ) ) {
+    return trim( $taxonomy_obj->rewrite_slug, '/' );
+  }
+  $slug = $taxonomy_obj->rewrite['slug'] ?? '';
+  if ( '' === $slug ) {
+    if ( 'category' === $taxonomy ) {
+      $slug = get_option( 'category_base' ) ?: 'category';
+    } elseif ( 'post_tag' === $taxonomy ) {
+      $slug = get_option( 'tag_base' ) ?: 'tag';
+    } else {
+      $slug = $taxonomy;
+    }
+  }
+  return trim( $slug, '/' );
+}
+
 function run_slash_edits() {
   $clean_path = slash_edit_get_url();
+  if ( empty( $clean_path ) ) return;
   // Loop through all post types and check if the current URL matches a post type
   $post_types = get_post_types();
   if (count($post_types) > 0) {
@@ -95,10 +117,18 @@ function run_slash_edits() {
   $taxonomies = get_taxonomies();
   $path_segments = array_values( array_filter( explode( '/', (string) $clean_path ), 'strlen' ) );
   foreach ( $taxonomies as $taxonomy ) {
-    if ( empty( $path_segments ) || $path_segments[0] !== $taxonomy ) {
+    $rewrite_base = slash_edit_get_taxonomy_rewrite_base( $taxonomy );
+    if ( null === $rewrite_base || '' === $rewrite_base ) {
       continue;
     }
-    $term_segments = array_slice( $path_segments, 1 );
+    $base_segments = array_values( array_filter( explode( '/', $rewrite_base ), 'strlen' ) );
+    if ( empty( $path_segments ) || empty( $base_segments ) || count( $path_segments ) < count( $base_segments ) ) {
+      continue;
+    }
+    if ( array_slice( $path_segments, 0, count( $base_segments ) ) !== $base_segments ) {
+      continue;
+    }
+    $term_segments = array_slice( $path_segments, count( $base_segments ) );
     $term_slug = implode( '/', $term_segments );
     slash_edit_term( $taxonomy, $term_slug );
   }
