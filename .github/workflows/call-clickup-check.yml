@@ -1,0 +1,11 @@
+name: Enforce ClickUp Link
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+    branches:
+      - dev
+
+jobs:
+  call-central-workflow:
+    uses: CodePilotSE/infra-scripts/.github/workflows/check-clickup-url.yml@main
