@@ -51,20 +51,30 @@ function slash_edit_get_url() {
   return null;
 }
 
-function slash_edit_post($post_type, $post_slug) {
-  
-  if ( empty( $post_slug ) ) {
+function slash_edit_post( $clean_path ) {
+  if ( empty( $clean_path ) ) {
     return;
   }
 
-  // Get the post by slug
-  if ( $post = get_page_by_path( $post_slug, OBJECT, $post_type ) ) {
-    $edit_link = get_edit_post_link( $post->ID, 'raw' );
-    if ( !empty( $edit_link ) ) {
-      wp_safe_redirect( $edit_link );
-      exit;
-    }
-  }    
+  $path = '/' . ltrim( $clean_path, '/' );
+  $post_id = url_to_postid( home_url( $path ) );
+
+  if ( ! $post_id && trailingslashit( $path ) !== $path ) {
+    $post_id = url_to_postid( home_url( trailingslashit( $path ) ) );
+  }
+
+  if ( ! $post_id ) {
+    return;
+  }
+
+  $edit_link = get_edit_post_link( $post_id, 'raw' );
+  if ( empty( $edit_link ) ) {
+    $edit_link = admin_url( 'post.php?post=' . $post_id . '&action=edit' );
+  }
+  if ( ! empty( $edit_link ) ) {
+    wp_safe_redirect( $edit_link );
+    exit;
+  }
 }
 
 function slash_edit_term($taxonomy, $term_slug) {
@@ -105,15 +115,7 @@ function slash_edit_get_taxonomy_rewrite_base( $taxonomy ) {
 function run_slash_edits() {
   $clean_path = slash_edit_get_url();
   if ( empty( $clean_path ) ) return;
-  // Loop through all post types and check if the current URL matches a post type
-  $post_types = get_post_types();
-  if (count($post_types) > 0) {
-    // Get the post slug from the url
-    $post_slug = trim($clean_path, '/');
-    foreach ($post_types as $post_type) {
-      slash_edit_post($post_type, $post_slug);
-    }
-  }
+  slash_edit_post( $clean_path );
   $taxonomies = get_taxonomies();
   $path_segments = array_values( array_filter( explode( '/', (string) $clean_path ), 'strlen' ) );
   foreach ( $taxonomies as $taxonomy ) {
