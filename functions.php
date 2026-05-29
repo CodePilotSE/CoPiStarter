@@ -20,6 +20,7 @@ include_once get_template_directory() . '/inc/archive-header.php';
 include_once get_template_directory() . '/inc/archive-navigation.php';
 include_once get_template_directory() . '/inc/template-tags.php';
 include_once get_template_directory() . '/inc/nav.php';
+include_once get_template_directory() . '/inc/image-sizes.php';
 
 // Functionality.
 require_once get_template_directory() . '/inc/blocks.php';
@@ -30,6 +31,8 @@ include_once get_template_directory() . '/inc/acf-theme-colors.php';
 include_once get_template_directory() . '/inc/block-classes.php';
 include_once get_template_directory() . '/inc/excerpt-settings.php';
 include_once get_template_directory() . '/inc/slash-edit.php';
+include_once get_template_directory() . '/inc/print-acf-link-field.php';
+
 // Plugin Support.
 require_once get_template_directory() . '/inc/acf.php';
 require_once get_template_directory() . '/inc/wordpress-seo.php';
