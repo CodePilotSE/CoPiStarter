@@ -39,7 +39,7 @@ add_action( 'after_switch_theme', 'copi_setup_image_size_options' );
 
 function custom_image_sizes_to_editor( $sizes ) {
   $sizes = array();
-  $sizes['thumbnail']    = __( 'Liten', 'copistarter' );
+  $sizes['thumbnail']    = __( 'Liten (kvadratisk)', 'copistarter' );
   $sizes['medium']       = __( 'Medium', 'copistarter' );
   $sizes['medium_large'] = __( 'Mediumstor', 'copistarter' );
   $sizes['large']        = __( 'Stor', 'copistarter' );
