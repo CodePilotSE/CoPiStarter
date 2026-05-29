@@ -20,6 +20,7 @@ include_once get_template_directory() . '/inc/archive-header.php';
 include_once get_template_directory() . '/inc/archive-navigation.php';
 include_once get_template_directory() . '/inc/template-tags.php';
 include_once get_template_directory() . '/inc/nav.php';
+include_once get_template_directory() . '/inc/image-sizes.php';
 
 // Functionality.
 require_once get_template_directory() . '/inc/blocks.php';
