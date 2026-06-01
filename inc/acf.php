@@ -49,19 +49,19 @@ add_action( 'init', __NAMESPACE__ . '\\register_options_page' );
  * Print ACF field with optional inline text editing support.
  *
  * @param string $field      Field name/key.
- * @param string $context    Context (e.g. block ID) or empty for global.
+ * @param string $block_id   Block ID or empty for global.
  * @param string $element    HTML element to wrap value in.
  * @param array  $attributes Optional HTML attributes as key => value pairs.
  *
  * Usage:
- * cs_print_acf_inline_edit( 'field name', 'current block id', 'element to wrap the field in', 'array of attributes as "key => value" pairs' )
+ * cs_print_acf_inline_edit( 'field name', '$block_id', 'element to wrap the field in', 'array of attributes as "key => value" pairs' )
  *
  * @return void
  */
-function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attributes = [] ) {
+function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $attributes = [] ) {
 	$allowed_elements     = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div' ];
 	$allowed_field_types  = [ 'text', 'textarea', 'number', 'email', 'url', 'tel' ];
-	$field_object = empty( $context ) ? get_field_object( $field ) : get_field_object( $field, $context );
+	$field_object = empty( $block_id ) ? get_field_object( $field ) : get_field_object( $field, $block_id );
 	if ( ! is_array( $field_object ) ) {
 		return;
 	}
@@ -71,10 +71,10 @@ function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attr
 		return;
 	}
 
-	if ( empty( $context ) ) {
+	if ( empty( $block_id ) ) {
 		$field_value = \get_field( $field );
 	} else {
-		$field_value = \get_field( $field, $context );
+		$field_value = \get_field( $field, $block_id );
 	}
 
 	$attributes_strings = [];
@@ -84,7 +84,7 @@ function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attr
 	}
 
 	if ( empty( $attributes['id'] ) ) {
-		$attributes['id'] = sanitize_key( $field . '_' . $context );
+		$attributes['id'] = sanitize_key( $field . '_' . $block_id );
 	}
 
 	foreach ( $attributes as $key => $value ) {
@@ -93,7 +93,7 @@ function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attr
 
 	$attributes_string = implode( ' ', $attributes_strings );
 	if ( function_exists( 'acf_inline_text_editing_attrs' ) ) {
-		if ( empty( $context ) ) {
+		  if ( empty( $block_id ) ) {
 			$field_editing_attrs = acf_inline_text_editing_attrs( $field );
 		} else {
 			$field_editing_attrs = acf_inline_text_editing_attrs( $field, $context );
