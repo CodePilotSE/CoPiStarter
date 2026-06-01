@@ -74,12 +74,17 @@ function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attr
 	}
 
 	$attributes_string = '';
+
+  if( empty( $attributes['id'] ) ) {
+    $attributes['id'] = $field . '_' . $context;
+  }
+  $attributes_strings = [];
   if( !empty( $attributes ) && is_array( $attributes ) ) {
     foreach ( $attributes as $key => $value ) {
-      $attributes_string .= esc_attr( $key ) . '="' . esc_attr( $value ) . '" ';
+      $attributes_strings[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
     }
 	}
-
+  $attributes_string = implode( ' ', $attributes_strings );
 	if ( function_exists( 'acf_inline_text_editing_attrs' ) ) {
 		if ( empty( $context ) ) {
 			$field_editing_attrs = acf_inline_text_editing_attrs( $field );
