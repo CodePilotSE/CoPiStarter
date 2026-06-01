@@ -253,8 +253,8 @@ label,
 	}
 }
 
-.alignwide:not(.is-layout-constrained) > *,
-.alignfull:not(.is-layout-constrained) > * {
+.alignwide:not(.is-layout-constrained, .wp-block-image) > *,
+.alignfull:not(.is-layout-constrained, .wp-block-image) > * {
 	max-width: var(--wp--custom--layout--wide);
 	margin-left: auto;
 	margin-right: auto;
