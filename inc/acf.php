@@ -103,7 +103,7 @@ function cs_print_acf_inline_edit( $field, $context = '', $element = 'h2', $attr
 			'<%1$s %2$s>%3$s</%1$s>',
 			esc_attr( $element ),
 			$attributes_string,
-			wp_kses_post( $field_value )
+			esc_html( $field_value )
 		);
 	}
 }
