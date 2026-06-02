@@ -44,3 +44,73 @@ function register_options_page() {
 	}
 }
 add_action( 'init', __NAMESPACE__ . '\\register_options_page' );
+
+/**
+ * Print ACF field with optional inline text editing support.
+ *
+ * @param string $field      Field name/key.
+ * @param string $block_id   Block ID or empty for global.
+ * @param string $element    HTML element to wrap value in.
+ * @param array  $attributes Optional HTML attributes as key => value pairs.
+ *
+ * Usage:
+ * cs_print_acf_inline_edit( 'field name', '$block_id', 'element to wrap the field in', 'array of attributes as "key => value" pairs' )
+ *
+ * @return void
+ */
+function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $attributes = [] ) {
+	$allowed_elements     = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div' ];
+	$allowed_field_types  = [ 'text', 'textarea', 'number', 'email', 'url', 'tel' ];
+	$field_object = empty( $block_id ) ? get_field_object( $field ) : get_field_object( $field, $block_id );
+	if ( ! is_array( $field_object ) ) {
+		return;
+	}
+
+	$field_type = $field_object['type'] ?? '';
+	if ( empty( $field_type ) || ! in_array( $field_type, $allowed_field_types, true ) || ! in_array( $element, $allowed_elements, true ) ) {
+		return;
+	}
+
+	if ( empty( $block_id ) ) {
+		$field_value = \get_field( $field );
+	} else {
+		$field_value = \get_field( $field, $block_id );
+	}
+
+	$attributes_strings = [];
+
+	if ( ! is_array( $attributes ) ) {
+		$attributes = [];
+	}
+
+	if ( empty( $attributes['id'] ) ) {
+		$attributes['id'] = sanitize_key( $field . '_' . $block_id );
+	}
+
+	foreach ( $attributes as $key => $value ) {
+		$attributes_strings[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
+	}
+
+	$attributes_string = implode( ' ', $attributes_strings );
+	if ( function_exists( 'acf_inline_text_editing_attrs' ) ) {
+		  if ( empty( $block_id ) ) {
+			$field_editing_attrs = acf_inline_text_editing_attrs( $field );
+		} else {
+			$field_editing_attrs = acf_inline_text_editing_attrs( $field, $context );
+		}
+		printf(
+			'<%1$s %2$s %3$s>%4$s</%1$s>',
+			esc_attr( $element ),
+			$field_editing_attrs,
+			$attributes_string,
+			esc_html( $field_value )
+		);
+	} else {
+		printf(
+			'<%1$s %2$s>%3$s</%1$s>',
+			esc_attr( $element ),
+			$attributes_string,
+			esc_html( $field_value )
+		);
+	}
+}
