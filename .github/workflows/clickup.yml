@@ -3,7 +3,7 @@ name: ClickUp Integration
 
 on:
   pull_request:
-    types: [opened, reopened, edited, synchronize, review_requested]
+    types: [opened, reopened, edited, synchronize, review_requested, closed]
   pull_request_review:
     types: [submitted]
 
