@@ -5,8 +5,8 @@
 function be_register_menus() {
 	register_nav_menus(
 		[
-			'primary' => esc_html__( 'Huvudmeny', 'lansmansgarden' ),
-			'footer-menu' => esc_html__( 'Sidfotsmeny', 'lansmansgarden' ),
+			'primary' => esc_html__( 'Huvudmeny', 'copistarter' ),
+			'footer-menu' => esc_html__( 'Sidfotsmeny', 'copistarter' ),
 		]
 	);
 
