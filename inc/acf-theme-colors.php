@@ -74,7 +74,7 @@ function get_theme_color_theme_slugs( $theme = 'all' ) {
  * @param string $filter Full acf/load_field filter name.
  * @param string $theme  Color theme to limit the choices to.
  */
-function add_theme_colors_to_field( $filter, $theme = 'all', $exceptions_add, $exceptions_remove ) {
+function add_theme_colors_to_field( $filter, $theme = 'all', $exceptions_add = array(), $exceptions_remove = array() ) {
   add_filter(
     $filter,
     function( $field ) use ( $theme, $exceptions_add, $exceptions_remove ) {
