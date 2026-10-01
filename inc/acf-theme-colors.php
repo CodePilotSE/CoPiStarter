@@ -104,6 +104,8 @@ function acf_dynamic_colors_load( $field, $theme = 'all', $exceptions_add = arra
     $added_colors = $exceptions_add[ $field_name ] ?? array();
     $removed_colors = $exceptions_remove[ $field_name ] ?? array();
 
+    $field['choices'] = array();
+
     foreach ( $colors as $color ) {
       $slug = $color['slug'] ?? '';
 
