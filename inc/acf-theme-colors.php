@@ -56,6 +56,7 @@ function get_theme_color_theme_slugs( $theme = 'all' ) {
   $themes = array(
     'main'        => $main,
     'accent'      => $accent,
+    'main+accent' => array_merge( $main, $accent ),
   );
 
   return $themes[ $theme ] ?? null;
