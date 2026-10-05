@@ -82,13 +82,15 @@ function get_theme_color_theme_slugs( $theme = 'all' ) {
 //--------------------------------
 // FUNCTIONS
 //--------------------------------
+
 /**
  * Register the theme color choices filter for a field.
  *
  * ACF only passes $field to acf/load_field, so the theme is bound in a closure.
  *
  * @param string $filter Full acf/load_field filter name.
- * @param string $theme  Color theme to limit the choices to. */
+ * @param string $theme  Color theme to limit the choices to.
+ */
 function add_theme_colors_to_field( $filter, $theme = 'all', $exceptions_add = array(), $exceptions_remove = array() ) {
   add_filter(
     $filter,
