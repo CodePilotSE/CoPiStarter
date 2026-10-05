@@ -96,7 +96,7 @@ function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $att
 		  if ( empty( $block_id ) ) {
 			$field_editing_attrs = acf_inline_text_editing_attrs( $field );
 		} else {
-			$field_editing_attrs = acf_inline_text_editing_attrs( $field, $context );
+			$field_editing_attrs = acf_inline_text_editing_attrs( $field, $block_id );
 		}
 		printf(
 			'<%1$s %2$s %3$s>%4$s</%1$s>',
