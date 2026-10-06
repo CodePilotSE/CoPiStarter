@@ -36,15 +36,11 @@
 					&:checked {
 						position: relative;
 						box-shadow: none;
+						outline: 3px solid #0075ff;
+						outline-offset: 2px;
 
 						&::before {
-							box-sizing: border-box;
-							position: absolute;
-							background-color: transparent;
-							border: 3px solid #0075ff;
-							height: calc(100% + 12px);
-							width: calc(100% + 12px);
-							transform-origin: center;
+							display: none;
 						}
 					}
 
