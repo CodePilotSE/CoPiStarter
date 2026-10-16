@@ -3,7 +3,7 @@
  * Archive
  *
  * @package      CoPiStarter
- * @author       Bill Erickson
+ * @author       CodePilot AB
  * @since        1.0.0
  * @license      GPL-2.0+
  **/
@@ -21,6 +21,14 @@ function be_archive_body_class( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'be_archive_body_class' );
+function be_archive_content_before( ) {
+  $page_id = get_option( 'page_for_posts' );
+  if ( empty( $page_id ) ) return;
+  echo '<div class="block-area block-area-home">';
+    echo apply_filters( 'the_content', get_post_field( 'post_content', $page_id ) );
+  echo '</div>';
+}
+add_filter( 'tha_content_before', 'be_archive_content_before' );
 
 // Build the page.
 require get_template_directory() . '/index.php';
