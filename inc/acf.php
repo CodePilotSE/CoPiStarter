@@ -77,9 +77,6 @@ function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $att
 		$field_value = \get_field( $field, $block_id, $format_value = true, $escape_html = true);
 	}
 
-  // Escape the field value and allow HTML if allowed
-	$field_value = $allow_html ? wp_kses_post( $field_value ) : esc_html( $field_value );
-
   $is_preview = function_exists( 'acf_get_data' ) && (bool) acf_get_data( 'acf_doing_block_preview' );
 
   // Return early if we are in frontend and the field value is empty
