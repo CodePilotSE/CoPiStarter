@@ -83,7 +83,7 @@ function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $att
   $is_preview = function_exists( 'acf_get_data' ) && (bool) acf_get_data( 'acf_doing_block_preview' );
 
   // Return early if we are in frontend and the field value is empty
-  if ( ! $field_value && ! $is_preview ) return;
+  if ( '' === $field_value && ! $is_preview ) return;
   
 	$attributes_strings = [];
 
