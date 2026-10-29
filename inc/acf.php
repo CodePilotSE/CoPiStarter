@@ -72,7 +72,7 @@ function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $att
 	}
 
   if ( empty( $block_id ) ) {
-		$field_value = \get_field( $field , $format_value = true, $escape_html = true);
+		$field_value = \get_field( $field ,false , $format_value = true, $escape_html = true);
 	} else {
 		$field_value = \get_field( $field, $block_id, $format_value = true, $escape_html = true);
 	}
