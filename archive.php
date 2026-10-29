@@ -21,14 +21,36 @@ function be_archive_body_class( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'be_archive_body_class' );
-function be_archive_content_before( ) {
-  $page_id = get_option( 'page_for_posts' );
-  if ( empty( $page_id ) ) return;
-  echo '<div class="block-area block-area-home">';
-    echo apply_filters( 'the_content', get_post_field( 'post_content', $page_id ) );
-  echo '</div>';
+/**
+ * Posts page introduction (inside <main>).
+ */
+function be_archive_content_top() {
+	$page_id = get_option( 'page_for_posts' );
+	if ( empty( $page_id ) || ! is_home() ) {
+		return;
+	}
+	echo '<div class="block-area block-area-home">';
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Filtered through the_content.
+	echo apply_filters( 'the_content', get_post_field( 'post_content', $page_id ) );
+	echo '</div>';
 }
-add_filter( 'tha_content_before', 'be_archive_content_before' );
+add_action( 'tha_content_top', 'be_archive_content_top' );
+
+/**
+ * Open post listing grid wrapper.
+ */
+function be_archive_listing_open() {
+	echo '<div class="archive-listing">';
+}
+add_action( 'tha_content_while_before', 'be_archive_listing_open' );
+
+/**
+ * Close post listing grid wrapper (after pagination).
+ */
+function be_archive_listing_close() {
+	echo '</div>';
+}
+add_action( 'tha_content_while_after', 'be_archive_listing_close', 20 );
 
 // Build the page.
 require get_template_directory() . '/index.php';
