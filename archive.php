@@ -25,7 +25,12 @@ function be_archive_content_before( ) {
   $page_id = get_option( 'page_for_posts' );
   if ( empty( $page_id ) ) return;
   echo '<div class="block-area block-area-home">';
-    echo apply_filters( 'the_content', get_post_field( 'post_content', $page_id ) );
+    $loop = new WP_Query( [ 'post_type' => 'page', 'p' => $page_id ] );
+    while ( $loop->have_posts() ) {
+      $loop->the_post();
+      the_content();
+    }
+    wp_reset_postdata();
   echo '</div>';
 }
 add_filter( 'tha_content_before', 'be_archive_content_before' );
