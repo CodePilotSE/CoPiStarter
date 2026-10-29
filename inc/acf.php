@@ -59,7 +59,7 @@ add_action( 'init', __NAMESPACE__ . '\\register_options_page' );
  * @return void
  */
 function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $attributes = [] ) {
-	$allowed_elements     = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div' ];
+	$allowed_elements     = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div' ];
 	$allowed_field_types  = [ 'text', 'textarea', 'number', 'email', 'url', 'tel' ];
 	$field_object = empty( $block_id ) ? get_field_object( $field ) : get_field_object( $field, $block_id );
 	if ( ! is_array( $field_object ) ) {
@@ -71,12 +71,17 @@ function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $att
 		return;
 	}
 
-	if ( empty( $block_id ) ) {
-		$field_value = \get_field( $field );
+  if ( empty( $block_id ) ) {
+		$field_value = \get_field( $field ,false , $format_value = true, $escape_html = true);
 	} else {
-		$field_value = \get_field( $field, $block_id );
+		$field_value = \get_field( $field, $block_id, $format_value = true, $escape_html = true);
 	}
 
+  $is_preview = function_exists( 'acf_get_data' ) && (bool) acf_get_data( 'acf_doing_block_preview' );
+
+  // Return early if we are in frontend and the field value is empty
+  if ( '' === $field_value && ! $is_preview ) return;
+  
 	$attributes_strings = [];
 
 	if ( ! is_array( $attributes ) ) {
@@ -93,7 +98,7 @@ function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $att
 
 	$attributes_string = implode( ' ', $attributes_strings );
 	if ( function_exists( 'acf_inline_text_editing_attrs' ) ) {
-		  if ( empty( $block_id ) ) {
+    if ( empty( $block_id ) ) {
 			$field_editing_attrs = acf_inline_text_editing_attrs( $field );
 		} else {
 			$field_editing_attrs = acf_inline_text_editing_attrs( $field, $block_id );
@@ -103,14 +108,14 @@ function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $att
 			esc_attr( $element ),
 			$field_editing_attrs,
 			$attributes_string,
-			esc_html( $field_value )
+			$field_value
 		);
 	} else {
 		printf(
 			'<%1$s %2$s>%3$s</%1$s>',
 			esc_attr( $element ),
 			$attributes_string,
-			esc_html( $field_value )
+			$field_value
 		);
 	}
 }
