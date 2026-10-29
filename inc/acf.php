@@ -58,7 +58,7 @@ add_action( 'init', __NAMESPACE__ . '\\register_options_page' );
  *
  * @return void
  */
-function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $attributes = [], $allow_html = false ) {
+function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $attributes = [] ) {
 	$allowed_elements     = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div' ];
 	$allowed_field_types  = [ 'text', 'textarea', 'number', 'email', 'url', 'tel' ];
 	$field_object = empty( $block_id ) ? get_field_object( $field ) : get_field_object( $field, $block_id );
@@ -71,10 +71,10 @@ function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $att
 		return;
 	}
 
-	if ( empty( $block_id ) ) {
-		$field_value = \get_field( $field );
+  if ( empty( $block_id ) ) {
+		$field_value = \get_field( $field , $format_value = true, $escape_html = true);
 	} else {
-		$field_value = \get_field( $field, $block_id );
+		$field_value = \get_field( $field, $block_id, $format_value = true, $escape_html = true);
 	}
 
   // Escape the field value and allow HTML if allowed
