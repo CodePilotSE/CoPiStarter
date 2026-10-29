@@ -23,7 +23,7 @@ function be_archive_body_class( $classes ) {
 add_filter( 'body_class', 'be_archive_body_class' );
 function be_archive_content_before( ) {
   $page_id = get_option( 'page_for_posts' );
-  if ( empty( $page_id ) ) return;
+  if ( empty( $page_id ) || ! is_home() || get_query_var( 'paged' ) ) return;
   echo '<div class="block-area block-area-home">';
     $loop = new WP_Query( [ 'post_type' => 'page', 'p' => $page_id ] );
     while ( $loop->have_posts() ) {
