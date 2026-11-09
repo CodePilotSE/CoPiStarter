@@ -127,17 +127,17 @@
 				},
 				{
 					"name": "4XL (H1)",
-					"size": "var(--copistarter--font-size--4xl)",
+					"size": "var(--copistarter--font-size--4-xl)",
 					"slug": "4xl"
 				},
 				{
 					"name": "3XL (H2)",
-					"size": "var(--copistarter--font-size--3xl)",
+					"size": "var(--copistarter--font-size--3-xl)",
 					"slug": "3xl"
 				},
 				{
 					"name": "2XL (H3)",
-					"size": "var(--copistarter--font-size--2xl)",
+					"size": "var(--copistarter--font-size--2-xl)",
 					"slug": "2xl"
 				},
 				{
@@ -228,18 +228,18 @@
 			},
 			"h1": {
 				"typography": {
-					"fontSize": "var(--copistarter--font-size--4xl)",
+					"fontSize": "var(--copistarter--font-size--4-xl)",
 					"lineHeight": "var(--wp--custom--line-height--tiny)"
 				}
 			},
 			"h2": {
 				"typography": {
-					"fontSize": "var(--copistarter--font-size--3xl)"
+					"fontSize": "var(--copistarter--font-size--3-xl)"
 				}
 			},
 			"h3": {
 				"typography": {
-					"fontSize": "var(--copistarter--font-size--2xl)"
+					"fontSize": "var(--copistarter--font-size--2-xl)"
 				}
 			},
 			"h4": {
