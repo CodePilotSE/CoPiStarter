@@ -2,9 +2,9 @@
 .DS_Store
 .sass-cache/
 node_modules
-# Ignore all CSS files in all folders
+# Ignore all CSS files
 **/*.css
 **/*.css.map
-# Don't ignore the root style.css
-!style.css
+
+# Keep only the theme root stylesheet
 !/style.css
