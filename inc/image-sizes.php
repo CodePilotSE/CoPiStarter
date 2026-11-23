@@ -16,12 +16,12 @@ function copi_setup_image_size_options() {
   update_option( 'thumbnail_size_h', 200 );
 
   // Medium image-size
-  update_option( 'medium_size_w', 1000 );
+  update_option( 'medium_size_w', 600 );
   update_option( 'medium_size_h', 0 );
   update_option( 'medium_size_crop', 0 );
 
   // Medium-large image-size
-  update_option( 'medium_large_size_w', 800 );
+  update_option( 'medium_large_size_w', 900 );
   update_option( 'medium_large_size_h', 0 );
   update_option( 'medium_large_size_crop', 0 );
 
