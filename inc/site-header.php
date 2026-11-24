@@ -14,15 +14,15 @@
  */
 function be_site_header() {
   print_site_logo("site-header__logo");
-	echo '<div class="site-header__toggles">';
-	echo be_mobile_menu_toggle();
-	echo '</div>';
+  echo '<div class="site-header__toggles">';
+  echo be_mobile_menu_toggle();
+  echo '</div>';
 
-	echo '<nav class="nav-menu" role="navigation">';
-	if ( has_nav_menu( 'primary' ) ) {
-		wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'container_class' => 'nav-primary' ) );
-	}
-	echo '</nav>';
+  echo '<nav class="nav-menu" role="navigation">';
+  if ( has_nav_menu( 'primary' ) ) {
+    wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'container_class' => 'nav-primary' ) );
+  }
+  echo '</nav>';
 
 }
 add_action( 'tha_header_bottom', 'be_site_header', 11 );
@@ -31,11 +31,11 @@ add_action( 'tha_header_bottom', 'be_site_header', 11 );
  * Mobile menu toggle
  */
 function be_mobile_menu_toggle() {
-	$output  = '<button aria-label="Menu" class="menu-toggle">';
-	$output .= be_icon( array( 'icon' => 'menu', 'class' => 'open' ) );
-	$output .= be_icon( array( 'icon' => 'close', 'class' => 'close' ) );
-	$output .= '</button>';
-	return $output;
+  $output  = '<button aria-label="Menu" class="menu-toggle">';
+  $output .= be_icon( array( 'icon' => 'menu', 'class' => 'open' ) );
+  $output .= be_icon( array( 'icon' => 'close', 'class' => 'close' ) );
+  $output .= '</button>';
+  return $output;
 }
 
 function cs_header_search() {
@@ -58,28 +58,28 @@ add_action('tha_header_bottom', 'cs_header_search', 12);
  */
 function be_nav_add_dropdown_icons( $output, $item, $depth, $args ) {
 
-	if ( ! isset( $args->theme_location ) || 'primary' !== $args->theme_location ) {
-		return $output;
-	}
+  if ( ! isset( $args->theme_location ) || 'primary' !== $args->theme_location ) {
+    return $output;
+  }
 
-	if ( isset( $args->depth ) && 1 === $args->depth ) {
-		return $output;
-	}
+  if ( isset( $args->depth ) && 1 === $args->depth ) {
+    return $output;
+  }
 
-	if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
+  if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
 
-		// Add SVG icon to parent items.
-		$icon = be_icon( array( 'icon' => 'carat-down-large', 'size' => 12 ) );
+    // Add SVG icon to parent items.
+    $icon = be_icon( array( 'icon' => 'carat-down-large', 'size' => 12 ) );
 
-		// Optional - two icons based on open/close state
-		//$icon = be_icon( [ 'icon' => 'plus', 'class' => 'open' ] ) . be_icon( [ 'icon' => 'minus', 'class' => 'close' ] );
+    // Optional - two icons based on open/close state
+    //$icon = be_icon( [ 'icon' => 'plus', 'class' => 'open' ] ) . be_icon( [ 'icon' => 'minus', 'class' => 'close' ] );
 
-		$output .= sprintf(
-			'<button aria-label="Submenu Dropdown" class="submenu-expand" tabindex="-1">%s</button>',
-			$icon
-		);
-	}
+    $output .= sprintf(
+      '<button aria-label="Submenu Dropdown" class="submenu-expand" tabindex="-1">%s</button>',
+      $icon
+    );
+  }
 
-	return $output;
+  return $output;
 }
 add_filter( 'walker_nav_menu_start_el', 'be_nav_add_dropdown_icons', 10, 4 );

@@ -3,14 +3,14 @@ function copi_setup_image_size_options() {
   // ---------------------------------------------------------
   // Add new image sizes
   // ---------------------------------------------------------
-  
+
   // X-Large image-size
   add_image_size( 'x-large', 1600, 0, false ); 
 
   // ---------------------------------------------------------
   // Update existing wp image sizes
   // ---------------------------------------------------------
-  
+
   // Thumbnail image-size
   update_option( 'thumbnail_size_w', 200 );
   update_option( 'thumbnail_size_h', 200 );

@@ -81,7 +81,7 @@ function slash_edit_term($taxonomy, $term_slug) {
   if ( empty( $term_slug ) ) {
     return;
   }
-  
+
   if ( $term = get_term_by( 'slug', $term_slug, $taxonomy )) {
     $edit_link = get_edit_term_link( $term->term_id, $taxonomy );
     if ( !empty( $edit_link ) ) {

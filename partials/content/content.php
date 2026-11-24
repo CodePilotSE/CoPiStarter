@@ -11,9 +11,9 @@
 echo '<article class="' . esc_attr( join( ' ', get_post_class() ) ) . '">';
 
 if ( be_has_action( 'tha_entry_top' ) ) {
-	echo '<header class="entry-header">';
-	tha_entry_top();
-	echo '</header>';
+  echo '<header class="entry-header">';
+  tha_entry_top();
+  echo '</header>';
 }
 
 echo '<div class="entry-content">';
@@ -21,19 +21,19 @@ tha_entry_content_before();
 the_content();
 
 wp_link_pages(
-	[
-		'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'copistarter' ),
-		'after'  => '</div>',
-	]
+  [
+    'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'copistarter' ),
+    'after'  => '</div>',
+  ]
 );
 
 tha_entry_content_after();
 echo '</div>';
 
 if ( be_has_action( 'tha_entry_bottom' ) ) {
-	echo '<footer class="entry-footer">';
-	tha_entry_bottom();
-	echo '</footer>';
+  echo '<footer class="entry-footer">';
+  tha_entry_bottom();
+  echo '</footer>';
 }
 
 echo '</article>';

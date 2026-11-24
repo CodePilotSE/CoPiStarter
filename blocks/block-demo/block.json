@@ -1,33 +1,32 @@
 {
-	"name": "cwp/block-demo",
-	"title": "Block Demo",
-	"description": "",
-	"style": "block-block-demo",
-	"category": "theme",
-	"icon": "",
-	"apiVersion": 2,
-	"keywords": [],
-	"acf": {
-		"mode": "preview",
-		"renderTemplate": "render.php",
-		"blockVersion": 3,
-		"autoInlineEditing": true
-	},
-	"styles": [
-	],
-	"supports": {
-		"align": true,
-		"anchor": true,
-		"alignContent": true,
-		"color": {
-			"text": true,
-			"background": true,
-			"link": false,
-			"gradients": false,
-			"button": false,
-			"heading": false
-		},
-		"alignText": true,
-		"fullHeight": false
-	}
+  "name": "cwp/block-demo",
+  "title": "Block Demo",
+  "description": "",
+  "style": "block-block-demo",
+  "category": "theme",
+  "icon": "",
+  "apiVersion": 2,
+  "keywords": [],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php",
+    "blockVersion": 3,
+    "autoInlineEditing": true
+  },
+  "styles": [],
+  "supports": {
+    "align": true,
+    "anchor": true,
+    "alignContent": true,
+    "color": {
+      "text": true,
+      "background": true,
+      "link": false,
+      "gradients": false,
+      "button": false,
+      "heading": false
+    },
+    "alignText": true,
+    "fullHeight": false
+  }
 }

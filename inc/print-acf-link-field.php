@@ -22,11 +22,11 @@ function cs_print_acf_link_field( $field, $post_id = false, $link_text = '', $fa
 
   if ( ! is_array( $field_object ) || empty( $field_object ) ) return;
   if ( empty( $field_object['type'] ) || $field_object['type'] !== 'link' ) return;
-  
+
   $field_value = $field_object['value'];
   $return_format = $field_object['return_format'] ?? '';
   $link = '';
-  
+
   if ( $return_format === 'array' ) :
     // If the field is an array, check if the url is set and if not, return
     if ( !is_array( $field_value ) || empty( $field_value['url'] ) ) return;
@@ -42,6 +42,6 @@ function cs_print_acf_link_field( $field, $post_id = false, $link_text = '', $fa
       $link_text = $fallback_text;
     endif;
   endif;
-  
+
   printf( '<a href="%1$s">%2$s</a>', esc_url( $link ), esc_html( $link_text ) );
 }

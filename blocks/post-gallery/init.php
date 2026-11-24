@@ -19,7 +19,7 @@ function query($block) {
     'order' => 'DESC',
     'post_status' => 'publish',
   ];
-  
+
   if (function_exists('get_field')):
     switch(get_field('post_gallery_mode')):
       case 'latest-posts':
