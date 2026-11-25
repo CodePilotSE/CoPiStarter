@@ -84,7 +84,7 @@ add_filter( 'acf/load_field', __NAMESPACE__ . '\\default_placeholder_from_label'
  */
 function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $attributes = [] ) {
   $allowed_elements          = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div' ];
-  $allowed_field_types       = [ 'text', 'textarea', 'number', 'email', 'url', 'tel', 'password' ];
+  $allowed_field_types       = [ 'text', 'textarea', 'number', 'email', 'url', 'tel'];
   // ACF only enables contenteditable (and its ::before placeholder CSS) for these types.
   $contenteditable_types     = [ 'text', 'textarea' ];
   $field_object              = empty( $block_id ) ? get_field_object( $field ) : get_field_object( $field, $block_id );
