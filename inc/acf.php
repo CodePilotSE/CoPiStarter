@@ -20,13 +20,13 @@ add_filter( 'acf/blocks/no_fields_assigned_message', '__return_empty_string' );
  * Remove ACF admin menu
  */
 function remove_acf_admin_menu() {
-	if ( ! ( function_exists( 'wp_get_environment_type' ) && 'production' === wp_get_environment_type() ) ) {
-		return;
-	}
+  if ( ! ( function_exists( 'wp_get_environment_type' ) && 'production' === wp_get_environment_type() ) ) {
+    return;
+  }
 
-	$slug = 'edit.php?post_type=acf-field-group';
-	remove_submenu_page( $slug, $slug );
-	remove_submenu_page( $slug, 'post-new.php?post_type=acf-field-group' );
+  $slug = 'edit.php?post_type=acf-field-group';
+  remove_submenu_page( $slug, $slug );
+  remove_submenu_page( $slug, 'post-new.php?post_type=acf-field-group' );
 }
 add_action( 'admin_menu', __NAMESPACE__ . '\\remove_acf_admin_menu' );
 
@@ -34,14 +34,14 @@ add_action( 'admin_menu', __NAMESPACE__ . '\\remove_acf_admin_menu' );
  * Register Options Page
  */
 function register_options_page() {
-	if ( function_exists( 'acf_add_options_page' ) ) {
-		acf_add_options_page(
-			[
-				'title'      => __( 'Site Options', 'copistarter' ),
-				'capability' => 'manage_options',
-			]
-		);
-	}
+  if ( function_exists( 'acf_add_options_page' ) ) {
+    acf_add_options_page(
+      [
+        'title'      => __( 'Site Options', 'copistarter' ),
+        'capability' => 'manage_options',
+      ]
+    );
+  }
 }
 add_action( 'init', __NAMESPACE__ . '\\register_options_page' );
 
@@ -59,63 +59,63 @@ add_action( 'init', __NAMESPACE__ . '\\register_options_page' );
  * @return void
  */
 function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $attributes = [] ) {
-	$allowed_elements     = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div' ];
-	$allowed_field_types  = [ 'text', 'textarea', 'number', 'email', 'url', 'tel' ];
-	$field_object = empty( $block_id ) ? get_field_object( $field ) : get_field_object( $field, $block_id );
-	if ( ! is_array( $field_object ) ) {
-		return;
-	}
+  $allowed_elements     = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div' ];
+  $allowed_field_types  = [ 'text', 'textarea', 'number', 'email', 'url', 'tel' ];
+  $field_object = empty( $block_id ) ? get_field_object( $field ) : get_field_object( $field, $block_id );
+  if ( ! is_array( $field_object ) ) {
+    return;
+  }
 
-	$field_type = $field_object['type'] ?? '';
-	if ( empty( $field_type ) || ! in_array( $field_type, $allowed_field_types, true ) || ! in_array( $element, $allowed_elements, true ) ) {
-		return;
-	}
+  $field_type = $field_object['type'] ?? '';
+  if ( empty( $field_type ) || ! in_array( $field_type, $allowed_field_types, true ) || ! in_array( $element, $allowed_elements, true ) ) {
+    return;
+  }
 
   if ( empty( $block_id ) ) {
-		$field_value = \get_field( $field ,false , $format_value = true, $escape_html = true);
-	} else {
-		$field_value = \get_field( $field, $block_id, $format_value = true, $escape_html = true);
-	}
+    $field_value = \get_field( $field ,false , $format_value = true, $escape_html = true);
+  } else {
+    $field_value = \get_field( $field, $block_id, $format_value = true, $escape_html = true);
+  }
 
   $is_preview = function_exists( 'acf_get_data' ) && (bool) acf_get_data( 'acf_doing_block_preview' );
 
   // Return early if we are in frontend and the field value is empty
   if ( '' === $field_value && ! $is_preview ) return;
-  
-	$attributes_strings = [];
 
-	if ( ! is_array( $attributes ) ) {
-		$attributes = [];
-	}
+  $attributes_strings = [];
 
-	if ( empty( $attributes['id'] ) ) {
-		$attributes['id'] = sanitize_key( $field . '_' . $block_id );
-	}
+  if ( ! is_array( $attributes ) ) {
+    $attributes = [];
+  }
 
-	foreach ( $attributes as $key => $value ) {
-		$attributes_strings[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
-	}
+  if ( empty( $attributes['id'] ) ) {
+    $attributes['id'] = sanitize_key( $field . '_' . $block_id );
+  }
 
-	$attributes_string = implode( ' ', $attributes_strings );
-	if ( function_exists( 'acf_inline_text_editing_attrs' ) ) {
+  foreach ( $attributes as $key => $value ) {
+    $attributes_strings[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
+  }
+
+  $attributes_string = implode( ' ', $attributes_strings );
+  if ( function_exists( 'acf_inline_text_editing_attrs' ) ) {
     if ( empty( $block_id ) ) {
-			$field_editing_attrs = acf_inline_text_editing_attrs( $field );
-		} else {
-			$field_editing_attrs = acf_inline_text_editing_attrs( $field, $block_id );
-		}
-		printf(
-			'<%1$s %2$s %3$s>%4$s</%1$s>',
-			esc_attr( $element ),
-			$field_editing_attrs,
-			$attributes_string,
-			$field_value
-		);
-	} else {
-		printf(
-			'<%1$s %2$s>%3$s</%1$s>',
-			esc_attr( $element ),
-			$attributes_string,
-			$field_value
-		);
-	}
+      $field_editing_attrs = acf_inline_text_editing_attrs( $field );
+    } else {
+      $field_editing_attrs = acf_inline_text_editing_attrs( $field, $block_id );
+    }
+    printf(
+      '<%1$s %2$s %3$s>%4$s</%1$s>',
+      esc_attr( $element ),
+      $field_editing_attrs,
+      $attributes_string,
+      $field_value
+    );
+  } else {
+    printf(
+      '<%1$s %2$s>%3$s</%1$s>',
+      esc_attr( $element ),
+      $attributes_string,
+      $field_value
+    );
+  }
 }

@@ -13,29 +13,29 @@
  */
 function be_default_loop() {
 
-	if ( have_posts() ) :
+  if ( have_posts() ) :
 
-		tha_content_while_before();
+    tha_content_while_before();
 
-		/* Start the Loop */
-		while ( have_posts() && ! is_404() ) :
-			the_post();
-			tha_entry_before();
-			$partial = is_singular() ? 'content' : 'archive';
-			get_template_part( 'partials/content/' . $partial );
-			tha_entry_after();
-		endwhile;
+    /* Start the Loop */
+    while ( have_posts() && ! is_404() ) :
+      the_post();
+      tha_entry_before();
+      $partial = is_singular() ? 'content' : 'archive';
+      get_template_part( 'partials/content/' . $partial );
+      tha_entry_after();
+    endwhile;
 
-		tha_content_while_after();
+    tha_content_while_after();
 
-	else :
+  else :
 
-		tha_entry_before();
-		$context = apply_filters( 'be_empty_loop_partial_context', 'no-content' );
-		get_template_part( 'partials/content/' . $context );
-		tha_entry_after();
+    tha_entry_before();
+    $context = apply_filters( 'be_empty_loop_partial_context', 'no-content' );
+    get_template_part( 'partials/content/' . $context );
+    tha_entry_after();
 
-	endif;
+  endif;
 
 }
 add_action( 'tha_content_loop', 'be_default_loop' );
@@ -44,14 +44,14 @@ add_action( 'tha_content_loop', 'be_default_loop' );
  * Entry Title
  */
 function be_entry_header() {
-	if ( be_has_h1_block() ) {
-		add_filter( 'render_block', 'be_entry_header_in_content', 10, 2 );
+  if ( be_has_h1_block() ) {
+    add_filter( 'render_block', 'be_entry_header_in_content', 10, 2 );
 
-	} else {
-		do_action( 'be_entry_title_before' );
-		echo '<h1 class="entry-title">' . esc_html( get_the_title() ) . '</h1>';
-		do_action( 'be_entry_title_after' );
-	}
+  } else {
+    do_action( 'be_entry_title_before' );
+    echo '<h1 class="entry-title">' . esc_html( get_the_title() ) . '</h1>';
+    do_action( 'be_entry_title_after' );
+  }
 }
 add_action( 'tha_entry_top', 'be_entry_header' );
 
@@ -62,17 +62,17 @@ add_action( 'tha_entry_top', 'be_entry_header' );
  * @param array  $block Block.
  */
 function be_entry_header_in_content( $output, $block ) {
-	if ( 'core/heading' === $block['blockName'] && ! empty( $block['attrs'] ) && ! empty( $block['attrs']['level'] ) && 1 === $block['attrs']['level'] ) {
-		ob_start();
-		do_action( 'be_entry_title_before' );
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is hardcoded and safe, not set via input.
-		echo $output;
-		do_action( 'be_entry_title_after' );
-		$output = ob_get_clean();
-		remove_filter( 'render_block', 'be_entry_header_in_content', 10 );
-	}
+  if ( 'core/heading' === $block['blockName'] && ! empty( $block['attrs'] ) && ! empty( $block['attrs']['level'] ) && 1 === $block['attrs']['level'] ) {
+    ob_start();
+    do_action( 'be_entry_title_before' );
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is hardcoded and safe, not set via input.
+    echo $output;
+    do_action( 'be_entry_title_after' );
+    $output = ob_get_clean();
+    remove_filter( 'render_block', 'be_entry_header_in_content', 10 );
+  }
 
-	return $output;
+  return $output;
 }
 
 /**
@@ -84,33 +84,33 @@ function be_entry_header_in_content( $output, $block ) {
  */
 function be_has_h1_block( $blocks = array() ) {
 
-	if ( is_singular() && empty( $blocks ) ) {
-		global $post;
-		$blocks = parse_blocks( $post->post_content );
-	}
+  if ( is_singular() && empty( $blocks ) ) {
+    global $post;
+    $blocks = parse_blocks( $post->post_content );
+  }
 
-	foreach ( $blocks as $block ) {
+  foreach ( $blocks as $block ) {
 
-		if ( ! isset( $block['blockName'] ) ) {
-			continue;
-		}
+    if ( ! isset( $block['blockName'] ) ) {
+      continue;
+    }
 
-		// Custom header block.
-		if ( 'acf/header' === $block['blockName'] ) {
-			return true;
+    // Custom header block.
+    if ( 'acf/header' === $block['blockName'] ) {
+      return true;
 
-			// Heading block.
-		} elseif ( 'core/heading' === $block['blockName'] && isset( $block['attrs']['level'] ) && 1 === $block['attrs']['level'] ) {
-			return true;
+      // Heading block.
+    } elseif ( 'core/heading' === $block['blockName'] && isset( $block['attrs']['level'] ) && 1 === $block['attrs']['level'] ) {
+      return true;
 
-			// Scan inner blocks for headings.
-		} elseif ( isset( $block['innerBlocks'] ) && ! empty( $block['innerBlocks'] ) ) {
-			$inner_h1 = be_has_h1_block( $block['innerBlocks'] );
-			if ( $inner_h1 ) {
-				return true;
-			}
-		}
-	}
+      // Scan inner blocks for headings.
+    } elseif ( isset( $block['innerBlocks'] ) && ! empty( $block['innerBlocks'] ) ) {
+      $inner_h1 = be_has_h1_block( $block['innerBlocks'] );
+      if ( $inner_h1 ) {
+        return true;
+      }
+    }
+  }
 
-	return false;
+  return false;
 }

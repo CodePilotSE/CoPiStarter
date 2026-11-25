@@ -11,16 +11,16 @@
 use CoPiStarter\Block_Areas;
 
 if ( ! function_exists( 'be_page_layout' ) ) {
-	return;
+  return;
 }
 
 $layout = be_page_layout();
 if ( ! in_array( $layout, array( 'content-sidebar', 'sidebar-content' ), true ) ) {
-	return;
+  return;
 }
 
 if ( ! apply_filters( 'be_display_sidebar', true ) ) {
-	return;
+  return;
 }
 
 tha_sidebars_before();

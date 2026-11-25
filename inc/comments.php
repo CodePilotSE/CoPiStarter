@@ -13,78 +13,78 @@ namespace CoPiStarter\Comments;
 $disable_site_comments = true;
 
 if ( $disable_site_comments ) {
-	add_action(
-		'admin_init',
-		function () {
-			// Redirect any user trying to access comments page.
-			global $pagenow;
+  add_action(
+    'admin_init',
+    function () {
+      // Redirect any user trying to access comments page.
+      global $pagenow;
 
-			if ( $pagenow === 'edit-comments.php' ) {
-				wp_safe_redirect( admin_url() );
-				exit;
-			}
+      if ( $pagenow === 'edit-comments.php' ) {
+        wp_safe_redirect( admin_url() );
+        exit;
+      }
 
-			// Disable support for comments and trackbacks in post types.
-			foreach ( get_post_types() as $post_type ) {
-				if ( post_type_supports( $post_type, 'comments' ) ) {
-					remove_post_type_support( $post_type, 'comments' );
-					remove_post_type_support( $post_type, 'trackbacks' );
-				}
-			}
-		}
-	);
+      // Disable support for comments and trackbacks in post types.
+      foreach ( get_post_types() as $post_type ) {
+        if ( post_type_supports( $post_type, 'comments' ) ) {
+          remove_post_type_support( $post_type, 'comments' );
+          remove_post_type_support( $post_type, 'trackbacks' );
+        }
+      }
+    }
+  );
 
   add_action('wp_dashboard_setup', function () {
     // Remove comments metabox from dashboard 
     remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
   });
 
-	// Close comments on the front-end.
-	add_filter( 'comments_open', '__return_false', 20, 2 );
-	add_filter( 'pings_open', '__return_false', 20, 2 );
+  // Close comments on the front-end.
+  add_filter( 'comments_open', '__return_false', 20, 2 );
+  add_filter( 'pings_open', '__return_false', 20, 2 );
 
-	// Hide existing comments.
-	add_filter( 'comments_array', '__return_empty_array', 10, 2 );
+  // Hide existing comments.
+  add_filter( 'comments_array', '__return_empty_array', 10, 2 );
 
-	// Remove comments page in menu.
-	add_action(
-		'admin_menu',
-		function () {
-			remove_menu_page( 'edit-comments.php' );
-		}
-	);
+  // Remove comments page in menu.
+  add_action(
+    'admin_menu',
+    function () {
+      remove_menu_page( 'edit-comments.php' );
+    }
+  );
 
-	// Remove comments links from admin bar.
-	add_action(
-		'init',
-		function () {
-			if ( is_admin_bar_showing() ) {
-				remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 );
-			}
-		}
-	);
+  // Remove comments links from admin bar.
+  add_action(
+    'init',
+    function () {
+      if ( is_admin_bar_showing() ) {
+        remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 );
+      }
+    }
+  );
 
-	return;
+  return;
 }
 
 /**
  * Display Comments
  */
 function display_comments() {
-	echo '<div id="comments" class="entry-comments">';
+  echo '<div id="comments" class="entry-comments">';
 
-	\comment_form();
+  \comment_form();
 
-	if ( \have_comments() ) :
-		echo '<h2 class="comments-title">' . esc_html( get_comments_number_text() ) . '</h2>';
-		comment_navigation( 'before' );
-		echo '<ol class="comment-list">';
-		\wp_list_comments( [ 'style' => 'ol', 'type' => 'comment' ] );
-		echo '</ol>';
-		comment_navigation( 'after' );
-	endif;
+  if ( \have_comments() ) :
+    echo '<h2 class="comments-title">' . esc_html( get_comments_number_text() ) . '</h2>';
+    comment_navigation( 'before' );
+    echo '<ol class="comment-list">';
+    \wp_list_comments( [ 'style' => 'ol', 'type' => 'comment' ] );
+    echo '</ol>';
+    comment_navigation( 'after' );
+  endif;
 
-	echo '</div>';
+  echo '</div>';
 }
 add_action( 'tha_comments_before', __NAMESPACE__ . '\\display_comments', 40 );
 
@@ -92,9 +92,9 @@ add_action( 'tha_comments_before', __NAMESPACE__ . '\\display_comments', 40 );
  * Comments Tempalte
  */
 function comments_template() {
-	if ( is_single() && ( comments_open() || get_comments_number() ) ) {
-		\comments_template();
-	}
+  if ( is_single() && ( comments_open() || get_comments_number() ) ) {
+    \comments_template();
+  }
 }
 add_action( 'tha_content_while_after', __NAMESPACE__ . '\\comments_template' );
 
@@ -104,32 +104,32 @@ add_action( 'tha_content_while_after', __NAMESPACE__ . '\\comments_template' );
  * @param string $location Location.
  */
 function comment_navigation( $location = '' ) {
-	$comment_nav_locations = [ 'after' ];
-	if ( ! in_array( $location, $comment_nav_locations, true ) ) {
-		return;
-	}
+  $comment_nav_locations = [ 'after' ];
+  if ( ! in_array( $location, $comment_nav_locations, true ) ) {
+    return;
+  }
 
-	if ( get_comment_pages_count() <= 1 ) {
-		return;
-	}
+  if ( get_comment_pages_count() <= 1 ) {
+    return;
+  }
 
-	$output  = '<nav id="comment-nav-' . esc_attr( $location ) . '" class="navigation comment-navigation" role="navigation">';
-	$output .= '<h3 class="screen-reader-text">' . esc_html__( 'Comment navigation', 'copistarter' ) . '</h3>';
-	$output .= '<div class="nav-links">';
-	$output .= '<div class="nav-previous">' . get_previous_comments_link( esc_html__( 'Older Comments', 'copistarter' ) ) . '</div>';
-	$output .= '<div class="nav-next">' . get_next_comments_link( esc_html__( 'Newer Comments', 'copistarter' ) ) . '</div>';
-	$output .= '</div>';
-	$output .= '</nav>';
+  $output  = '<nav id="comment-nav-' . esc_attr( $location ) . '" class="navigation comment-navigation" role="navigation">';
+  $output .= '<h3 class="screen-reader-text">' . esc_html__( 'Comment navigation', 'copistarter' ) . '</h3>';
+  $output .= '<div class="nav-links">';
+  $output .= '<div class="nav-previous">' . get_previous_comments_link( esc_html__( 'Older Comments', 'copistarter' ) ) . '</div>';
+  $output .= '<div class="nav-next">' . get_next_comments_link( esc_html__( 'Newer Comments', 'copistarter' ) ) . '</div>';
+  $output .= '</div>';
+  $output .= '</nav>';
 
-	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is hardcoded and safe, not set via input.
-	echo apply_filters( 'be_comment_navigation', $output, $location );
+  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Value is hardcoded and safe, not set via input.
+  echo apply_filters( 'be_comment_navigation', $output, $location );
 }
 
 /**
  * Comment links as buttons
  */
 function comment_link_attributes( $atts = '' ) {
-	return ' class="wp-element-button"';
+  return ' class="wp-element-button"';
 }
 add_filter( 'previous_comments_link_attributes', __NAMESPACE__ . '\\comment_link_attributes' );
 add_filter( 'next_comments_link_attributes', __NAMESPACE__ . '\\comment_link_attributes' );
@@ -144,16 +144,16 @@ add_filter( 'next_comments_link_attributes', __NAMESPACE__ . '\\comment_link_att
  * @param int|\WP_Post $post_id    The post ID or WP_Post object.
  */
 function staff_comment_class( $classes, $class, $comment_id, $comment, $post_id ) {
-	if ( empty( $comment->user_id ) ) {
-		return $classes;
-	}
-	$staff_roles = array( 'comment_manager', 'author', 'editor', 'administrator' );
-	$staff_roles = apply_filters( 'be_staff_roles', $staff_roles );
-	$user        = get_userdata( (int) $comment->user_id );
-	if ( $user instanceof \WP_User && is_array( $user->roles ) && ! empty( array_intersect( $user->roles, $staff_roles ) ) ) {
-		$classes[] = 'staff';
-	}
-	return $classes;
+  if ( empty( $comment->user_id ) ) {
+    return $classes;
+  }
+  $staff_roles = array( 'comment_manager', 'author', 'editor', 'administrator' );
+  $staff_roles = apply_filters( 'be_staff_roles', $staff_roles );
+  $user        = get_userdata( (int) $comment->user_id );
+  if ( $user instanceof \WP_User && is_array( $user->roles ) && ! empty( array_intersect( $user->roles, $staff_roles ) ) ) {
+    $classes[] = 'staff';
+  }
+  return $classes;
 }
 add_filter( 'comment_class', __NAMESPACE__ . '\\staff_comment_class', 10, 5 );
 
@@ -164,8 +164,8 @@ add_filter( 'comment_class', __NAMESPACE__ . '\\staff_comment_class', 10, 5 );
  * @param string $avatar Avatar.
  */
 function remove_avatars_from_comments( $avatar ) {
-	global $in_comment_loop;
-	return $in_comment_loop ? '' : $avatar;
+  global $in_comment_loop;
+  return $in_comment_loop ? '' : $avatar;
 }
 add_filter( 'get_avatar', __NAMESPACE__ . '\\remove_avatars_from_comments' );
 
@@ -175,8 +175,8 @@ add_filter( 'get_avatar', __NAMESPACE__ . '\\remove_avatars_from_comments' );
  * @param array $fields Comment form fields.
  */
 function remove_url_from_comment_form( $fields ) {
-	unset( $fields['url'] );
-	return $fields;
+  unset( $fields['url'] );
+  return $fields;
 }
 add_filter( 'comment_form_default_fields', __NAMESPACE__ . '\\remove_url_from_comment_form' );
 
@@ -187,7 +187,7 @@ add_filter( 'comment_form_default_fields', __NAMESPACE__ . '\\remove_url_from_co
  * @param string $author Author Name.
  */
 function remove_url_from_existing_comments( $author_link, $author ) {
-	return $author;
+  return $author;
 }
 add_filter( 'get_comment_author_link', __NAMESPACE__ . '\\remove_url_from_existing_comments', 10, 2 );
 
@@ -197,10 +197,10 @@ add_filter( 'get_comment_author_link', __NAMESPACE__ . '\\remove_url_from_existi
  * @param array $args Comment Form args.
  */
 function comment_form_button_class( $args ) {
-	$args['class_submit'] = 'submit wp-element-button';
-	$args['title_reply'] = __( 'Leave a comment', 'copistarter' );
-	$args['title_reply_before'] = str_replace( 'h3', 'h2', $args['title_reply_before'] );
-	$args['title_reply_after'] = str_replace( 'h3', 'h2', $args['title_reply_after'] );
-	return $args;
+  $args['class_submit'] = 'submit wp-element-button';
+  $args['title_reply'] = __( 'Leave a comment', 'copistarter' );
+  $args['title_reply_before'] = str_replace( 'h3', 'h2', $args['title_reply_before'] );
+  $args['title_reply_after'] = str_replace( 'h3', 'h2', $args['title_reply_after'] );
+  return $args;
 }
 add_filter( 'comment_form_defaults', __NAMESPACE__ . '\\comment_form_button_class' );

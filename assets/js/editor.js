@@ -1,7 +1,7 @@
 wp.domReady(() => {
   // Get all registered block types
   const allBlocks = wp.blocks.getBlockTypes();
-  
+
   // ------------------------------------------------------------
   // Unregister blocks
   // ------------------------------------------------------------
@@ -10,7 +10,7 @@ wp.domReady(() => {
     'core/code',
     'core/html',
   ];
-  
+
   const disallowedBlockCategories = [
     'theme',
     'widgets',
@@ -25,7 +25,7 @@ wp.domReady(() => {
     'core/post-date',
     'core/post-title'
   ];
-  
+
 
   allBlocks.forEach((block) => {
     if (((!allowedBlocks.includes(block.name) && disallowedBlockCategories.includes(block.category)) || disallowedBlocks.includes(block.name)) && block.name.substring(0, 5) === 'core/') {
@@ -69,8 +69,8 @@ wp.domReady(() => {
       field.dispatchEvent(new Event('change'));
     });
   }, 1000); // Adjust timeout as needed to ensure fields are loaded
-  
-  
+
+
   // ------------------------------------------------------------
   // Set align to none if it is empty to fix issue with align setting reverting to default
   // ------------------------------------------------------------
