@@ -121,7 +121,7 @@ function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $att
     $attributes['id'] = sanitize_key( $field . '_' . $block_id );
   }
 
-  $placeholder             = ! empty( $field_object['placeholder'] ) ? (string) $field_object['placeholder'] : '';
+  $placeholder             = isset( $field_object['placeholder'] ) && '' !== (string) $field_object['placeholder'] ? (string) $field_object['placeholder'] : '';
   $is_contenteditable      = in_array( $field_type, $contenteditable_types, true );
   $show_visual_placeholder = $is_preview && '' === $field_value && '' !== $placeholder && ! $is_contenteditable;
 
