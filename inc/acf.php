@@ -126,7 +126,7 @@ function cs_print_acf_inline_edit( $field, $block_id = '', $element = 'h2', $att
   $show_visual_placeholder = $is_preview && '' === $field_value && '' !== $placeholder && ! $is_contenteditable;
 
   if ( $show_visual_placeholder ) {
-    $attributes['style'] = trim( ( $attributes['style'] ?? '' ) . ' opacity:0.62;' );
+    $attributes['style'] = rtrim( trim( (string) ( $attributes['style'] ?? '' ) ), ';' ) . '; opacity:0.62;'
     $display_value       = esc_html( $placeholder );
   } else {
     $display_value = $field_value;
