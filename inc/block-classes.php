@@ -20,7 +20,7 @@ function block_element_color($color_support, $color, $element, $classes) {
 }
 
 function cs_block_class( $block , $classes = [] ) {
-  
+
   // Alignment
   if($block['supports']['align'] && !empty($block['align'])) {
     $classes[] = 'align' . $block['align'];
@@ -81,8 +81,8 @@ function cs_block_class( $block , $classes = [] ) {
     $classes[] = $block['className'];
   } 
 
-  
-	return $classes;
+
+  return $classes;
 }
 
 /**
@@ -102,10 +102,10 @@ function block_gradient_style_tag( $block, $additional_styles = '' ) {
   $styles = '';
   if(!empty($block['supports']['color']['gradients']) && !empty( $block['style']['color']['gradient'] ) ){
     $styles = 'background: ' . $block['style']['color']['gradient'] . ';';
-	}
+  }
   $styles .= $additional_styles;
   if(!empty($styles)) {
     return 'style="'. $styles .'"';
   }
-	return '';
+  return '';
 }

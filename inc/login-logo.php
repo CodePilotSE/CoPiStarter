@@ -14,7 +14,7 @@
  * @param string $url URL.
  */
 function be_login_header_url( $url ) {
-	return esc_url( home_url() );
+  return esc_url( home_url() );
 }
 add_filter( 'login_headerurl', 'be_login_header_url' );
 add_filter( 'login_headertext', '__return_empty_string' );
@@ -33,15 +33,15 @@ function be_login_logo() {
   } else {
     return;
   }
-	?>
-	<style>
-		.login h1 a {
-			background-image: url(<?php echo esc_url( $logo_url ); ?>);
-			background-size: contain;
-			width: 312px;
-			height: 100px;
-		}
-	</style>
-	<?php
+  ?>
+  <style>
+    .login h1 a {
+      background-image: url(<?php echo esc_url( $logo_url ); ?>);
+      background-size: contain;
+      width: 312px;
+      height: 100px;
+    }
+  </style>
+  <?php
 }
 add_action( 'login_head', 'be_login_logo' );

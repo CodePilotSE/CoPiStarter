@@ -13,9 +13,9 @@
  *
  */
 function be_entry_category() {
-	$term = be_first_term();
-	if( !empty( $term ) && ! is_wp_error( $term ) )
-		echo '<p class="entry-category"><a href="' . get_term_link( $term, 'category' ) . '">' . $term->name . '</a></p>';
+  $term = be_first_term();
+  if( !empty( $term ) && ! is_wp_error( $term ) )
+    echo '<p class="entry-category"><a href="' . get_term_link( $term, 'category' ) . '">' . $term->name . '</a></p>';
 }
 
 /**
@@ -23,9 +23,9 @@ function be_entry_category() {
  *
  */
 function be_post_summary_title() {
-	global $wp_query;
-	$tag = ( is_singular() || -1 === $wp_query->current_post ) ? 'h3' : 'h2';
-	echo '<' . $tag . ' class="post-summary__title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></' . $tag . '>';
+  global $wp_query;
+  $tag = ( is_singular() || -1 === $wp_query->current_post ) ? 'h3' : 'h2';
+  echo '<' . $tag . ' class="post-summary__title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></' . $tag . '>';
 }
 
 /**
@@ -33,7 +33,7 @@ function be_post_summary_title() {
  *
  */
 function be_post_summary_image( $size = 'thumbnail_medium' ) {
-	echo '<a class="post-summary__image" href="' . get_permalink() . '" tabindex="-1" aria-hidden="true">' . wp_get_attachment_image( be_entry_image_id(), $size ) . '</a>';
+  echo '<a class="post-summary__image" href="' . get_permalink() . '" tabindex="-1" aria-hidden="true">' . wp_get_attachment_image( be_entry_image_id(), $size ) . '</a>';
 }
 
 
@@ -42,7 +42,7 @@ function be_post_summary_image( $size = 'thumbnail_medium' ) {
  *
  */
 function be_entry_image_id() {
-	return has_post_thumbnail() ? get_post_thumbnail_id() : get_option( 'options_be_default_image' );
+  return has_post_thumbnail() ? get_post_thumbnail_id() : get_option( 'options_be_default_image' );
 }
 
 /**
@@ -50,8 +50,8 @@ function be_entry_image_id() {
  *
  */
 function be_entry_author() {
-	$id = (int) get_the_author_meta( 'ID' );
-	echo '<p class="entry-author"><a href="' . get_author_posts_url( $id ) . '" aria-hidden="true" tabindex="-1">' . get_avatar( $id, 40 ) . '</a><em>by</em> <a href="' . get_author_posts_url( $id ) . '">' . get_the_author() . '</a></p>';
+  $id = (int) get_the_author_meta( 'ID' );
+  echo '<p class="entry-author"><a href="' . get_author_posts_url( $id ) . '" aria-hidden="true" tabindex="-1">' . get_avatar( $id, 40 ) . '</a><em>by</em> <a href="' . get_author_posts_url( $id ) . '">' . get_the_author() . '</a></p>';
 }
 
 
@@ -74,5 +74,5 @@ function print_site_logo($class = array()){
   }
 
 
-	echo '<a href="' . esc_url( home_url() ) . '" rel="home" class="'. implode(" ", $class) .'" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . ' Home">' . $home_link_content . '</a>';
+  echo '<a href="' . esc_url( home_url() ) . '" rel="home" class="'. implode(" ", $class) .'" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . ' Home">' . $home_link_content . '</a>';
 }

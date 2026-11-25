@@ -6,39 +6,39 @@ import { MenuPositioning } from './nav-position.js';
 
 ;(function () {
 
-	'use strict';
+  'use strict';
 
-	// Element variables
-	const menuToggle = document.querySelector('.menu-toggle');
-	const navMenu = document.querySelector('.nav-menu[role="navigation"]');
+  // Element variables
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navMenu = document.querySelector('.nav-menu[role="navigation"]');
 
-	const elementExists = function(element) {
-		if ( typeof(element) != 'undefined' && element != null ) {
-			return true;
-		}
-		return false;
-	}
+  const elementExists = function(element) {
+    if ( typeof(element) != 'undefined' && element != null ) {
+      return true;
+    }
+    return false;
+  }
 
-	// Event functions
-	const toggleMenu = function(event) {
-		if ( !event.target.closest('.menu-toggle') ) return;
-		if ( elementExists(navMenu) ) {
-			navMenu.classList.toggle('active');
-		}
-		menuToggle.classList.toggle('active');
-	}
+  // Event functions
+  const toggleMenu = function(event) {
+    if ( !event.target.closest('.menu-toggle') ) return;
+    if ( elementExists(navMenu) ) {
+      navMenu.classList.toggle('active');
+    }
+    menuToggle.classList.toggle('active');
+  }
 
-	const toggleSubMenu = function(event) {
-		if ( !event.target.closest('.submenu-expand') ) return;
-		event.target.closest('.submenu-expand').classList.toggle('expanded');
-		event.preventDefault();
-	}
+  const toggleSubMenu = function(event) {
+    if ( !event.target.closest('.submenu-expand') ) return;
+    event.target.closest('.submenu-expand').classList.toggle('expanded');
+    event.preventDefault();
+  }
 
-	// Add functions to click event listener
-	document.addEventListener('click', function(event) {
-		toggleMenu(event);
-		toggleSubMenu(event);
-	});
+  // Add functions to click event listener
+  document.addEventListener('click', function(event) {
+    toggleMenu(event);
+    toggleSubMenu(event);
+  });
 
   document.addEventListener('DOMContentLoaded', function() {
     var wrapper = document.querySelector('.header-search-wrapper');
@@ -48,20 +48,20 @@ import { MenuPositioning } from './nav-position.js';
     var isMouseDownInside = false;
     var isSearchVisible = false;
     searchButton.removeAttribute('type');
-  
+
     function showSearchBlock() {
         searchBlockInput.style.display = 'block';
         searchBlock.classList.add('active');
         isSearchVisible = true;
         searchBlockInput.focus();
     }
-  
+
     function hideSearchBlock() {
         searchBlockInput.style.display = 'none';
         searchBlock.classList.remove('active');
         isSearchVisible = false;
     }
-  
+
     // Handle search button click
     searchButton.addEventListener('click', function(event) {
         if (!isSearchVisible) {
@@ -70,12 +70,12 @@ import { MenuPositioning } from './nav-position.js';
         }
         // If search is visible, let the default form submission happen
     });
-  
+
     // Add mousedown event listener to the wrapper to check if the mousedown started inside the wrapper
     wrapper.addEventListener('mousedown', function(event) {
         isMouseDownInside = true;
     });
-  
+
     // Add mouseup event listener to the document to hide the search block when clicking outside the wrapper
     document.addEventListener('mouseup', function(event) {
         if (!wrapper.contains(event.target) && !isMouseDownInside) {
@@ -85,8 +85,8 @@ import { MenuPositioning } from './nav-position.js';
         isMouseDownInside = false;
     });
   });
-	// Initialize menu positioning when DOM is ready
-	document.addEventListener('DOMContentLoaded', () => MenuPositioning.init());
-  
+  // Initialize menu positioning when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => MenuPositioning.init());
+
 })();
 

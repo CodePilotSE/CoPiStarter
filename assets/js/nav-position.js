@@ -35,7 +35,7 @@ export const MenuPositioning = {
 
   adjustSubmenuPosition(submenu) {
     const { rect, windowWidth, isNested, parentIsLeft, parentIsLeftNudged } = this.getSubmenuInfo(submenu);
-    
+
     if (rect.right > windowWidth) {
       submenu.classList.add(isNested ? 'left' : 'left-nudged');
     } else if (parentIsLeft || parentIsLeftNudged) {

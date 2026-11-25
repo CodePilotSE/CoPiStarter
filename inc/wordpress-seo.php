@@ -12,8 +12,8 @@
  * Breadcrumbs
  */
 function be_breadcrumbs() {
-	if ( function_exists( 'yoast_breadcrumb' ) && ! is_front_page() ) {
-		yoast_breadcrumb( '<p id="breadcrumbs" class="breadcrumb">', '</p>' );
-	}
+  if ( function_exists( 'yoast_breadcrumb' ) && ! is_front_page() ) {
+    yoast_breadcrumb( '<p id="breadcrumbs" class="breadcrumb">', '</p>' );
+  }
 }
 add_action( 'tha_content_top', 'be_breadcrumbs' );

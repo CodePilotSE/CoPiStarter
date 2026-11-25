@@ -37,36 +37,36 @@ define( 'THA_HOOKS_VERSION', '1.0-draft' );
  * </code>
  */
 add_theme_support(
-	'tha_hooks',
-	array(
+  'tha_hooks',
+  array(
 
-		/**
-		 * As a Theme developer, use the 'all' parameter, to declare support for all
-		 * hook types.
-		 * Please make sure you then actually reference all the hooks in this file,
-		 * Plugin developers depend on it!
-		 */
-		'all',
+    /**
+     * As a Theme developer, use the 'all' parameter, to declare support for all
+     * hook types.
+     * Please make sure you then actually reference all the hooks in this file,
+     * Plugin developers depend on it!
+     */
+    'all',
 
-		/**
-		 * Themes can also choose to only support certain hook types.
-		 * Please make sure you then actually reference all the hooks in this type
-		 * family.
-		 *
-		 * When the 'all' parameter was set, specific hook types do not need to be
-		 * added explicitly.
-		 */
-		'html',
-		'body',
-		'head',
-		'header',
-		'content',
-		'entry',
-		'comments',
-		'sidebars',
-		'sidebar',
-		'footer',
-	)
+    /**
+     * Themes can also choose to only support certain hook types.
+     * Please make sure you then actually reference all the hooks in this type
+     * family.
+     *
+     * When the 'all' parameter was set, specific hook types do not need to be
+     * added explicitly.
+     */
+    'html',
+    'body',
+    'head',
+    'header',
+    'content',
+    'entry',
+    'comments',
+    'sidebars',
+    'sidebar',
+    'footer',
+  )
 );
 
 /**
@@ -88,7 +88,7 @@ add_theme_support(
  * @return bool
  */
 function tha_current_theme_supports( $bool, $args, $registered ) {
-	return in_array( $args[0], $registered[0] ) || in_array( 'all', $registered[0] );
+  return in_array( $args[0], $registered[0] ) || in_array( 'all', $registered[0] );
 }
 add_filter( 'current_theme_supports-tha_hooks', 'tha_current_theme_supports', 10, 3 );
 
@@ -98,21 +98,21 @@ add_filter( 'current_theme_supports-tha_hooks', 'tha_current_theme_supports', 10
  * $tha_supports[] = 'html;
  */
 function tha_html_before() {
-	do_action( 'tha_html_before' );
+  do_action( 'tha_html_before' );
 }
 /**
  * HTML <body> hooks
  * $tha_supports[] = 'body';
  */
 function tha_body_top() {
-	do_action( 'tha_body_top' );
+  do_action( 'tha_body_top' );
 }
 
 /**
  * Body Bottom .
  */
 function tha_body_bottom() {
-	do_action( 'tha_body_bottom' );
+  do_action( 'tha_body_bottom' );
 }
 
 /**
@@ -121,14 +121,14 @@ function tha_body_bottom() {
  * $tha_supports[] = 'head';
  */
 function tha_head_top() {
-	do_action( 'tha_head_top' );
+  do_action( 'tha_head_top' );
 }
 
 /**
  * Head Bottom .
  */
 function tha_head_bottom() {
-	do_action( 'tha_head_bottom' );
+  do_action( 'tha_head_bottom' );
 }
 
 /**
@@ -137,28 +137,28 @@ function tha_head_bottom() {
  * $tha_supports[] = 'header';
  */
 function tha_header_before() {
-	do_action( 'tha_header_before' );
+  do_action( 'tha_header_before' );
 }
 
 /**
  * Header After.
  */
 function tha_header_after() {
-	do_action( 'tha_header_after' );
+  do_action( 'tha_header_after' );
 }
 
 /**
  * Header Top.
  */
 function tha_header_top() {
-	do_action( 'tha_header_top' );
+  do_action( 'tha_header_top' );
 }
 
 /**
  * Header Bottom
  */
 function tha_header_bottom() {
-	do_action( 'tha_header_bottom' );
+  do_action( 'tha_header_bottom' );
 }
 
 /**
@@ -167,63 +167,63 @@ function tha_header_bottom() {
  * $tha_supports[] = 'content';
  */
 function tha_content_before() {
-	do_action( 'tha_content_before' );
+  do_action( 'tha_content_before' );
 }
 
 /**
  * Content Wrap Before
  */
 function tha_content_wrap_before() {
-	do_action( 'tha_content_wrap_before' );
+  do_action( 'tha_content_wrap_before' );
 }
 
 /**
  * Content Loop
  */
 function tha_content_loop() {
-	do_action( 'tha_content_loop' );
+  do_action( 'tha_content_loop' );
 }
 
 /**
  * Content Wrap After.
  */
 function tha_content_wrap_after() {
-	do_action( 'tha_content_wrap_after' );
+  do_action( 'tha_content_wrap_after' );
 }
 
 /**
  * Content After.
  */
 function tha_content_after() {
-	do_action( 'tha_content_after' );
+  do_action( 'tha_content_after' );
 }
 
 /**
  * Content Top.
  */
 function tha_content_top() {
-	do_action( 'tha_content_top' );
+  do_action( 'tha_content_top' );
 }
 
 /**
  * Content Bottom.
  */
 function tha_content_bottom() {
-	do_action( 'tha_content_bottom' );
+  do_action( 'tha_content_bottom' );
 }
 
 /**
  * Content While Before.
  */
 function tha_content_while_before() {
-	do_action( 'tha_content_while_before' );
+  do_action( 'tha_content_while_before' );
 }
 
 /**
  * Content While After.
  */
 function tha_content_while_after() {
-	do_action( 'tha_content_while_after' );
+  do_action( 'tha_content_while_after' );
 }
 
 /**
@@ -232,42 +232,42 @@ function tha_content_while_after() {
  * $tha_supports[] = 'entry';
  */
 function tha_entry_before() {
-	do_action( 'tha_entry_before' );
+  do_action( 'tha_entry_before' );
 }
 
 /**
  * Entry After.
  */
 function tha_entry_after() {
-	do_action( 'tha_entry_after' );
+  do_action( 'tha_entry_after' );
 }
 
 /**
  * Entry Content Before.
  */
 function tha_entry_content_before() {
-	do_action( 'tha_entry_content_before' );
+  do_action( 'tha_entry_content_before' );
 }
 
 /**
  * Entry Content After.
  */
 function tha_entry_content_after() {
-	do_action( 'tha_entry_content_after' );
+  do_action( 'tha_entry_content_after' );
 }
 
 /**
  * Entry Top.
  */
 function tha_entry_top() {
-	do_action( 'tha_entry_top' );
+  do_action( 'tha_entry_top' );
 }
 
 /**
  * Entry Bottom.
  */
 function tha_entry_bottom() {
-	do_action( 'tha_entry_bottom' );
+  do_action( 'tha_entry_bottom' );
 }
 
 /**
@@ -276,14 +276,14 @@ function tha_entry_bottom() {
  * $tha_supports[] = 'comments';
  */
 function tha_comments_before() {
-	do_action( 'tha_comments_before' );
+  do_action( 'tha_comments_before' );
 }
 
 /**
  * Comments After.
  */
 function tha_comments_after() {
-	do_action( 'tha_comments_after' );
+  do_action( 'tha_comments_after' );
 }
 
 /**
@@ -292,28 +292,28 @@ function tha_comments_after() {
  * $tha_supports[] = 'sidebar';
  */
 function tha_sidebars_before() {
-	do_action( 'tha_sidebars_before' );
+  do_action( 'tha_sidebars_before' );
 }
 
 /**
  * Sidebars After
  */
 function tha_sidebars_after() {
-	do_action( 'tha_sidebars_after' );
+  do_action( 'tha_sidebars_after' );
 }
 
 /**
  * Sidebar Top.
  */
 function tha_sidebar_top() {
-	do_action( 'tha_sidebar_top' );
+  do_action( 'tha_sidebar_top' );
 }
 
 /**
  * Sidebar Bottom.
  */
 function tha_sidebar_bottom() {
-	do_action( 'tha_sidebar_bottom' );
+  do_action( 'tha_sidebar_bottom' );
 }
 
 /**
@@ -322,26 +322,26 @@ function tha_sidebar_bottom() {
  * $tha_supports[] = 'footer';
  */
 function tha_footer_before() {
-	do_action( 'tha_footer_before' );
+  do_action( 'tha_footer_before' );
 }
 
 /**
  * Footer After.
  */
 function tha_footer_after() {
-	do_action( 'tha_footer_after' );
+  do_action( 'tha_footer_after' );
 }
 
 /**
  * Footer Top.
  */
 function tha_footer_top() {
-	do_action( 'tha_footer_top' );
+  do_action( 'tha_footer_top' );
 }
 
 /**
  * Footer Bottom.
  */
 function tha_footer_bottom() {
-	do_action( 'tha_footer_bottom' );
+  do_action( 'tha_footer_bottom' );
 }

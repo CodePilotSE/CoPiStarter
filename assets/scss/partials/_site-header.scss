@@ -2,219 +2,219 @@
 ---------------------------------------------------------------------------------------------------- */
 
 .site-header {
-	background: var(--wp--preset--color--white);
-	position: relative;
+  background: var(--wp--preset--color--white);
+  position: relative;
 
-	.wrap {
-		display: grid;
-		grid-template-columns: 200px 1fr;
-	}
+  .wrap {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+  }
 
-	&__toggles {
-		display: flex;
-		flex-wrap: nowrap;
-		justify-self: flex-end;
+  &__toggles {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-self: flex-end;
 
-		@include media(">mobile_menu") {
-			display: none;
-		}
-	}
+    @include media(">mobile_menu") {
+      display: none;
+    }
+  }
 
-	@include media("<=mobile_menu") {
-		max-height: 100vh;
-		overflow-y: auto;
-		overscroll-behavior-y: contain;
-	}
+  @include media("<=mobile_menu") {
+    max-height: 100vh;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
 }
 
 .search-toggle,
 .menu-toggle,
 .favorite-toggle {
-	background: transparent;
-	border: none;
-	box-shadow: none;
-	cursor: pointer;
-	line-height: 0;
-	padding: 0;
-	text-align: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  line-height: 0;
+  padding: 0;
+  text-align: center;
 
-	@include size(44px);
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  @include size(44px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-	svg {
-		@include size(24px);
-	}
+  svg {
+    @include size(24px);
+  }
 
-	.close {
-		display: none;
-	}
+  .close {
+    display: none;
+  }
 
-	&.active {
-		.close {
-			display: inline;
-		}
+  &.active {
+    .close {
+      display: inline;
+    }
 
-		.open {
-			display: none;
-		}
-	}
+    .open {
+      display: none;
+    }
+  }
 }
 
 /* Admin Bar
 --------------------------------------------- */
 
 @include media(">782px") {
-	.admin-bar .site-container {
-		padding-top: 32px;
-	}
+  .admin-bar .site-container {
+    padding-top: 32px;
+  }
 }
 
 @include media("<=782px") {
-	#wpadminbar {
-		display: none !important;
-	}
+  #wpadminbar {
+    display: none !important;
+  }
 }
 
 /* Navigation
 ---------------------------------------------------------------------------------------------------- */
 
 .nav-menu {
-	& > * {
-		line-height: 0;
-	}
+  & > * {
+    line-height: 0;
+  }
 
-	ul {
-		clear: both;
-		line-height: 1;
-		margin: 0;
-		padding: 0;
-		width: 100%;
-	}
+  ul {
+    clear: both;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
 
-	.menu-item {
-		list-style: none;
-		position: relative;
+  .menu-item {
+    list-style: none;
+    position: relative;
 
-		a {
-			border: none;
-			color: var(--wp--preset--color--black);
-			display: block;
-			font-size: var(--wp--preset--font-size--s);
-			position: relative;
-			padding: var(--wp--custom--layout--spacing-s);
-			text-decoration: none;
-		}
+    a {
+      border: none;
+      color: var(--wp--preset--color--black);
+      display: block;
+      font-size: var(--wp--preset--font-size--s);
+      position: relative;
+      padding: var(--wp--custom--layout--spacing-s);
+      text-decoration: none;
+    }
 
-		&.menu-item-has-children > a {
-			padding-right: calc(var(--wp--custom--layout--spacing-s) + 6px);
-		}
+    &.menu-item-has-children > a {
+      padding-right: calc(var(--wp--custom--layout--spacing-s) + 6px);
+    }
 
-		&:hover > a {
-		}
+    &:hover > a {
+    }
 
-		&.current-menu-item > a,
-		&.current-menu-ancestor > a {
-		}
-	}
+    &.current-menu-item > a,
+    &.current-menu-ancestor > a {
+    }
+  }
 
-	.submenu-expand {
-		@include button-reset;
-		position: absolute;
-		line-height: 0;
-		top: 50%;
-		transform: translateY(-50%);
-		right: 7px;
+  .submenu-expand {
+    @include button-reset;
+    position: absolute;
+    line-height: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 7px;
 
-		&:not(.expanded) .close,
-		&.expanded .open {
-			display: none;
-		}
-	}
+    &:not(.expanded) .close,
+    &.expanded .open {
+      display: none;
+    }
+  }
 
-	@include media(">mobile_menu") {
-		.menu {
-			display: flex;
-			justify-content: flex-end;
-		}
+  @include media(">mobile_menu") {
+    .menu {
+      display: flex;
+      justify-content: flex-end;
+    }
 
-		.menu-item {
-			&:hover,
-			&:focus-within {
-				& > .sub-menu {
-					left: auto;
-					opacity: 1;
-				}
-			}
-		}
+    .menu-item {
+      &:hover,
+      &:focus-within {
+        & > .sub-menu {
+          left: auto;
+          opacity: 1;
+        }
+      }
+    }
 
-		.menu > .menu-item-has-children:hover > a {
-			color: var(--wp--preset--color--black);
-		}
+    .menu > .menu-item-has-children:hover > a {
+      color: var(--wp--preset--color--black);
+    }
 
-		.sub-menu {
-			background: var(--wp--preset--color--white);
-			left: -9999px;
-			opacity: 0;
-			position: absolute;
-			width: 215px;
-			z-index: 99;
+    .sub-menu {
+      background: var(--wp--preset--color--white);
+      left: -9999px;
+      opacity: 0;
+      position: absolute;
+      width: 215px;
+      z-index: 99;
 
-			&.left {
-				right: 100%;
-			}
+      &.left {
+        right: 100%;
+      }
 
-			&.left-nudged {
-				right: 0;
-			}
+      &.left-nudged {
+        right: 0;
+      }
 
-			.menu-item {
-				float: none;
+      .menu-item {
+        float: none;
 
-				&:hover > a {
-				}
-			}
+        &:hover > a {
+        }
+      }
 
-			.sub-menu {
-				margin: -48px 0 0 215px;
-			}
-		}
-	}
+      .sub-menu {
+        margin: -48px 0 0 215px;
+      }
+    }
+  }
 
-	@include media("<=mobile_menu") {
-		display: none;
+  @include media("<=mobile_menu") {
+    display: none;
 
-		&.active {
-			display: block;
-			grid-column: 1 / -1;
-		}
+    &.active {
+      display: block;
+      grid-column: 1 / -1;
+    }
 
-		.submenu-expand {
-			top: 0;
-			right: 0;
-			transform: none;
-			@include size(44px);
+    .submenu-expand {
+      top: 0;
+      right: 0;
+      transform: none;
+      @include size(44px);
 
-			svg {
-				@include size(18px);
-			}
+      svg {
+        @include size(18px);
+      }
 
-			&:not(.expanded) {
-			}
+      &:not(.expanded) {
+      }
 
-			&.expanded {
-				transform: rotate(180deg);
+      &.expanded {
+        transform: rotate(180deg);
 
-				& + .sub-menu {
-					display: block;
-				}
-			}
-		}
+        & + .sub-menu {
+          display: block;
+        }
+      }
+    }
 
-		.sub-menu {
-			display: none;
-			padding-left: 8px;
-		}
-	}
+    .sub-menu {
+      display: none;
+      padding-left: 8px;
+    }
+  }
 }

@@ -12,10 +12,10 @@
  * Header Meta Tags
  */
 function be_header_meta_tags() {
-	echo '<meta charset="' . esc_attr( get_bloginfo( 'charset' ) ) . '">';
-	echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-	echo '<link rel="profile" href="http://gmpg.org/xfn/11">';
-	echo '<link rel="pingback" href="' . esc_url( get_bloginfo( 'pingback_url' ) ) . '">';
+  echo '<meta charset="' . esc_attr( get_bloginfo( 'charset' ) ) . '">';
+  echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
+  echo '<link rel="profile" href="http://gmpg.org/xfn/11">';
+  echo '<link rel="pingback" href="' . esc_url( get_bloginfo( 'pingback_url' ) ) . '">';
 }
 add_action( 'wp_head', 'be_header_meta_tags' );
 
@@ -25,10 +25,10 @@ add_action( 'wp_head', 'be_header_meta_tags' );
  * @param array $classes Body classes.
  */
 function be_extra_body_classes( $classes ) {
-	if ( is_singular() ) {
-		$classes[] = 'singular';
-	}
-	return $classes;
+  if ( is_singular() ) {
+    $classes[] = 'singular';
+  }
+  return $classes;
 }
 add_filter( 'body_class', 'be_extra_body_classes' );
 
@@ -39,23 +39,23 @@ add_filter( 'body_class', 'be_extra_body_classes' );
  */
 function be_clean_body_classes( $classes ) {
 
-	$allowed_classes = [
-		'singular',
-		'single',
-		'page',
-		'archive',
-		'home',
-		'search',
-		'admin-bar',
-		'logged-in',
-		'wp-embed-responsive',
-	];
+  $allowed_classes = [
+    'singular',
+    'single',
+    'page',
+    'archive',
+    'home',
+    'search',
+    'admin-bar',
+    'logged-in',
+    'wp-embed-responsive',
+  ];
 
-	if ( function_exists( 'be_page_layout_options' ) ) {
-		$allowed_classes = array_merge( $allowed_classes, be_page_layout_options() );
-	}
+  if ( function_exists( 'be_page_layout_options' ) ) {
+    $allowed_classes = array_merge( $allowed_classes, be_page_layout_options() );
+  }
 
-	return array_intersect( $classes, $allowed_classes );
+  return array_intersect( $classes, $allowed_classes );
 
 }
 add_filter( 'body_class', 'be_clean_body_classes', 20 );
@@ -68,41 +68,41 @@ add_filter( 'body_class', 'be_clean_body_classes', 20 );
  * @param \stdClass $args Object of wp_nav_menu() arguments.
  */
 function be_clean_nav_menu_classes( $classes, $menu_item, $args ) {
-	if ( ! is_array( $classes ) ) {
-		return $classes;
-	}
+  if ( ! is_array( $classes ) ) {
+    return $classes;
+  }
 
-	foreach ( $classes as $i => $class ) {
+  foreach ( $classes as $i => $class ) {
 
-		// Remove class with menu item id.
-		$id = strtok( $class, 'menu-item-' );
-		if ( 0 < intval( $id ) ) {
-			unset( $classes[ $i ] );
-		}
+    // Remove class with menu item id.
+    $id = strtok( $class, 'menu-item-' );
+    if ( 0 < intval( $id ) ) {
+      unset( $classes[ $i ] );
+    }
 
-		// Remove menu-item-type-*.
-		if ( false !== strpos( $class, 'menu-item-type-' ) ) {
-			unset( $classes[ $i ] );
-		}
+    // Remove menu-item-type-*.
+    if ( false !== strpos( $class, 'menu-item-type-' ) ) {
+      unset( $classes[ $i ] );
+    }
 
-		// Remove menu-item-object-*.
-		if ( false !== strpos( $class, 'menu-item-object-' ) ) {
-			unset( $classes[ $i ] );
-		}
+    // Remove menu-item-object-*.
+    if ( false !== strpos( $class, 'menu-item-object-' ) ) {
+      unset( $classes[ $i ] );
+    }
 
-		// Change page ancestor to menu ancestor.
-		if ( 'current-page-ancestor' === $class ) {
-			$classes[] = 'current-menu-ancestor';
-			unset( $classes[ $i ] );
-		}
-	}
+    // Change page ancestor to menu ancestor.
+    if ( 'current-page-ancestor' === $class ) {
+      $classes[] = 'current-menu-ancestor';
+      unset( $classes[ $i ] );
+    }
+  }
 
-	// Remove submenu class if depth is limited.
-	if ( isset( $args->depth ) && 1 === $args->depth ) {
-		$classes = array_diff( $classes, array( 'menu-item-has-children' ) );
-	}
+  // Remove submenu class if depth is limited.
+  if ( isset( $args->depth ) && 1 === $args->depth ) {
+    $classes = array_diff( $classes, array( 'menu-item-has-children' ) );
+  }
 
-	return $classes;
+  return $classes;
 }
 add_filter( 'nav_menu_css_class', 'be_clean_nav_menu_classes', 5, 3 );
 
@@ -113,16 +113,16 @@ add_filter( 'nav_menu_css_class', 'be_clean_nav_menu_classes', 5, 3 );
  */
 function be_clean_post_classes( $classes ) {
 
-	if ( ! is_array( $classes ) ) {
-		return $classes;
-	}
+  if ( ! is_array( $classes ) ) {
+    return $classes;
+  }
 
-	$allowed_classes = [
-		'entry',
-		'type-' . get_post_type(),
-	];
+  $allowed_classes = [
+    'entry',
+    'type-' . get_post_type(),
+  ];
 
-	return array_intersect( $classes, $allowed_classes );
+  return array_intersect( $classes, $allowed_classes );
 }
 add_filter( 'post_class', 'be_clean_post_classes', 5 );
 
@@ -132,12 +132,12 @@ add_filter( 'post_class', 'be_clean_post_classes', 5 );
  * @param string $title Title.
  */
 function be_archive_title_remove_prefix( $title ) {
-	$title_pieces = explode( ': ', $title );
-	if ( count( $title_pieces ) > 1 ) {
-		unset( $title_pieces[0] );
-		$title = join( ': ', $title_pieces );
-	}
-	return $title;
+  $title_pieces = explode( ': ', $title );
+  if ( count( $title_pieces ) > 1 ) {
+    unset( $title_pieces[0] );
+    $title = join( ': ', $title_pieces );
+  }
+  return $title;
 }
 add_filter( 'get_the_archive_title', 'be_archive_title_remove_prefix' );
 
@@ -148,11 +148,11 @@ add_filter( 'get_the_archive_title', 'be_archive_title_remove_prefix' );
  * @param int    $author_id Author ID.
  */
 function be_custom_author_url( $link, $author_id ) {
-	$website = get_the_author_meta( 'user_url', $author_id );
-	if ( ! empty( $website ) && false !== strpos( $website, home_url() ) ) {
-		$link = esc_url_raw( $website );
-	}
-	return $link;
+  $website = get_the_author_meta( 'user_url', $author_id );
+  if ( ! empty( $website ) && false !== strpos( $website, home_url() ) ) {
+    $link = esc_url_raw( $website );
+  }
+  return $link;
 }
 add_filter( 'author_link', 'be_custom_author_url', 10, 2 );
 
@@ -160,7 +160,7 @@ add_filter( 'author_link', 'be_custom_author_url', 10, 2 );
  * Excerpt More
  */
 function be_excerpt_more() {
-	return '&hellip;';
+  return '&hellip;';
 }
 add_filter( 'excerpt_more', 'be_excerpt_more' );
 
@@ -179,7 +179,7 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
  * }
  */
 function be_max_srcset_width( $max_width, $size_array ) {
-	return 1600;
+  return 1600;
 }
 add_filter( 'max_srcset_image_width', 'be_max_srcset_width', 10, 2 );
 
@@ -188,6 +188,6 @@ add_filter( 'max_srcset_image_width', 'be_max_srcset_width', 10, 2 );
  */
 
  function be_remove_default_block_patterns() {
-	remove_theme_support( 'core-block-patterns' );
+  remove_theme_support( 'core-block-patterns' );
 }
 add_action( 'after_setup_theme', 'be_remove_default_block_patterns' );

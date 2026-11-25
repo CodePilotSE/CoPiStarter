@@ -17,19 +17,19 @@ echo '<div class="entry-content">';
 
 if ( is_search() ) {
 
-	echo '<p>' . esc_html__( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'copistarter' ) . '</p>';
-	get_search_form();
+  echo '<p>' . esc_html__( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'copistarter' ) . '</p>';
+  get_search_form();
 
 } else {
 
-	$output = Block_Areas\show( '404', $echo = false );
+  $output = Block_Areas\show( '404', $echo = false );
 
-	if ( empty( $output ) ) {
-		echo '<p>' . esc_html__( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'copistarter' ) . '</p>';
-		get_search_form();
-	} else {
-		echo $output;
-	}
+  if ( empty( $output ) ) {
+    echo '<p>' . esc_html__( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'copistarter' ) . '</p>';
+    get_search_form();
+  } else {
+    echo $output;
+  }
 }
 
 echo '</div>';

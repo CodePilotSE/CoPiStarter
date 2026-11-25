@@ -2,23 +2,23 @@
 --------------------------------------------- */
 
 .breadcrumb {
-	margin: 0 auto 16px;
-	line-height: var(--wp--custom--line-height--small);
-	font-size: var(--wp--preset--font-size--s);
-	max-width: var(--wp--custom--layout--page);
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  margin: 0 auto 16px;
+  line-height: var(--wp--custom--line-height--small);
+  font-size: var(--wp--preset--font-size--s);
+  max-width: var(--wp--custom--layout--page);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-	.sep {
-		margin: 0 4px;
-	}
+  .sep {
+    margin: 0 4px;
+  }
 
-	.archive-header &,
-	.post-header & {
-		max-width: 100%;
-		grid-column: 1 / -1;
-		margin-left: 0;
-		margin-right: 0;
-	}
+  .archive-header &,
+  .post-header & {
+    max-width: 100%;
+    grid-column: 1 / -1;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

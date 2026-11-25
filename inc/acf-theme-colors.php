@@ -106,7 +106,7 @@ endforeach;
 
 
 function acf_dynamic_colors_load( $field, $theme = 'all', $exceptions_add = array(), $exceptions_remove = array() ) {
-  
+
   $colors = get_theme_color_palette();
   if( ! empty( $colors ) ) {
 
