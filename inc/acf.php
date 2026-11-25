@@ -58,7 +58,7 @@ function default_placeholder_from_label( $field ) {
 
 	if ( empty( $field['type'] ) || ! in_array( $field['type'], $text_field_types, true ) ) return $field;
 
-	if ( ! empty( $field['placeholder'] ) ) return $field;
+if ( isset( $field['placeholder'] ) && '' !== (string) $field['placeholder'] ) return $field;
 
 	$label = isset( $field['label'] ) ? trim( (string) $field['label'] ) : '';
 	if ( '' === $label ) return $field;
